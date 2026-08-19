@@ -1,54 +1,95 @@
-import Link from "next/link";
-import { ExternalLink, Github, GitBranch, GitCommit } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import {
+  profileData,
+  repositoriesData,
+  sourceControlSections,
+  type SourceControlSection,
+} from "@/lib/github-data";
+import { SourceControlSidebar } from "./source-control/source-control-sidebar";
+import { ProfileView } from "./source-control/profile-view";
+import { RepositoriesView } from "./source-control/repositories-view";
+import { ActivityView } from "./source-control/activity-view";
+import { GitBranch, ArrowLeft, FolderGit2 } from "lucide-react";
 
 export function GithubApp() {
+  const [selectedSection, setSelectedSection] =
+    useState<SourceControlSection>("repositories");
+  const [showMobileContent, setShowMobileContent] = useState(false);
+
+  const handleSelectSection = (id: SourceControlSection) => {
+    setSelectedSection(id);
+    setShowMobileContent(true);
+  };
+
   return (
-    <div className="space-y-4 text-white">
-      <div>
-        <div className="flex items-center gap-2 font-mono text-[0.66rem] uppercase tracking-widest text-accent font-semibold">
-          <Github className="h-3.5 w-3.5" />
-          <span>Source Control & Repositories</span>
+    <div className="flex flex-col h-full space-y-4 text-white">
+      {/* Application Sub-Header */}
+      <div className="flex items-center justify-between border-b border-white/10 pb-3">
+        <div className="flex items-center gap-2">
+          <GitBranch className="h-4 w-4 text-accent" />
+          <div>
+            <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-white">
+              SOURCE CONTROL
+            </h2>
+            <p className="text-[0.68rem] text-white/60">
+              GitHub / Repositories / Development Activity
+            </p>
+          </div>
         </div>
-        <h2 className="mt-1 text-xl font-bold tracking-tight text-white">GITHUB WORKBENCH</h2>
-        <p className="mt-1 text-xs text-white/70">
-          Source control activity, active branches, and code repository commits.
-        </p>
-      </div>
 
-      <div className="rounded-xl border border-white/12 bg-black/40 p-3.5 font-mono text-xs space-y-2">
-        <div className="flex items-center justify-between text-accent font-semibold border-b border-white/10 pb-2">
-          <span className="flex items-center gap-1.5">
-            <GitBranch className="h-3.5 w-3.5" />
-            <span>main</span>
-          </span>
-          <span className="text-[0.6rem] uppercase text-white/40">Status: Active</span>
-        </div>
-        <div className="space-y-2 pt-1 text-white/80">
-          <div className="flex items-start gap-2">
-            <GitCommit className="h-3.5 w-3.5 text-accent shrink-0 mt-0.5" />
-            <div>
-              <div className="font-semibold text-white/90">aniket-os: Core desktop environment & window manager</div>
-              <div className="text-[0.62rem] text-white/45">Refactored interaction model & app registry</div>
-            </div>
-          </div>
-          <div className="flex items-start gap-2">
-            <GitCommit className="h-3.5 w-3.5 text-accent shrink-0 mt-0.5" />
-            <div>
-              <div className="font-semibold text-white/90">claimfast: Claims automation engine prototype</div>
-              <div className="text-[0.62rem] text-white/45">Added initial rule parser and Next 15 setup</div>
-            </div>
-          </div>
+        <div className="hidden sm:flex items-center gap-2 font-mono text-[0.62rem] text-white/40 uppercase tracking-widest border border-white/10 px-2.5 py-1 rounded">
+          <FolderGit2 className="h-3 w-3 text-accent" />
+          <span>{repositoriesData.length} REPOS</span>
         </div>
       </div>
 
-      <div className="pt-2">
-        <Link
-          href="/github"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent/20 border border-accent/40 px-4 py-2.5 font-mono text-xs font-semibold text-accent transition-colors hover:bg-accent hover:text-slate-950"
+      {/* Two-Panel Body */}
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-[13rem_1fr] lg:grid-cols-[14.5rem_1fr] gap-4 min-h-[28rem]">
+        {/* Left: Sidebar */}
+        <div
+          className={`md:block border-r border-white/10 pr-0 md:pr-4 ${
+            showMobileContent ? "hidden md:block" : "block"
+          }`}
         >
-          <span>Open GitHub Signal Route</span>
-          <ExternalLink className="h-3.5 w-3.5" />
-        </Link>
+          <SourceControlSidebar
+            sections={sourceControlSections}
+            selectedId={selectedSection}
+            repoCounts={repositoriesData.length}
+            onSelectSection={handleSelectSection}
+          />
+        </div>
+
+        {/* Right: Content */}
+        <div
+          className={`flex flex-col min-h-0 overflow-y-auto pr-1 no-scrollbar ${
+            showMobileContent ? "block" : "hidden md:block"
+          }`}
+        >
+          {/* Mobile Back */}
+          {showMobileContent && (
+            <div className="md:hidden mb-3 pb-2 border-b border-white/10">
+              <button
+                type="button"
+                onClick={() => setShowMobileContent(false)}
+                className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:text-white transition-colors"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                <span>Back to Navigation</span>
+              </button>
+            </div>
+          )}
+
+          {/* Section content */}
+          {selectedSection === "profile" && (
+            <ProfileView profile={profileData} />
+          )}
+          {selectedSection === "repositories" && (
+            <RepositoriesView repositories={repositoriesData} />
+          )}
+          {selectedSection === "activity" && <ActivityView />}
+        </div>
       </div>
     </div>
   );

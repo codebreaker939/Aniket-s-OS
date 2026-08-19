@@ -61,21 +61,21 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "JOURNEY",
     icon: "journey",
     category: "PATH",
-    description: "Education, learning milestones, and career trajectory.",
+    description: "Aniket Rai — Engineering Journey & Technical Growth Trajectory.",
     href: "/journey",
-    defaultPosition: { top: "8rem", left: "20rem" },
-    defaultSize: { width: "36rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "5.5rem", left: "14rem" },
+    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   toolbox: {
     id: "toolbox",
-    title: "TECH STACK & TOOLBOX",
+    title: "TOOLBOX",
     label: "TOOLBOX",
     icon: "toolbox",
     category: "STACK",
-    description: "Full-stack technologies, frameworks, and AI/ML exploration stack.",
+    description: "Technical Stack / Working Knowledge — Developer tool inventory.",
     href: "/skills",
-    defaultPosition: { top: "7rem", left: "24rem" },
-    defaultSize: { width: "36rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "5.5rem", left: "16rem" },
+    defaultSize: { width: "44rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   github: {
     id: "github",
@@ -83,10 +83,10 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "GITHUB",
     icon: "github",
     category: "SOURCE",
-    description: "GitHub repositories, code commits, and open-source signals.",
+    description: "GitHub / Repositories / Development Activity.",
     href: "/github",
-    defaultPosition: { top: "9rem", right: "6rem" },
-    defaultSize: { width: "34rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "5.5rem", right: "2rem" },
+    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   resume: {
     id: "resume",

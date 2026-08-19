@@ -1,53 +1,95 @@
-import Link from "next/link";
-import { ExternalLink, Wrench, Layers } from "lucide-react";
+"use client";
 
-const stackGroups = [
-  { category: "Frontend & Interface", items: ["React 19", "Next.js 15", "TypeScript", "Tailwind CSS", "Motion"] },
-  { category: "Backend & Systems", items: ["Node.js", "Python", "REST APIs", "PostgreSQL", "Redis"] },
-  { category: "AI / ML Stack", items: ["Python", "PyTorch", "Scikit-Learn", "FastAPI", "NumPy / Pandas"] },
-  { category: "Tooling & Environment", items: ["Git / GitHub", "VS Code", "Vercel", "Docker Basics", "macOS Terminal"] }
-];
+import { useState, useMemo } from "react";
+import { toolCategories, toolsData } from "@/lib/toolbox-data";
+import { ToolboxCategories } from "./toolbox/toolbox-categories";
+import { ToolboxInventory } from "./toolbox/toolbox-inventory";
+import { Wrench, ArrowLeft, Layers } from "lucide-react";
 
 export function ToolboxApp() {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showMobileInventory, setShowMobileInventory] = useState(false);
+
+  // Count tools per category for the sidebar
+  const categoryCounts = useMemo(() => {
+    const counts: Record<string, number> = {};
+    for (const cat of toolCategories) {
+      counts[cat.id] = toolsData.filter((t) => t.category === cat.id).length;
+    }
+    return counts;
+  }, []);
+
+  const handleSelectCategory = (id: string | null) => {
+    setSelectedCategory(id);
+    setShowMobileInventory(true);
+  };
+
   return (
-    <div className="space-y-4 text-white">
-      <div>
-        <div className="flex items-center gap-2 font-mono text-[0.66rem] uppercase tracking-widest text-accent font-semibold">
-          <Wrench className="h-3.5 w-3.5" />
-          <span>Tech Stack & Environment</span>
-        </div>
-        <h2 className="mt-1 text-xl font-bold tracking-tight text-white">TOOLBOX</h2>
-        <p className="mt-1 text-xs text-white/70">
-          Core technologies, frameworks, libraries, and developer tools.
-        </p>
-      </div>
-
-      <div className="grid gap-3 sm:grid-cols-2">
-        {stackGroups.map((group) => (
-          <div key={group.category} className="rounded-lg border border-white/10 bg-white/[0.04] p-3">
-            <div className="flex items-center gap-2 font-mono text-[0.62rem] font-semibold text-accent uppercase tracking-wider">
-              <Layers className="h-3 w-3" />
-              <span>{group.category}</span>
-            </div>
-            <div className="mt-2.5 flex flex-wrap gap-1.5">
-              {group.items.map((item) => (
-                <span key={item} className="rounded-md border border-white/10 bg-slate-950/40 px-2 py-1 font-mono text-xs text-white/90">
-                  {item}
-                </span>
-              ))}
-            </div>
+    <div className="flex flex-col h-full space-y-4 text-white">
+      {/* Application Sub-Header */}
+      <div className="flex items-center justify-between border-b border-white/10 pb-3">
+        <div className="flex items-center gap-2">
+          <Wrench className="h-4 w-4 text-accent" />
+          <div>
+            <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-white">
+              TOOLBOX
+            </h2>
+            <p className="text-[0.68rem] text-white/60">
+              Technical Stack / Working Knowledge
+            </p>
           </div>
-        ))}
+        </div>
+
+        <div className="hidden sm:flex items-center gap-2 font-mono text-[0.62rem] text-white/40 uppercase tracking-widest border border-white/10 px-2.5 py-1 rounded">
+          <Layers className="h-3 w-3 text-accent" />
+          <span>{toolsData.length} TOOLS</span>
+        </div>
       </div>
 
-      <div className="pt-2">
-        <Link
-          href="/skills"
-          className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-accent/20 border border-accent/40 px-4 py-2.5 font-mono text-xs font-semibold text-accent transition-colors hover:bg-accent hover:text-slate-950"
+      {/* Two-Panel Body */}
+      <div className="flex-1 grid grid-cols-1 md:grid-cols-[14rem_1fr] lg:grid-cols-[15.5rem_1fr] gap-4 min-h-[28rem]">
+        {/* Left Panel: Categories */}
+        <div
+          className={`md:block border-r border-white/10 pr-0 md:pr-4 ${
+            showMobileInventory ? "hidden md:block" : "block"
+          }`}
         >
-          <span>Inspect Toolbox Route</span>
-          <ExternalLink className="h-3.5 w-3.5" />
-        </Link>
+          <ToolboxCategories
+            categories={toolCategories}
+            selectedId={selectedCategory}
+            counts={categoryCounts}
+            onSelectCategory={handleSelectCategory}
+          />
+        </div>
+
+        {/* Right Panel: Inventory */}
+        <div
+          className={`flex flex-col min-h-0 ${
+            showMobileInventory ? "block" : "hidden md:block"
+          }`}
+        >
+          {/* Mobile Back */}
+          {showMobileInventory && (
+            <div className="md:hidden mb-3 pb-2 border-b border-white/10">
+              <button
+                type="button"
+                onClick={() => setShowMobileInventory(false)}
+                className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:text-white transition-colors"
+              >
+                <ArrowLeft className="h-3.5 w-3.5" />
+                <span>Back to Categories</span>
+              </button>
+            </div>
+          )}
+
+          <ToolboxInventory
+            tools={toolsData}
+            selectedCategory={selectedCategory}
+            searchQuery={searchQuery}
+            onSearchChange={setSearchQuery}
+          />
+        </div>
       </div>
     </div>
   );
