@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { experimentsData } from "@/lib/experiments-data";
 import { ExperimentIndex } from "./engineering-lab/experiment-index";
 import { ExperimentDetail } from "./engineering-lab/experiment-detail";
@@ -9,6 +9,21 @@ import { FlaskConical, ArrowLeft, Layers, Terminal } from "lucide-react";
 export function EngineeringLabApp() {
   const [selectedId, setSelectedId] = useState<string | null>("LAB-002");
   const [showMobileDetail, setShowMobileDetail] = useState(false);
+
+  useEffect(() => {
+    const handleSelectExperiment = (e: Event) => {
+      const customEvent = e as CustomEvent<{ labId: string }>;
+      if (customEvent.detail?.labId) {
+        setSelectedId(customEvent.detail.labId);
+        setShowMobileDetail(true);
+      }
+    };
+
+    window.addEventListener("os:select-lab-experiment", handleSelectExperiment);
+    return () => {
+      window.removeEventListener("os:select-lab-experiment", handleSelectExperiment);
+    };
+  }, []);
 
   const selectedExperiment = experimentsData.find((e) => e.id === selectedId) || null;
 

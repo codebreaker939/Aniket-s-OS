@@ -1,17 +1,15 @@
 import type { Metadata } from "next";
-
-import { SectionPlaceholder } from "@/components/sections/section-placeholder";
+import { AboutApp } from "@/components/apps/about-app";
 
 export const metadata: Metadata = {
-  title: "About"
+  title: "About Aniket Rai — Aniket OS",
+  description: "Developer profile, engineering background, and technical direction for Aniket Rai.",
 };
 
 export default function AboutPage() {
   return (
-    <SectionPlaceholder
-      eyebrow="System Profile"
-      title="About Aniket Rai"
-      description="A focused profile page for a B.Tech CSE student with a full-stack development foundation and a current AI/ML exploration track."
-    />
+    <main className="min-h-screen bg-[#060810] text-white p-6 max-w-6xl mx-auto">
+      <AboutApp />
+    </main>
   );
 }

@@ -30,7 +30,7 @@ const WindowManagerContext = createContext<WindowManagerContextType | null>(null
 export function WindowManagerProvider({ children }: { children: ReactNode }) {
   const [selectedAppId, setSelectedAppId] = useState<DesktopAppId>("engineering-lab");
   const [activeWindowId, setActiveWindowId] = useState<DesktopAppId | null>("engineering-lab");
-  const [highestZIndex, setHighestZIndex] = useState(10);
+  const [highestZIndex, setHighestZIndex] = useState(30);
 
   const [windows, setWindows] = useState<Record<DesktopAppId, WindowState>>(() => {
     const initial: Partial<Record<DesktopAppId, WindowState>> = {};
@@ -40,7 +40,7 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
         isOpen: id === "engineering-lab",
         isMinimized: false,
         isMaximized: false,
-        zIndex: id === "engineering-lab" ? 10 : 1
+        zIndex: id === "engineering-lab" ? 30 : 20
       };
     });
     return initial as Record<DesktopAppId, WindowState>;
@@ -78,10 +78,16 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
 
   const openApp = (id: DesktopAppId) => {
     focusApp(id);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("os:app-opened", { detail: { appId: id } }));
+    }
   };
 
   const restoreApp = (id: DesktopAppId) => {
     focusApp(id);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("os:app-restored", { detail: { appId: id } }));
+    }
   };
 
   const closeApp = (id: DesktopAppId) => {
@@ -97,6 +103,9 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     if (activeWindowId === id) {
       setActiveWindowId(getTopVisibleApp(id));
     }
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("os:app-closed", { detail: { appId: id } }));
+    }
   };
 
   const minimizeApp = (id: DesktopAppId) => {
@@ -109,6 +118,9 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     }));
     if (activeWindowId === id) {
       setActiveWindowId(getTopVisibleApp(id));
+    }
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("os:app-minimized", { detail: { appId: id } }));
     }
   };
 

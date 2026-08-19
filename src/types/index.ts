@@ -13,6 +13,7 @@ export type DesktopAppIcon =
   | "github"
   | "resume"
   | "certifications"
+  | "achievements"
   | "notes"
   | "contact"
   | "terminal"
@@ -27,10 +28,12 @@ export type DesktopAppId =
   | "github"
   | "resume"
   | "certifications"
+  | "achievements"
   | "lab-notes"
   | "contact"
   | "terminal"
-  | "settings";
+  | "settings"
+  | "activity";
 
 export type DesktopApp = NavigationItem & {
   id: DesktopAppId;

@@ -1,12 +1,13 @@
 "use client";
 
-import { Battery, Circle, Power, Wifi } from "lucide-react";
+import { Battery, Circle, Power, Wifi, Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import type { DesktopAppId } from "@/types";
 import { PowerMenu } from "./power-menu";
 
 type MenuBarProps = {
   onOpenWindow?: (id: DesktopAppId) => void;
+  onOpenSearch?: () => void;
 };
 
 type MenuCategory = "File" | "Edit" | "View" | "Window" | "Help";
@@ -22,7 +23,7 @@ function formatMenuTime(date: Date) {
   }).format(date);
 }
 
-export function MenuBar({ onOpenWindow }: MenuBarProps) {
+export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
   const [clock, setClock] = useState({ label: "", iso: "" });
   const [activeMenu, setActiveMenu] = useState<MenuCategory | "OS" | null>(null);
   const [powerMenuOpen, setPowerMenuOpen] = useState(false);
@@ -161,7 +162,18 @@ export function MenuBar({ onOpenWindow }: MenuBarProps) {
       </div>
 
       {/* Right System Indicators */}
-      <div className="flex items-center gap-3 font-mono text-[0.65rem] text-white/75">
+      <div className="flex items-center gap-2.5 font-mono text-[0.65rem] text-white/75">
+        {/* Spotlight Search Trigger Button */}
+        <button
+          type="button"
+          aria-label="Open Spotlight Search (⌘K)"
+          onClick={onOpenSearch}
+          className="flex items-center gap-1 rounded bg-white/5 border border-white/10 px-2 py-0.5 font-mono text-[0.6rem] font-bold text-white/70 hover:bg-white/10 hover:border-accent/40 hover:text-accent transition-colors"
+        >
+          <Search aria-hidden="true" className="h-3 w-3 text-accent" />
+          <span className="hidden sm:inline">⌘K</span>
+        </button>
+
         <span className="hidden items-center gap-1.5 sm:inline-flex text-white/70">
           <Wifi aria-hidden="true" className="h-3.5 w-3.5 text-accent/90" />
           <span>Wi-Fi</span>

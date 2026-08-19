@@ -24,14 +24,14 @@ export type AppDefinition = {
 export const appRegistry: Record<DesktopAppId, AppDefinition> = {
   about: {
     id: "about",
-    title: "ABOUT ANIKET",
+    title: "ABOUT",
     label: "ABOUT",
     icon: "about",
     category: "PROFILE",
-    description: "Profile, education context, and engineering direction.",
+    description: "Aniket Rai / Developer Profile & Engineering Focus.",
     href: "/about",
     defaultPosition: { top: "5.5rem", left: "18rem" },
-    defaultSize: { width: "34rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultSize: { width: "44rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   projects: {
     id: "projects",
@@ -110,27 +110,38 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     defaultPosition: { top: "6rem", left: "16rem" },
     defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   },
+  achievements: {
+    id: "achievements",
+    title: "MILESTONES",
+    label: "MILESTONES",
+    icon: "achievements",
+    category: "PROGRESS",
+    description: "Achievements / Competitions / Leadership — Engineering milestone log.",
+    href: "/achievements",
+    defaultPosition: { top: "5.5rem", left: "14rem" },
+    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+  },
   "lab-notes": {
     id: "lab-notes",
-    title: "VISITOR & LAB NOTES",
+    title: "LAB NOTES",
     label: "LAB NOTES",
     icon: "notes",
     category: "NOTES",
-    description: "Short technical notes, visitor feedback, and research logs.",
+    description: "Visitor Notes / Field Observations — Shared laboratory notebook.",
     href: "/lab-notes",
-    defaultPosition: { top: "8.5rem", right: "4rem" },
-    defaultSize: { width: "34rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "5.5rem", left: "16rem" },
+    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   contact: {
     id: "contact",
-    title: "OPEN CONNECTION",
+    title: "CONTACT",
     label: "CONTACT",
     icon: "contact",
     category: "COMMS",
-    description: "Direct channels for internship and software engineering inquiries.",
+    description: "Open a Connection — Communication console & inquiries.",
     href: "/contact",
-    defaultPosition: { top: "9.5rem", left: "26rem" },
-    defaultSize: { width: "32rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "5.5rem", left: "14rem" },
+    defaultSize: { width: "48rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   terminal: {
     id: "terminal",
@@ -151,5 +162,16 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     description: "Aniket OS environment configuration and workstation controls.",
     defaultPosition: { top: "10.5rem", right: "12rem" },
     defaultSize: { width: "30rem", maxHeight: "calc(100svh - 12rem)" }
+  },
+  activity: {
+    id: "activity",
+    title: "SYSTEM ACTIVITY",
+    label: "ACTIVITY",
+    icon: "terminal",
+    category: "SYSTEM",
+    description: "Real session event log, system audit, and state transitions.",
+    href: "/activity",
+    defaultPosition: { top: "6.5rem", left: "16rem" },
+    defaultSize: { width: "40rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   }
 };

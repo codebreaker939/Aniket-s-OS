@@ -38,7 +38,7 @@ export type GitHubActivity = {
  * GitHub username configuration.
  * Update this when the actual GitHub username is confirmed.
  */
-export const GITHUB_USERNAME = "aniketrai";
+export const GITHUB_USERNAME = "codebreaker939";
 export const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
 
 /* ─── Profile Data ──────────────────────────────────────── */

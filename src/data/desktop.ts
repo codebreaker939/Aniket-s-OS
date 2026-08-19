@@ -90,6 +90,17 @@ export const desktopApps: DesktopApp[] = [
     status: "ready"
   },
   {
+    id: "achievements",
+    title: "Milestones",
+    label: "MILESTONES",
+    href: "/achievements",
+    description: "Achievements, competitions, leadership, and engineering activity log.",
+    icon: "achievements",
+    systemLabel: "PROGRESS",
+    openMode: "route",
+    status: "ready"
+  },
+  {
     id: "lab-notes",
     title: "Lab Notes",
     label: "LAB NOTES",
@@ -122,6 +133,7 @@ export const dockApps: DockApp[] = [
   { id: "github", label: "GitHub", icon: "github", href: "/github", openMode: "route" },
   { id: "resume", label: "Resume", icon: "resume", href: "/resume", openMode: "route" },
   { id: "certifications", label: "Credentials", icon: "certifications", href: "/certifications", openMode: "route" },
+  { id: "achievements", label: "Milestones", icon: "achievements", href: "/achievements", openMode: "route" },
   { id: "lab-notes", label: "Lab Notes", icon: "notes", href: "/lab-notes", openMode: "route" },
   { id: "terminal", label: "Terminal", icon: "terminal", openMode: "window" },
   { id: "settings", label: "Settings", icon: "settings", openMode: "window" }

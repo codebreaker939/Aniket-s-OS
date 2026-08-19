@@ -60,7 +60,7 @@ export const experimentsData: EngineeringExperiment[] = [
       "Validating complex multi-step claim payloads across client and server validation layers."
     ],
     outcome: "Delivered a operational MERN-stack claim management portal enabling structured claim filing and real-time status tracking.",
-    githubUrl: "https://github.com/aniketrai"
+    githubUrl: "https://github.com/codebreaker939"
   },
   {
     id: "LAB-002",
@@ -95,7 +95,7 @@ export const experimentsData: EngineeringExperiment[] = [
       "Managing thread safety during concurrent lock heartbeat updates and process shutdown signals."
     ],
     outcome: "Built a verified distributed locking implementation with automated TTL expiry handling process failures gracefully.",
-    githubUrl: "https://github.com/aniketrai"
+    githubUrl: "https://github.com/codebreaker939"
   },
   {
     id: "LAB-003",

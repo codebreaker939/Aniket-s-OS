@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-
-import { SectionPlaceholder } from "@/components/sections/section-placeholder";
+import { LabNotesApp } from "@/components/apps/lab-notes-app";
 
 export const metadata: Metadata = {
-  title: "Lab Notes"
+  title: "Lab Notes & Visitor Feedback — Aniket OS",
+  description: "Shared notebook of visitor observations, feedback, and field notes for Aniket OS and the Engineering Lab.",
 };
 
 export default function LabNotesPage() {
   return (
-    <SectionPlaceholder
-      eyebrow="Engineering Lab"
-      title="Lab Notes"
-      description="This route is reserved for future technical notes, build logs, and AI/ML learning writeups."
-      status="Backend pending"
-    />
+    <main className="min-h-screen bg-[#060810] text-white p-6 max-w-6xl mx-auto">
+      <LabNotesApp />
+    </main>
   );
 }

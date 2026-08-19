@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-
-import { SectionPlaceholder } from "@/components/sections/section-placeholder";
+import { MilestonesApp } from "@/components/apps/milestones-app";
 
 export const metadata: Metadata = {
-  title: "Achievements"
+  title: "Milestones & Achievements — Aniket OS",
+  description: "Engineering milestone log, student leadership, competitions, and project achievements for Aniket Rai.",
 };
 
 export default function AchievementsPage() {
   return (
-    <SectionPlaceholder
-      eyebrow="Milestones"
-      title="Achievement Log"
-      description="A reserved space for verified achievements and milestones without inventing stats or experience."
-      status="Awaiting content"
-    />
+    <main className="min-h-screen bg-[#060810] text-white p-6 max-w-6xl mx-auto">
+      <MilestonesApp />
+    </main>
   );
 }

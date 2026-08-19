@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { DesktopHero } from "@/components/os/desktop-hero";
 import { DesktopIcon } from "@/components/os/desktop-icon";
@@ -13,8 +14,11 @@ import { WindowManagerProvider, useWindowManager } from "@/components/os/window-
 import { OSLifecycleProvider, useOSLifecycle } from "@/components/os/os-lifecycle";
 import { PowerScreen } from "@/components/os/power-screen";
 import { BootSequence } from "@/components/os/boot-sequence";
+import { CommandCenter } from "@/components/os/command-center/command-center";
 import { appRegistry } from "@/lib/app-registry";
 import { desktopApps } from "@/data/desktop";
+import { SystemActivityProvider } from "@/components/os/system-activity-context";
+import { SystemActivityWidget } from "@/components/os/system-activity-widget";
 import { AppRenderer } from "@/components/apps/app-renderer";
 import type { DesktopApp, DesktopAppId } from "@/types";
 
@@ -24,7 +28,9 @@ export function DesktopShell() {
   return (
     <OSLifecycleProvider>
       <WindowManagerProvider>
-        <OSController />
+        <SystemActivityProvider>
+          <OSController />
+        </SystemActivityProvider>
       </WindowManagerProvider>
     </OSLifecycleProvider>
   );
@@ -138,6 +144,20 @@ function DesktopShellInner() {
     focusApp,
   } = useWindowManager();
 
+  const [isCommandCenterOpen, setIsCommandCenterOpen] = useState(false);
+
+  // Global Keyboard Shortcut: ⌘+K / Ctrl+K
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+        e.preventDefault();
+        setIsCommandCenterOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
   const openWindowsList = (Object.keys(windows) as DesktopAppId[]).filter(
     (id) => windows[id]?.isOpen && !windows[id]?.isMinimized
   );
@@ -152,16 +172,25 @@ function DesktopShellInner() {
   };
 
   return (
-    <div className="relative min-h-svh w-full overflow-x-hidden text-white md:overflow-hidden select-none">
-      <div className="relative z-10 flex min-h-svh flex-col">
-        {/* Top OS Menu Bar */}
-        <MenuBar onOpenWindow={handleOpenApp} />
+    <div className="fixed inset-0 h-svh w-screen overflow-hidden text-white select-none">
+      {/* Spotlight Command Center Modal */}
+      <CommandCenter
+        isOpen={isCommandCenterOpen}
+        onClose={() => setIsCommandCenterOpen(false)}
+      />
 
-        <main className="relative flex-1 pt-12 pb-24">
-          <div className="relative mx-auto min-h-[calc(100svh-5rem)] w-full max-w-[1720px] px-4">
+      <div className="relative z-10 flex h-full w-full flex-col overflow-hidden">
+        {/* Top OS Menu Bar */}
+        <MenuBar
+          onOpenWindow={handleOpenApp}
+          onOpenSearch={() => setIsCommandCenterOpen(true)}
+        />
+
+        <main className="relative flex-1 pt-9 pb-20 overflow-hidden">
+          <div className="relative mx-auto h-full w-full max-w-[1720px] px-4 overflow-hidden">
 
             {/* Desktop Hero Canvas */}
-            <div className="relative z-10 mx-auto flex min-h-[48svh] max-w-4xl flex-col items-center justify-center pb-8 pt-8 md:min-h-[calc(100svh-12rem)] md:px-24">
+            <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col items-center justify-center pb-8 pt-4 md:px-24">
               <DesktopHero align="center" />
             </div>
 
@@ -183,8 +212,9 @@ function DesktopShellInner() {
             </div>
 
             {/* System Widgets */}
-            <div className="hidden lg:block lg:absolute lg:right-6 lg:top-6 lg:z-20">
+            <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-3 lg:absolute lg:right-6 lg:top-6 lg:z-10">
               <SystemWidget onOpenApp={(id) => handleOpenApp(id)} />
+              <SystemActivityWidget />
             </div>
 
             {/* Mobile App Launcher */}
