@@ -35,14 +35,14 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
   },
   projects: {
     id: "projects",
-    title: "PROJECT ARCHIVE",
+    title: "PROJECTS",
     label: "PROJECTS",
     icon: "projects",
     category: "WORK",
-    description: "Verified project records, case studies, and engineering builds.",
+    description: "Selected Builds & Software Project Archive — ClaimFast, LockSync, V-pred, HelixAI, DisasterAlert.",
     href: "/projects",
-    defaultPosition: { top: "6.5rem", left: "22rem" },
-    defaultSize: { width: "38rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "5.5rem", left: "16rem" },
+    defaultSize: { width: "54rem", height: "calc(100svh - 9rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   "engineering-lab": {
     id: "engineering-lab",

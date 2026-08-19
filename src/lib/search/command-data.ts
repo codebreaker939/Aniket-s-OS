@@ -1,11 +1,13 @@
 import type { DesktopAppId, DesktopAppIcon } from "@/types";
 import { appRegistry } from "@/lib/app-registry";
 import { experimentsData } from "@/lib/experiments-data";
+import { projectsData } from "@/lib/projects-data";
 import { contactConfig } from "@/lib/contact-data";
 
 export type CommandItemType =
   | "application"
   | "experiment"
+  | "project"
   | "technology"
   | "action"
   | "external";
@@ -15,7 +17,7 @@ export type CommandItem = {
   type: CommandItemType;
   title: string;
   subtitle: string;
-  category: "Applications" | "Engineering Lab" | "Toolbox / Stack" | "Quick Actions" | "External Links";
+  category: "Applications" | "Projects & Builds" | "Engineering Lab" | "Toolbox / Stack" | "Quick Actions" | "External Links";
   keywords: string[];
   iconName: DesktopAppIcon;
   appId?: DesktopAppId;
@@ -24,7 +26,7 @@ export type CommandItem = {
 };
 
 /**
- * Builds normalized search index across Applications, Lab Experiments, Stack, and Links.
+ * Builds normalized search index across Applications, Projects, Lab Experiments, Stack, and Links.
  */
 export function buildSearchIndex(): CommandItem[] {
   const items: CommandItem[] = [];
@@ -44,7 +46,27 @@ export function buildSearchIndex(): CommandItem[] {
     });
   });
 
-  // 2. Engineering Lab Experiments
+  // 2. Portfolio Projects
+  projectsData.forEach((prj) => {
+    items.push({
+      id: `prj-${prj.id}`,
+      type: "project",
+      title: `${prj.name} (${prj.id})`,
+      subtitle: `${prj.subtitle} · ${prj.domain}`,
+      category: "Projects & Builds",
+      keywords: [
+        prj.id.toLowerCase(),
+        prj.name.toLowerCase(),
+        prj.slug.toLowerCase(),
+        prj.domain.toLowerCase(),
+        ...prj.technologies.map((t) => t.toLowerCase()),
+      ],
+      iconName: "projects",
+      appId: "projects",
+    });
+  });
+
+  // 3. Engineering Lab Experiments
   experimentsData.forEach((exp) => {
     items.push({
       id: `exp-${exp.id}`,
@@ -65,7 +87,7 @@ export function buildSearchIndex(): CommandItem[] {
     });
   });
 
-  // 3. Toolbox Technologies
+  // 4. Toolbox Technologies
   const techItems: { name: string; category: string; keywords: string[] }[] = [
     { name: "Python", category: "Languages & Machine Learning", keywords: ["python", "py", "ml", "ai", "backend"] },
     { name: "TypeScript / JavaScript", category: "Languages & Web Logic", keywords: ["typescript", "javascript", "ts", "js", "web"] },
@@ -89,7 +111,7 @@ export function buildSearchIndex(): CommandItem[] {
     });
   });
 
-  // 4. Quick Actions & External Links
+  // 5. Quick Actions & External Links
   if (contactConfig.github) {
     items.push({
       id: "ext-github",
