@@ -162,7 +162,7 @@ export function SystemActivityProvider({ children }: { children: ReactNode }) {
       }
     };
 
-    // 6. GitHub Sync & Lab Note Listeners
+    // 6. GitHub Sync Listener
     const handleGitHubSynced = (e: Event) => {
       const customEvent = e as CustomEvent<{ count?: number; status: string }>;
       logEvent({
@@ -170,16 +170,6 @@ export function SystemActivityProvider({ children }: { children: ReactNode }) {
         title: "GitHub Synchronization Completed",
         description: `Retrieved ${customEvent.detail?.count || 0} public repositories from GitHub API.`,
         appId: "github",
-      });
-    };
-
-    const handleLabNotePrepared = (e: Event) => {
-      const customEvent = e as CustomEvent<{ noteId: string }>;
-      logEvent({
-        category: "LAB_NOTES",
-        title: "Visitor Note Prepared",
-        description: `Feedback note ${customEvent.detail?.noteId || "DEMO"} prepared for moderation.`,
-        appId: "lab-notes",
       });
     };
 
@@ -191,7 +181,6 @@ export function SystemActivityProvider({ children }: { children: ReactNode }) {
     window.addEventListener("os:app-minimized", handleAppMinimized);
     window.addEventListener("os:app-restored", handleAppRestored);
     window.addEventListener("os:github-synced", handleGitHubSynced);
-    window.addEventListener("os:lab-note-prepared", handleLabNotePrepared);
 
     return () => {
       window.removeEventListener("online", handleOnline);
@@ -202,7 +191,6 @@ export function SystemActivityProvider({ children }: { children: ReactNode }) {
       window.removeEventListener("os:app-minimized", handleAppMinimized);
       window.removeEventListener("os:app-restored", handleAppRestored);
       window.removeEventListener("os:github-synced", handleGitHubSynced);
-      window.removeEventListener("os:lab-note-prepared", handleLabNotePrepared);
     };
   }, [logEvent]);
 

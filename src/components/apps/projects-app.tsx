@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useOptionalWindowManager } from "@/components/os/window-manager";
+import { AppHeader, Panel, StatusBadge } from "@/components/ui/os-primitives";
 import { projectsData, type ProjectCategory } from "@/lib/projects-data";
 import type { DesktopAppId } from "@/types";
 import {
@@ -95,23 +96,19 @@ export function ProjectsApp() {
 
   return (
     <div className="flex flex-col h-full text-white select-none font-sans overflow-hidden space-y-3">
-      {/* Top Header & Search Bar */}
-      <div className="shrink-0 space-y-3 pb-3 border-b border-white/10">
+      <AppHeader
+        icon={FolderGit2}
+        title="Projects"
+        eyebrow="Curated Build Archive"
+        description="Selected projects organized for quick inspection, source context, and Engineering Lab connections."
+        variant="editorial"
+        status={<StatusBadge tone="neutral">{projectsData.length} Builds</StatusBadge>}
+      />
+
+      {/* Search Bar & Category Chips */}
+      <div className="shrink-0 space-y-3">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <FolderGit2 className="h-4 w-4 text-accent" />
-            <div>
-              <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-white flex items-center gap-2">
-                <span>PROJECTS</span>
-                <span className="text-[0.6rem] px-1.5 py-0.5 rounded border border-accent/30 bg-accent/10 text-accent font-normal">
-                  {projectsData.length} BUILDS
-                </span>
-              </h2>
-              <p className="text-[0.68rem] text-white/60">
-                Selected Builds & Software Project Archive
-              </p>
-            </div>
-          </div>
+          <p className="os-meta hidden sm:block">Filter archive</p>
 
           {/* Search Box */}
           <div className="relative w-full sm:w-64">
@@ -121,7 +118,7 @@ export function ProjectsApp() {
               placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-lg border border-white/12 bg-white/5 pl-8 pr-3 py-1.5 font-mono text-xs text-white placeholder-white/40 focus:border-accent/60 focus:bg-white/10 focus:outline-none transition-colors"
+              className="w-full rounded-lg border border-white/[0.12] bg-white/[0.045] py-1.5 pl-8 pr-3 text-xs text-white placeholder-white/40 transition-colors focus:border-accent-copper/[0.55] focus:bg-white/10 focus:outline-none"
             />
           </div>
         </div>
@@ -136,8 +133,8 @@ export function ProjectsApp() {
               className={`rounded-md border px-2.5 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-wider transition-all whitespace-nowrap
                 ${
                   selectedCategory === cat.id
-                    ? "border-accent/40 bg-accent/15 text-accent"
-                    : "border-white/8 bg-white/[0.02] text-white/40 hover:text-white/70 hover:border-white/15"
+                    ? "border-accent-copper/40 bg-accent-copper/[0.12] text-accent-copper"
+                    : "border-white/8 bg-white/[0.02] text-white/40 hover:text-white/70 hover:border-white/[0.15]"
                 }
               `}
             >
@@ -172,16 +169,16 @@ export function ProjectsApp() {
                   onClick={() => handleSelectProject(prj.slug)}
                   className={`w-full text-left rounded-xl border p-3.5 space-y-2 transition-all group ${
                     isSelected
-                      ? "border-accent/50 bg-accent/10 shadow-lg shadow-accent/5"
-                      : "border-white/10 bg-white/[0.02] hover:border-white/20 hover:bg-white/[0.05]"
+                      ? "border-accent-copper/40 bg-accent-copper/[0.075] shadow-lg shadow-black/[0.15]"
+                      : "border-white/10 bg-white/[0.020] hover:border-white/20 hover:bg-white/[0.050]"
                   }`}
                 >
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="font-mono text-[0.62rem] font-bold text-accent">
+                      <span className="font-mono text-[0.62rem] font-bold text-accent-copper">
                         {prj.id}
                       </span>
-                      <h3 className="font-mono text-xs font-bold text-white group-hover:text-accent transition-colors">
+                      <h3 className="text-sm font-semibold text-white transition-colors group-hover:text-accent-copper">
                         {prj.name}
                       </h3>
                     </div>
@@ -190,8 +187,8 @@ export function ProjectsApp() {
                       <span
                         className={`inline-flex items-center gap-1 font-mono text-[0.55rem] uppercase tracking-wider px-1.5 py-0.5 rounded border ${
                           prj.status === "COMPLETED"
-                            ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-                            : "border-amber-500/30 bg-amber-500/10 text-amber-400"
+                            ? "border-accent-mint/30 bg-accent-mint/10 text-accent-mint"
+                            : "border-semantic-attention/30 bg-semantic-attention/10 text-semantic-attention"
                         }`}
                       >
                         <span className="h-1 w-1 rounded-full bg-current" />
@@ -220,8 +217,9 @@ export function ProjectsApp() {
         </div>
 
         {/* Right Column: Selected Project Detail View */}
-        <div
-          className={`lg:col-span-7 flex flex-col rounded-xl border border-white/12 bg-white/[0.02] p-5 space-y-4 overflow-y-auto custom-scrollbar ${
+        <Panel
+          variant="editorial"
+          className={`lg:col-span-7 flex flex-col p-5 space-y-4 overflow-y-auto custom-scrollbar ${
             isMobileDetailOpen ? "flex" : "hidden lg:flex"
           }`}
         >
@@ -243,7 +241,7 @@ export function ProjectsApp() {
               <div className="space-y-1 border-b border-white/10 pb-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-xs font-bold text-accent">
+                    <span className="font-mono text-xs font-bold text-accent-copper">
                       {activeProject.id}
                     </span>
                     <span className="px-2 py-0.5 rounded border border-white/10 bg-white/5 font-mono text-[0.6rem] text-white/50 uppercase">
@@ -256,7 +254,7 @@ export function ProjectsApp() {
                   </span>
                 </div>
 
-                <h3 className="font-mono text-xl font-extrabold tracking-tight text-white">
+                <h3 className="os-text-display text-2xl font-semibold tracking-tight text-white">
                   {activeProject.name}
                 </h3>
                 <p className="text-xs text-white/60 font-sans">
@@ -283,7 +281,7 @@ export function ProjectsApp() {
                   <button
                     type="button"
                     onClick={handleOpenToolbox}
-                    className="inline-flex items-center gap-1 font-mono text-[0.58rem] text-accent hover:underline uppercase"
+                    className="inline-flex items-center gap-1 font-mono text-[0.58rem] text-accent-copper hover:text-white transition-colors uppercase"
                   >
                     <Wrench className="h-3 w-3" />
                     <span>View in Toolbox</span>
@@ -295,7 +293,7 @@ export function ProjectsApp() {
                     <span
                       key={tech}
                       onClick={handleOpenToolbox}
-                      className="cursor-pointer rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[0.62rem] text-white/80 hover:border-accent/40 hover:text-accent transition-colors"
+                      className="cursor-pointer rounded-md border border-white/10 bg-white/5 px-2.5 py-1 font-mono text-[0.62rem] text-white/80 hover:border-accent-copper/40 hover:text-accent-copper transition-colors"
                     >
                       {tech}
                     </span>
@@ -314,7 +312,7 @@ export function ProjectsApp() {
                     <button
                       type="button"
                       onClick={() => handleInspectExperiment(activeProject.experimentId)}
-                      className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-accent/40 bg-accent/15 px-3.5 py-2 font-semibold text-accent hover:bg-accent hover:text-slate-950 transition-colors"
+                      className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-accent-copper/40 bg-accent-copper/[0.12] px-3.5 py-2 font-semibold text-accent-copper hover:bg-accent-copper hover:text-slate-950 transition-colors"
                     >
                       <FlaskConical className="h-3.5 w-3.5" />
                       <span>INSPECT EXPERIMENT ({activeProject.experimentId})</span>
@@ -325,7 +323,7 @@ export function ProjectsApp() {
                     <button
                       type="button"
                       onClick={() => handleOpenSourceControl(activeProject.githubUrl)}
-                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/15 bg-white/5 px-3.5 py-2 font-semibold text-white hover:bg-white/10 hover:border-white/30 transition-colors"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/[0.15] bg-white/5 px-3.5 py-2 font-semibold text-white hover:bg-white/10 hover:border-white/30 transition-colors"
                     >
                       <Github className="h-3.5 w-3.5 text-white/70" />
                       <span>SOURCE CONTROL</span>
@@ -341,7 +339,7 @@ export function ProjectsApp() {
               <p className="font-mono text-xs text-white/40">Select a project to inspect details.</p>
             </div>
           )}
-        </div>
+        </Panel>
       </div>
     </div>
   );

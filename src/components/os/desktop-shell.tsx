@@ -120,7 +120,7 @@ function SleepOverlay() {
     >
       <div className="text-center space-y-2">
         <p className="font-mono text-2xl font-bold text-white/20">ANIKET OS</p>
-        <p className="font-mono text-[0.56rem] uppercase tracking-[0.28em] text-white/15">
+        <p className="font-mono text-[0.56rem] uppercase tracking-[0.28em] text-white/[0.15]">
           Click anywhere to wake
         </p>
       </div>
@@ -185,17 +185,17 @@ function DesktopShellInner() {
       />
 
       {/* Background Desktop Canvas (Hero, Icons, Widgets) */}
-      <div className="absolute inset-0 pt-9 pb-20 overflow-hidden z-10">
-        <div className="relative mx-auto h-full w-full max-w-[1720px] px-4 overflow-hidden">
+      <div className="absolute inset-0 z-10 overflow-hidden pt-9 pb-24">
+        <div className="relative mx-auto grid h-full w-full max-w-[1720px] grid-cols-1 overflow-y-auto px-4 py-5 no-scrollbar md:grid-cols-[8rem_minmax(0,1fr)_18rem] md:overflow-hidden md:px-6 lg:grid-cols-[9rem_minmax(0,1fr)_18rem]">
           {/* Desktop Hero Canvas */}
-          <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col items-center justify-center pb-8 pt-4 md:px-24">
+          <div className="relative z-10 col-start-1 flex min-h-[28rem] flex-col items-center justify-center pb-10 pt-12 md:col-start-2 md:min-h-0 md:px-10 md:pt-2">
             <DesktopHero align="center" />
           </div>
 
           {/* Desktop Icons */}
           <div
             aria-label="Desktop icons"
-            className="hidden md:grid md:absolute md:left-6 md:top-6 md:z-20 md:grid-flow-col md:grid-rows-5 md:gap-x-2 md:gap-y-3"
+            className="hidden md:grid md:absolute md:left-6 md:top-8 md:z-20 md:grid-cols-1 md:gap-y-3"
           >
             {desktopApps.map((app) => (
               <DesktopIcon
@@ -210,7 +210,7 @@ function DesktopShellInner() {
           </div>
 
           {/* System Widgets */}
-          <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-3 lg:absolute lg:right-6 lg:top-6 lg:z-10">
+          <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-3 lg:absolute lg:right-6 lg:top-8 lg:z-10">
             <SystemWidget onOpenApp={(id) => handleOpenApp(id)} />
             <SystemActivityWidget />
           </div>
@@ -225,7 +225,7 @@ function DesktopShellInner() {
       </div>
 
       {/* Desktop Multi-Window Surface (Floating Window Layer) */}
-      <div className="pointer-events-none absolute inset-x-0 top-9 bottom-16 z-30 hidden md:block overflow-hidden">
+      <div className="pointer-events-none absolute inset-x-0 top-9 bottom-24 z-30 hidden overflow-hidden md:block">
         <AnimatePresence>
           {openWindowsList.map((winId) => {
             const appDef = appRegistry[winId];
@@ -238,7 +238,7 @@ function DesktopShellInner() {
               <DesktopWindow
                 key={winId}
                 title={appDef.title}
-                icon={<IconComp aria-hidden="true" className="h-4 w-4 text-accent" />}
+                icon={<IconComp aria-hidden="true" className="h-4 w-4 text-accent-mint" />}
                 className="pointer-events-auto absolute"
                 zIndex={winState.zIndex}
                 state={isFocused ? "active" : "inactive"}
@@ -258,7 +258,7 @@ function DesktopShellInner() {
       </div>
 
       {/* Mobile Active Window Overlay (Mobile Viewport Window Layer) */}
-      <div className="md:hidden fixed inset-x-2 top-11 bottom-16 z-40 flex flex-col pointer-events-none">
+      <div className="fixed inset-x-2 bottom-20 top-12 z-40 flex flex-col pointer-events-none md:hidden">
         <AnimatePresence>
           {activeWindowId &&
             windows[activeWindowId]?.isOpen &&
@@ -270,7 +270,7 @@ function DesktopShellInner() {
                 appRegistry[activeWindowId]?.icon
                   ? (() => {
                       const IconC = desktopIconMap[appRegistry[activeWindowId]!.icon];
-                      return <IconC className="h-4 w-4 text-accent" />;
+                      return <IconC className="h-4 w-4 text-accent-mint" />;
                     })()
                   : null
               }
@@ -307,7 +307,13 @@ type MobileLaunchPadProps = {
 
 function MobileLaunchPad({ selectedApp, onSelect, onOpen }: MobileLaunchPadProps) {
   return (
-    <div className="md:hidden mt-4 pb-20 space-y-4">
+    <div className="relative z-20 -mt-5 pb-28 md:hidden">
+      <div className="mb-3 flex items-center justify-between">
+        <p className="os-meta">Applications</p>
+        <span className="rounded-full border border-white/10 bg-white/[0.035] px-2 py-1 font-mono text-[0.56rem] uppercase tracking-[0.12em] text-white/[0.42]">
+          Tap to open
+        </span>
+      </div>
       <div className="grid grid-cols-4 gap-3">
         {desktopApps.map((app) => (
           <DesktopIcon

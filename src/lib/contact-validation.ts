@@ -7,7 +7,6 @@ export type ContactValidationResult = {
 
 /**
  * Client-side validation for contact form messages.
- * Prepares contracts for future POST /api/contact endpoint.
  */
 export function validateContactForm(
   data: Partial<ContactMessageForm>

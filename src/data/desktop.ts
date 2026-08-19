@@ -61,7 +61,7 @@ export const desktopApps: DesktopApp[] = [
     title: "GitHub",
     label: "GITHUB",
     href: "/github",
-    description: "A future home for GitHub API integration and repository signals.",
+    description: "Public GitHub repository signals and development activity.",
     icon: "github",
     systemLabel: "SOURCE",
     openMode: "route",
@@ -101,17 +101,6 @@ export const desktopApps: DesktopApp[] = [
     status: "ready"
   },
   {
-    id: "lab-notes",
-    title: "Lab Notes",
-    label: "LAB NOTES",
-    href: "/lab-notes",
-    description: "Short technical notes from ongoing learning and experiments.",
-    icon: "notes",
-    systemLabel: "NOTES",
-    openMode: "route",
-    status: "planned"
-  },
-  {
     id: "contact",
     title: "Contact",
     label: "CONTACT",
@@ -134,7 +123,6 @@ export const dockApps: DockApp[] = [
   { id: "resume", label: "Resume", icon: "resume", href: "/resume", openMode: "route" },
   { id: "certifications", label: "Credentials", icon: "certifications", href: "/certifications", openMode: "route" },
   { id: "achievements", label: "Milestones", icon: "achievements", href: "/achievements", openMode: "route" },
-  { id: "lab-notes", label: "Lab Notes", icon: "notes", href: "/lab-notes", openMode: "route" },
   { id: "terminal", label: "Terminal", icon: "terminal", openMode: "window" },
   { id: "settings", label: "Settings", icon: "settings", openMode: "window" }
 ];

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { contactConfig, type ContactMessageForm } from "@/lib/contact-data";
 import { validateContactForm } from "@/lib/contact-validation";
+import { AppHeader, Panel, StatusBadge } from "@/components/ui/os-primitives";
 import {
   Mail,
   Linkedin,
@@ -102,33 +103,22 @@ export function ContactApp() {
 
   return (
     <div className="flex flex-col space-y-4 text-white select-none font-sans">
-      {/* Application Sub-Header */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-3 shrink-0">
-        <div className="flex items-center gap-2">
-          <Mail className="h-4 w-4 text-accent" />
-          <div>
-            <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-white">
-              CONTACT
-            </h2>
-            <p className="text-[0.68rem] text-white/60">
-              Open a Connection / Direct Communication Console
-            </p>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-1.5 font-mono text-[0.62rem] text-emerald-400 font-semibold uppercase tracking-wider border border-emerald-400/20 bg-emerald-400/10 px-2.5 py-1 rounded">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span>{c.status}</span>
-        </div>
-      </div>
+      <AppHeader
+        icon={Mail}
+        title="Contact"
+        eyebrow="Communication Console"
+        description="Direct channels for internships, collaborations, and engineering conversations."
+        variant="default"
+        status={<StatusBadge tone="ready" pulse>{c.status}</StatusBadge>}
+      />
 
       {/* Main Two-Panel Layout */}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-5 min-h-[28rem]">
         {/* Left Side: Communication Profile & Direct Channels */}
         <div className="space-y-4">
           {/* Identity Card */}
-          <div className="rounded-xl border border-white/12 bg-white/[0.03] p-5 space-y-2">
-            <span className="font-mono text-[0.58rem] font-bold text-accent uppercase tracking-[0.2em] block">
+          <Panel variant="default" className="space-y-2 p-5">
+            <span className="font-mono text-[0.58rem] font-bold text-accent-mint uppercase tracking-[0.2em] block">
               OPEN A CONNECTION
             </span>
 
@@ -136,7 +126,7 @@ export function ContactApp() {
               {c.name}
             </h3>
 
-            <p className="font-mono text-xs text-accent font-medium">
+            <p className="font-mono text-xs text-accent-mint font-medium">
               {c.role}
             </p>
 
@@ -152,7 +142,7 @@ export function ContactApp() {
             <p className="text-xs text-white/75 leading-relaxed pt-1">
               Open to conversations around software engineering internships, full-stack development, applied machine learning projects, and technical collaborations.
             </p>
-          </div>
+          </Panel>
 
           {/* Direct Communication Channels */}
           <div className="space-y-2.5">
@@ -161,13 +151,13 @@ export function ContactApp() {
             </span>
 
             {/* Email Channel */}
-            <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3 space-y-2">
+            <div className="os-panel rounded-lg p-3 space-y-2">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 text-accent shrink-0" />
+                  <Mail className="h-4 w-4 text-accent-mint shrink-0" />
                   <span className="font-mono text-xs font-semibold text-white">EMAIL</span>
                 </div>
-                <span className="font-mono text-[0.58rem] text-white/35 uppercase">Primary Channel</span>
+                <span className="font-mono text-[0.58rem] text-white/[0.35] uppercase">Primary Channel</span>
               </div>
 
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-1 border-t border-white/5">
@@ -197,7 +187,7 @@ export function ContactApp() {
 
                     <a
                       href={`mailto:${c.email}`}
-                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-accent/20 border border-accent/40 font-mono text-[0.62rem] font-semibold text-accent hover:bg-accent hover:text-slate-950 transition-all uppercase tracking-wider"
+                      className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-accent-mint/[0.15] border border-accent-mint/40 font-mono text-[0.62rem] font-semibold text-accent-mint hover:bg-accent-mint hover:text-slate-950 transition-all uppercase tracking-wider"
                     >
                       <Send className="h-3 w-3" />
                       <span>Send</span>
@@ -210,10 +200,10 @@ export function ContactApp() {
             {/* LinkedIn & GitHub Links */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {/* LinkedIn */}
-              <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3 flex flex-col justify-between space-y-2">
+              <div className="os-panel rounded-lg p-3 flex flex-col justify-between space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Linkedin className="h-4 w-4 text-accent shrink-0" />
+                    <Linkedin className="h-4 w-4 text-semantic-info shrink-0" />
                     <span className="font-mono text-xs font-semibold text-white">LINKEDIN</span>
                   </div>
                 </div>
@@ -227,7 +217,7 @@ export function ContactApp() {
                       href={c.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-mono text-[0.62rem] font-semibold text-accent hover:underline"
+                      className="inline-flex items-center gap-1 font-mono text-[0.62rem] font-semibold text-semantic-info hover:text-white transition-colors"
                     >
                       <span>Open</span>
                       <ExternalLink className="h-3 w-3" />
@@ -239,10 +229,10 @@ export function ContactApp() {
               </div>
 
               {/* GitHub */}
-              <div className="rounded-lg border border-white/10 bg-white/[0.02] p-3 flex flex-col justify-between space-y-2">
+              <div className="os-panel rounded-lg p-3 flex flex-col justify-between space-y-2">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <Github className="h-4 w-4 text-accent shrink-0" />
+                    <Github className="h-4 w-4 text-semantic-info shrink-0" />
                     <span className="font-mono text-xs font-semibold text-white">GITHUB</span>
                   </div>
                 </div>
@@ -256,7 +246,7 @@ export function ContactApp() {
                       href={c.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-mono text-[0.62rem] font-semibold text-accent hover:underline"
+                      className="inline-flex items-center gap-1 font-mono text-[0.62rem] font-semibold text-semantic-info hover:text-white transition-colors"
                     >
                       <span>Open</span>
                       <ExternalLink className="h-3 w-3" />
@@ -270,23 +260,23 @@ export function ContactApp() {
           </div>
 
           {/* Currently Open To */}
-          <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 space-y-2">
+          <Panel variant="default" className="space-y-2">
             <div className="flex items-center justify-between">
               <span className="font-mono text-[0.6rem] font-bold text-white/40 uppercase tracking-[0.16em]">
                 CURRENTLY OPEN TO
               </span>
-              <Briefcase className="h-3.5 w-3.5 text-emerald-400/70" />
+              <Briefcase className="h-3.5 w-3.5 text-accent-mint/70" />
             </div>
 
             <ul className="space-y-1.5 pt-1">
               {c.opportunities.map((item) => (
                 <li key={item} className="flex items-center gap-2 text-xs text-white/80">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-accent-mint shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
             </ul>
-          </div>
+          </Panel>
         </div>
 
         {/* Right Side: Message Console / Form */}
@@ -299,15 +289,15 @@ export function ContactApp() {
                 initial={{ opacity: 0, scale: 0.96 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.96 }}
-                className="rounded-xl border border-accent/30 bg-accent/[0.04] p-5 space-y-4 text-center font-sans h-full flex flex-col justify-between"
+                className="os-panel border-accent-mint/30 bg-accent-mint/[0.045] rounded-xl p-5 space-y-4 text-center font-sans h-full flex flex-col justify-between"
               >
                 <div className="space-y-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent/40 bg-accent/15 text-accent mx-auto">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent-mint/40 bg-accent-mint/[0.15] text-accent-mint mx-auto">
                     <CheckCircle2 className="h-6 w-6" />
                   </div>
 
                   <div>
-                    <span className="font-mono text-[0.62rem] font-bold text-accent uppercase tracking-[0.2em] px-2.5 py-0.5 rounded border border-accent/30 bg-accent/10">
+                    <span className="font-mono text-[0.62rem] font-bold text-accent-mint uppercase tracking-[0.2em] px-2.5 py-0.5 rounded border border-accent-mint/30 bg-accent-mint/10">
                       DISPATCH READY
                     </span>
                     <h3 className="text-base font-bold text-white tracking-tight mt-2">
@@ -319,7 +309,7 @@ export function ContactApp() {
                   </div>
 
                   <div className="rounded-lg border border-white/10 bg-slate-950/40 p-3 text-left space-y-1.5 font-mono text-[0.65rem] text-white/60">
-                    <div className="flex items-center justify-between text-accent border-b border-white/5 pb-1">
+                    <div className="flex items-center justify-between text-accent-mint border-b border-white/5 pb-1">
                       <span className="font-semibold uppercase">PRE-FILLED INQUIRY SUMMARY</span>
                       <span>{preparedMailto.subject}</span>
                     </div>
@@ -334,7 +324,7 @@ export function ContactApp() {
                     {c.email && (
                       <a
                         href={preparedMailto.mailtoUrl}
-                        className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-accent/20 border border-accent/40 px-4 py-2.5 font-mono text-xs font-bold text-accent hover:bg-accent hover:text-slate-950 transition-all uppercase tracking-wider"
+                        className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-lg bg-accent-mint/[0.15] border border-accent-mint/40 px-4 py-2.5 font-mono text-xs font-bold text-accent-mint hover:bg-accent-mint hover:text-slate-950 transition-all uppercase tracking-wider"
                       >
                         <Send className="h-3.5 w-3.5" />
                         <span>Open Email Client</span>
@@ -376,11 +366,11 @@ export function ContactApp() {
                 key="form"
                 onSubmit={handleSubmit}
                 initial={{ opacity: 1 }}
-                className="rounded-xl border border-white/10 bg-white/[0.02] p-5 space-y-4 font-sans flex flex-col justify-between h-full"
+                className="os-panel rounded-xl p-5 space-y-4 font-sans flex flex-col justify-between h-full"
               >
                 <div className="space-y-3.5">
                   <div className="border-b border-white/10 pb-2.5">
-                    <span className="font-mono text-[0.6rem] font-bold text-accent uppercase tracking-[0.18em] block">
+                    <span className="font-mono text-[0.6rem] font-bold text-accent-mint uppercase tracking-[0.18em] block">
                       MESSAGE CONSOLE
                     </span>
                     <h3 className="text-sm font-bold text-white tracking-tight">
@@ -466,7 +456,7 @@ export function ContactApp() {
                       <label htmlFor="contact-message" className="font-mono text-[0.62rem] font-bold text-white/70 uppercase tracking-wider block">
                         MESSAGE <span className="text-accent">*</span>
                       </label>
-                      <span className="font-mono text-[0.58rem] text-white/35">
+                      <span className="font-mono text-[0.58rem] text-white/[0.35]">
                         {message.length} / 500
                       </span>
                     </div>

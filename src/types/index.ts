@@ -14,7 +14,6 @@ export type DesktopAppIcon =
   | "resume"
   | "certifications"
   | "achievements"
-  | "notes"
   | "contact"
   | "terminal"
   | "settings";
@@ -29,7 +28,6 @@ export type DesktopAppId =
   | "resume"
   | "certifications"
   | "achievements"
-  | "lab-notes"
   | "contact"
   | "terminal"
   | "settings"
@@ -103,13 +101,4 @@ export type Achievement = {
   title: string;
   description: string;
   date?: string;
-};
-
-export type LabNote = {
-  id: string;
-  title: string;
-  summary: string;
-  slug: string;
-  publishedAt?: string;
-  status: "draft" | "published";
 };

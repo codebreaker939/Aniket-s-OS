@@ -1,5 +1,4 @@
 import {
-  BookOpen,
   FileText,
   FlaskConical,
   Folder,
@@ -27,7 +26,6 @@ export const desktopIconMap: Record<DesktopAppIcon, LucideIcon> = {
   resume: FileText,
   certifications: ShieldCheck,
   achievements: Award,
-  notes: BookOpen,
   contact: Mail,
   terminal: Terminal,
   settings: Settings

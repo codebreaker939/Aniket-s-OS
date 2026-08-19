@@ -8,7 +8,6 @@ import { GithubApp } from "./github-app";
 import { ResumeApp } from "./resume-app";
 import { CertificationsApp } from "./certifications-app";
 import { MilestonesApp } from "./milestones-app";
-import { LabNotesApp } from "./lab-notes-app";
 import { ContactApp } from "./contact-app";
 import { TerminalApp } from "./terminal-app";
 import { SettingsApp } from "./settings-app";
@@ -34,8 +33,6 @@ export function AppRenderer({ id }: { id: DesktopAppId }) {
       return <CertificationsApp />;
     case "achievements":
       return <MilestonesApp />;
-    case "lab-notes":
-      return <LabNotesApp />;
     case "contact":
       return <ContactApp />;
     case "terminal":

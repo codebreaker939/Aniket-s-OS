@@ -121,17 +121,6 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     defaultPosition: { top: "4.5rem", left: "12rem" },
     defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
-  "lab-notes": {
-    id: "lab-notes",
-    title: "LAB NOTES",
-    label: "LAB NOTES",
-    icon: "notes",
-    category: "NOTES",
-    description: "Visitor Notes / Field Observations — Shared laboratory notebook.",
-    href: "/lab-notes",
-    defaultPosition: { top: "4.5rem", left: "15rem" },
-    defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
-  },
   contact: {
     id: "contact",
     title: "CONTACT",

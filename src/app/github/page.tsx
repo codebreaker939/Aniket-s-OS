@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-
-import { SectionPlaceholder } from "@/components/sections/section-placeholder";
+import { GithubApp } from "@/components/apps/github-app";
 
 export const metadata: Metadata = {
-  title: "Source Control"
+  title: "Source Control - Aniket OS",
+  description: "GitHub repositories, development activity, and source-control signals for Aniket Rai.",
 };
 
-export default function GitHubPage() {
+export default function GithubPage() {
   return (
-    <SectionPlaceholder
-      eyebrow="Source Control"
-      title="GitHub Integration Placeholder"
-      description="This route is reserved for future GitHub API integration, repository highlights, and contribution signals."
-      status="Integration pending"
-    />
+    <main className="min-h-screen bg-[#060810] text-white p-6 max-w-6xl mx-auto">
+      <GithubApp />
+    </main>
   );
 }

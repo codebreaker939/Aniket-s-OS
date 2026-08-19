@@ -93,17 +93,17 @@ export function SystemWidget({ className, onOpenApp }: SystemWidgetProps) {
       {/* System Widget */}
       <aside
         aria-label="System status"
-        className="rounded-xl border border-white/10 bg-slate-950/30 p-3.5 text-white shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all hover:border-white/18"
+        className="os-surface-1 rounded-xl p-3.5 text-white transition-all hover:border-white/[0.18]"
       >
         <div className="mb-2.5 flex items-center justify-between">
-          <h2 className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-accent/80">
+          <h2 className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-accent-mint/80">
             System
           </h2>
           <span
             className={`h-1.5 w-1.5 rounded-full ${
               online
-                ? "bg-accent shadow-[0_0_6px_rgba(154,209,196,0.7)]"
-                : "bg-rose-400"
+                ? "bg-accent-mint shadow-[0_0_8px_rgba(96,224,202,0.65)] os-status-pulse"
+                : "bg-semantic-error"
             }`}
             aria-label={online ? "Online" : "Offline"}
           />
@@ -124,7 +124,7 @@ export function SystemWidget({ className, onOpenApp }: SystemWidgetProps) {
           <div className="border-t border-white/[0.07] pt-2 space-y-1.5">
             {/* Uptime */}
             <div className="flex items-center justify-between">
-              <dt className="font-mono text-[0.55rem] uppercase tracking-wider text-white/35">
+              <dt className="font-mono text-[0.55rem] uppercase tracking-wider text-white/[0.35]">
                 Session
               </dt>
               <dd className="font-mono text-[0.66rem] font-medium tabular-nums text-white/80">
@@ -134,17 +134,17 @@ export function SystemWidget({ className, onOpenApp }: SystemWidgetProps) {
 
             {/* Network */}
             <div className="flex items-center justify-between">
-              <dt className="font-mono text-[0.55rem] uppercase tracking-wider text-white/35">
+              <dt className="font-mono text-[0.55rem] uppercase tracking-wider text-white/[0.35]">
                 Network
               </dt>
               <dd
                 className={`flex items-center gap-1 font-mono text-[0.62rem] font-semibold ${
-                  online ? "text-accent" : "text-rose-400"
+                  online ? "text-accent-mint" : "text-semantic-error"
                 }`}
               >
                 <span
                   className={`h-1.5 w-1.5 rounded-full ${
-                    online ? "bg-accent" : "bg-rose-400"
+                    online ? "bg-accent-mint" : "bg-semantic-error"
                   }`}
                 />
                 {online ? "ONLINE" : "OFFLINE"}
@@ -153,17 +153,17 @@ export function SystemWidget({ className, onOpenApp }: SystemWidgetProps) {
 
             {/* Viewport */}
             <div className="flex items-center justify-between">
-              <dt className="font-mono text-[0.55rem] uppercase tracking-wider text-white/35">
+              <dt className="font-mono text-[0.55rem] uppercase tracking-wider text-white/[0.35]">
                 View
               </dt>
-              <dd className="font-mono text-[0.62rem] text-white/55">
+              <dd className="font-mono text-[0.62rem] text-white/[0.55]">
                 {viewportLabel}
               </dd>
             </div>
 
             {/* Focus */}
             <div className="flex items-center justify-between">
-              <dt className="font-mono text-[0.55rem] uppercase tracking-wider text-white/35">
+              <dt className="font-mono text-[0.55rem] uppercase tracking-wider text-white/[0.35]">
                 Focus
               </dt>
               <dd className="font-mono text-[0.62rem] text-white/80">
@@ -179,7 +179,7 @@ export function SystemWidget({ className, onOpenApp }: SystemWidgetProps) {
         aria-label="Engineering lab overview"
         role="button"
         tabIndex={0}
-        className="rounded-xl border border-white/10 bg-slate-950/30 p-3.5 text-white shadow-[0_8px_32px_rgba(0,0,0,0.35)] backdrop-blur-xl transition-all hover:border-white/18 hover:bg-slate-950/40 cursor-pointer"
+        className="os-surface-1 cursor-pointer rounded-xl p-3.5 text-white transition-all hover:-translate-y-0.5 hover:border-accent-mint/[0.22]"
         onClick={() => onOpenApp?.("engineering-lab")}
         onKeyDown={(e) => {
           if (e.key === "Enter" || e.key === " ") onOpenApp?.("engineering-lab");
@@ -189,7 +189,7 @@ export function SystemWidget({ className, onOpenApp }: SystemWidgetProps) {
           <h2 className="font-mono text-[0.6rem] font-semibold uppercase tracking-[0.2em] text-white/50">
             Engineering Lab
           </h2>
-          <span className="rounded border border-accent/25 bg-accent/10 px-1.5 py-0.5 font-mono text-[0.52rem] uppercase tracking-wider text-accent/70">
+          <span className="rounded border border-accent-mint/25 bg-accent-mint/10 px-1.5 py-0.5 font-mono text-[0.52rem] uppercase tracking-wider text-accent-mint/70">
             Open
           </span>
         </div>
@@ -197,7 +197,7 @@ export function SystemWidget({ className, onOpenApp }: SystemWidgetProps) {
           <span className="font-mono text-2xl font-bold text-white">
             {labCount.toString().padStart(2, "0")}
           </span>
-          <span className="font-mono text-[0.6rem] uppercase tracking-wider text-accent/70">
+          <span className="font-mono text-[0.6rem] uppercase tracking-wider text-accent-mint/70">
             Experiments
           </span>
         </div>

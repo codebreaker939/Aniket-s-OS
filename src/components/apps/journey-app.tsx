@@ -5,6 +5,7 @@ import { AnimatePresence } from "motion/react";
 import { journeyStages } from "@/lib/journey-data";
 import { JourneyTimeline } from "./journey/journey-timeline";
 import { JourneyDetail } from "./journey/journey-detail";
+import { AppHeader, StatusBadge } from "@/components/ui/os-primitives";
 import { GitBranch, ArrowLeft, Layers } from "lucide-react";
 
 export function JourneyApp() {
@@ -21,31 +22,26 @@ export function JourneyApp() {
 
   return (
     <div className="flex flex-col h-full space-y-4 text-white">
-      {/* Application Sub-Header */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-3">
-        <div className="flex items-center gap-2">
-          <GitBranch className="h-4 w-4 text-accent" />
-          <div>
-            <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-white">
-              SYSTEM EVOLUTION
-            </h2>
-            <p className="text-[0.68rem] text-white/60">
-              Aniket Rai — Engineering Journey
-            </p>
-          </div>
-        </div>
-
-        <div className="hidden sm:flex items-center gap-2 font-mono text-[0.62rem] text-white/40 uppercase tracking-widest border border-white/10 px-2.5 py-1 rounded">
-          <Layers className="h-3 w-3 text-accent" />
-          <span>{journeyStages.length} STAGES</span>
-        </div>
-      </div>
+      <AppHeader
+        icon={GitBranch}
+        title="System Evolution"
+        eyebrow="Progression Map"
+        description="A timeline of education, engineering growth, and current AI/ML direction."
+        variant="quiet"
+        status={<StatusBadge tone="learning">{journeyStages.length} Stages</StatusBadge>}
+        meta={
+          <span className="hidden items-center gap-2 font-mono text-[0.62rem] uppercase tracking-widest text-white/40 sm:flex">
+            <Layers className="h-3 w-3 text-accent-lavender" />
+            Journey
+          </span>
+        }
+      />
 
       {/* Two-Panel Body */}
       <div className="flex-1 grid grid-cols-1 md:grid-cols-[15rem_1fr] lg:grid-cols-[16.5rem_1fr] gap-4 min-h-[28rem]">
         {/* Left Panel: Timeline */}
         <div
-          className={`md:block border-r border-white/10 pr-0 md:pr-4 ${
+          className={`md:block rounded-xl border border-accent-lavender/[0.12] bg-white/[0.018] p-3 md:border-r md:border-white/10 md:bg-transparent md:p-0 md:pr-4 ${
             showMobileDetail ? "hidden md:block" : "block"
           }`}
         >
@@ -58,7 +54,7 @@ export function JourneyApp() {
 
         {/* Right Panel: Detail */}
         <div
-          className={`flex flex-col min-h-0 overflow-y-auto pr-1 no-scrollbar ${
+          className={`os-panel os-panel-quiet flex flex-col min-h-0 overflow-y-auto rounded-xl p-4 pr-3 no-scrollbar ${
             showMobileDetail ? "block" : "hidden md:block"
           }`}
         >
@@ -68,7 +64,7 @@ export function JourneyApp() {
               <button
                 type="button"
                 onClick={() => setShowMobileDetail(false)}
-                className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent hover:text-white transition-colors"
+                className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-accent-lavender hover:text-white transition-colors"
               >
                 <ArrowLeft className="h-3.5 w-3.5" />
                 <span>Back to Timeline</span>
@@ -80,8 +76,8 @@ export function JourneyApp() {
             {selectedStage ? (
               <JourneyDetail key={selectedStage.id} stage={selectedStage} />
             ) : (
-              <div className="flex flex-col items-center justify-center h-full min-h-[20rem] rounded-xl border border-dashed border-white/15 p-8 text-center font-mono">
-                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-white/12 bg-white/[0.04] text-accent mb-3">
+              <div className="flex flex-col items-center justify-center h-full min-h-[20rem] rounded-xl border border-dashed border-white/[0.15] p-8 text-center font-mono">
+                <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-accent-lavender/20 bg-accent-lavender/10 text-accent-lavender mb-3">
                   <GitBranch className="h-6 w-6" />
                 </div>
                 <h3 className="text-sm font-bold text-white uppercase tracking-wider">

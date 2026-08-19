@@ -44,12 +44,11 @@ export function DesktopWindow({
 }: DesktopWindowProps) {
   const reduceMotion = useReducedMotion();
 
-  // Dynamically clamp max-height based on window top offset to prevent extending below usable viewport
   const topOffset = defaultPosition?.top ? String(defaultPosition.top) : "4.5rem";
   const style: CSSProperties = {
     ...defaultPosition,
     ...defaultSize,
-    maxHeight: isMaximized ? undefined : `calc(100dvh - ${topOffset} - 5.5rem)`,
+    maxHeight: isMaximized ? undefined : `calc(100dvh - ${topOffset} - 9rem)`,
     zIndex
   };
 
@@ -57,11 +56,13 @@ export function DesktopWindow({
     <motion.section
       aria-label={title}
       className={cn(
-        "flex flex-col overflow-hidden rounded-xl border border-white/16 bg-slate-950/85 text-white shadow-[0_24px_80px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl transition-all duration-200 min-h-[16rem]",
-        state === "inactive" && "opacity-85 border-white/10 shadow-lg",
+        "os-surface-2 flex min-h-[16rem] flex-col overflow-hidden rounded-xl text-white transition-[box-shadow,border-color,opacity,transform] duration-200",
+        state === "active"
+          ? "border-accent-mint/[0.18] shadow-os-window-focus"
+          : "opacity-90 border-white/10 shadow-os-window",
         isMaximized
-          ? "!fixed !inset-x-3 !top-11 !bottom-20 !w-auto !h-auto !max-w-none !max-h-none z-40"
-          : "max-h-[calc(100dvh-7rem)] max-w-[calc(100vw-2rem)]",
+          ? "!fixed !inset-x-3 !top-11 !bottom-24 !w-auto !h-auto !max-w-none !max-h-none z-40"
+          : "max-h-[calc(100dvh-10rem)] max-w-[calc(100vw-2rem)]",
         className
       )}
       style={isMaximized ? { zIndex } : style}
@@ -71,62 +72,56 @@ export function DesktopWindow({
       transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
       onClick={onFocus}
     >
-      {/* Fixed Title Bar */}
-      <div className="group flex h-9 shrink-0 items-center justify-between border-b border-white/10 bg-white/[0.05] px-3 select-none">
-        {/* Left: Window Controls */}
+      <div className="group flex h-10 shrink-0 items-center justify-between border-b border-white/10 bg-gradient-to-r from-white/[0.075] via-white/[0.035] to-white/[0.015] px-3 select-none">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-2">
             <button
               type="button"
               aria-label={`Close ${title}`}
-              className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-rose-500/80 transition-colors hover:bg-rose-500 border border-rose-400/40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-rose-400"
+              className="group/btn flex h-5 w-5 items-center justify-center rounded-full border border-semantic-error/40 bg-semantic-error/70 transition-all hover:bg-semantic-error focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-error"
               onClick={(e) => {
                 e.stopPropagation();
                 onClose?.();
               }}
             >
-              <X aria-hidden="true" className="h-2 w-2 text-rose-950 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+              <X aria-hidden="true" className="h-2.5 w-2.5 text-slate-950 opacity-0 transition-opacity group-hover/btn:opacity-100" />
             </button>
             <button
               type="button"
               aria-label={`Minimize ${title}`}
-              className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-amber-500/80 transition-colors hover:bg-amber-500 border border-amber-400/40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-amber-400"
+              className="group/btn flex h-5 w-5 items-center justify-center rounded-full border border-semantic-attention/40 bg-semantic-attention/70 transition-all hover:bg-semantic-attention focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-attention"
               onClick={(e) => {
                 e.stopPropagation();
                 onMinimize?.();
               }}
             >
-              <Minus aria-hidden="true" className="h-2 w-2 text-amber-950 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+              <Minus aria-hidden="true" className="h-2.5 w-2.5 text-slate-950 opacity-0 transition-opacity group-hover/btn:opacity-100" />
             </button>
             <button
               type="button"
               aria-label={`Maximize ${title}`}
-              className="group/btn flex h-3 w-3 items-center justify-center rounded-full bg-emerald-500/80 transition-colors hover:bg-emerald-500 border border-emerald-400/40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400"
+              className="group/btn flex h-5 w-5 items-center justify-center rounded-full border border-accent-mint/40 bg-accent-mint/70 transition-all hover:bg-accent-mint focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent-mint"
               onClick={(e) => {
                 e.stopPropagation();
                 onMaximize?.();
               }}
             >
-              <Maximize2 aria-hidden="true" className="h-2 w-2 text-emerald-950 opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+              <Maximize2 aria-hidden="true" className="h-2.5 w-2.5 text-slate-950 opacity-0 transition-opacity group-hover/btn:opacity-100" />
             </button>
           </div>
-          {icon && <span className="ml-1 text-accent/80">{icon}</span>}
+          {icon && <span className="ml-1 text-accent-mint/80">{icon}</span>}
         </div>
 
-        {/* Center: Title */}
-        <div className="min-w-0 truncate text-center font-mono text-xs font-semibold text-white/85 tracking-tight">
+        <div className="min-w-0 truncate text-center text-xs font-semibold tracking-[0.02em] text-white/85">
           {title}
         </div>
 
-        {/* Right Spacer / Controls balance */}
         <div className="w-12" aria-hidden="true" />
       </div>
 
-      {/* Optional Fixed Toolbar */}
-      {toolbar ? <div className="shrink-0 border-b border-white/8 bg-slate-950/40 px-3.5 py-1.5">{toolbar}</div> : null}
+      {toolbar ? <div className="shrink-0 border-b border-white/10 bg-surface-1/[0.45] px-3.5 py-1.5">{toolbar}</div> : null}
 
-      {/* Primary Scrollable Content Area */}
-      <div className="min-h-0 flex-1 overflow-y-auto p-4 custom-scrollbar flex flex-col">{children}</div>
+      <div className="custom-scrollbar flex min-h-0 flex-1 flex-col overflow-y-auto p-4">{children}</div>
     </motion.section>
   );
 }

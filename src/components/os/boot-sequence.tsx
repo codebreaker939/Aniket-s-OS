@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useReducer, useRef } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Check } from "lucide-react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { Check, Cpu } from "lucide-react";
 
 /* ─── Boot steps (honest, browser-meaningful) ───────────── */
 
@@ -46,6 +46,7 @@ type BootSequenceProps = {
 };
 
 export function BootSequence({ onComplete }: BootSequenceProps) {
+  const reduceMotion = useReducedMotion();
   const [state, dispatch] = useReducer(bootReducer, {
     visibleCount: 0,
     phase: "steps",
@@ -85,28 +86,33 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
   return (
     <motion.div
       key="boot"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0, scale: 0.98 }}
+      initial={reduceMotion ? false : { opacity: 0, filter: "blur(8px)" }}
+      animate={reduceMotion ? undefined : { opacity: 1, filter: "blur(0px)" }}
+      exit={reduceMotion ? undefined : { opacity: 0, scale: 0.985, filter: "blur(8px)" }}
       transition={{ duration: 0.4 }}
       className="fixed inset-0 z-[200] flex items-center justify-center power-screen-bg"
     >
       <div aria-hidden="true" className="absolute inset-0 power-screen-atmosphere" />
       <div aria-hidden="true" className="absolute inset-0 power-screen-vignette" />
+      <div aria-hidden="true" className="desktop-grain absolute inset-0 opacity-20" />
 
       <div
-        className="relative z-10 flex flex-col gap-6 rounded-2xl border border-white/10 bg-slate-950/60 px-10 py-10 shadow-[0_32px_80px_rgba(0,0,0,0.5)] backdrop-blur-3xl"
-        style={{ minWidth: "min(340px, 90vw)" }}
+        className="os-surface-3 relative z-10 flex w-[min(24rem,88vw)] flex-col gap-6 rounded-2xl px-8 py-8"
       >
-        {/* Powering on label */}
-        <div className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent shadow-[0_0_8px_rgba(154,209,196,0.7)]" />
-          <span className="font-mono text-[0.58rem] uppercase tracking-[0.24em] text-accent/70">
-            Powering On
-          </span>
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <p className="os-meta text-accent-mint/70">Activation</p>
+            <h2 className="mt-1 text-xl font-semibold text-white">ANIKET OS</h2>
+          </div>
+          <motion.div
+            animate={reduceMotion ? undefined : { opacity: [0.58, 1, 0.58], scale: [0.98, 1.03, 0.98] }}
+            transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
+            className="flex h-11 w-11 items-center justify-center rounded-xl border border-accent-mint/24 bg-accent-mint/10 text-accent-mint"
+          >
+            <Cpu className="h-4 w-4" />
+          </motion.div>
         </div>
 
-        {/* Step list */}
         <ul className="space-y-2" aria-live="polite" aria-label="Boot steps">
           {BOOT_STEPS.map((step, i) => {
             const visible = i < state.visibleCount;
@@ -117,10 +123,10 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
                     initial={{ opacity: 0, x: -8 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.25, ease: "easeOut" }}
-                    className="flex items-center gap-2.5"
+                    className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/[0.026] px-3 py-2"
                   >
-                    <Check className="h-3 w-3 shrink-0 text-accent" aria-hidden="true" />
-                    <span className="font-mono text-[0.68rem] text-white/70">
+                    <Check className="h-3 w-3 shrink-0 text-accent-mint" aria-hidden="true" />
+                    <span className="text-xs text-white/70">
                       {step}
                     </span>
                   </motion.li>
@@ -137,10 +143,10 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
               initial={{ opacity: 0, y: 4 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="mt-1 border-t border-white/10 pt-3"
+              className="mt-1 rounded-lg border border-accent-mint/20 bg-accent-mint/[0.08] px-3 py-2"
             >
-              <p className="font-mono text-[0.7rem] font-bold uppercase tracking-[0.2em] text-white/80">
-                ANIKET OS Ready
+              <p className="font-mono text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-accent-mint">
+                Desktop emergence ready
               </p>
             </motion.div>
           )}
@@ -150,7 +156,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
         <button
           type="button"
           onClick={skip}
-          className="mt-1 self-end font-mono text-[0.56rem] uppercase tracking-[0.16em] text-white/20 hover:text-white/50 transition-colors focus-visible:outline-none focus-visible:text-accent"
+          className="mt-1 self-end font-mono text-[0.56rem] uppercase tracking-[0.16em] text-white/24 transition-colors hover:text-white/[0.58] focus-visible:outline-none focus-visible:text-accent-mint"
           aria-label="Skip boot sequence"
         >
           Skip →

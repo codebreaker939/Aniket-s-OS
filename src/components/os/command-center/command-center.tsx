@@ -99,7 +99,7 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
         role="dialog"
         aria-modal="true"
         aria-label="Spotlight Command Palette"
-        className="fixed inset-0 z-[200] flex items-start justify-center pt-14 sm:pt-20 p-4 bg-slate-950/75 backdrop-blur-md select-none"
+        className="fixed inset-0 z-[200] flex items-start justify-center bg-slate-950/70 p-4 pt-14 backdrop-blur-xl select-none sm:pt-20"
         onClick={onClose}
       >
         <motion.div
@@ -108,11 +108,11 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
           exit={{ opacity: 0, scale: 0.96, y: -10 }}
           transition={{ duration: 0.18, ease: "easeOut" }}
           onClick={(e) => e.stopPropagation()}
-          className="relative w-full max-w-xl max-h-[78vh] flex flex-col rounded-2xl border border-white/15 bg-slate-950/95 text-white shadow-[0_16px_48px_rgba(0,0,0,0.6),0_0_24px_rgba(94,210,186,0.1)] overflow-hidden"
+          className="os-surface-3 relative flex max-h-[78vh] w-full max-w-xl flex-col overflow-hidden rounded-2xl text-white"
         >
           {/* Header Search Input Bar */}
-          <div className="flex items-center gap-3 px-4 py-3.5 border-b border-white/10 bg-white/[0.03]">
-            <Search className="h-4 w-4 text-accent shrink-0" />
+          <div className="flex items-center gap-3 border-b border-white/10 bg-white/[0.035] px-4 py-3.5">
+            <Search className="h-4 w-4 shrink-0 text-accent-mint" />
             <input
               ref={inputRef}
               type="text"
@@ -120,12 +120,12 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               onKeyDown={handleKeyDown}
-              className="flex-1 bg-transparent font-mono text-xs sm:text-sm text-white placeholder:text-white/35 outline-none"
+              className="flex-1 bg-transparent text-sm text-white outline-none placeholder:text-white/[0.35]"
               aria-label="Search Aniket OS"
             />
 
             <div className="flex items-center gap-2">
-              <span className="font-mono text-[0.6rem] font-bold text-accent px-1.5 py-0.5 rounded border border-accent/30 bg-accent/10">
+              <span className="rounded border border-accent-mint/30 bg-accent-mint/10 px-1.5 py-0.5 font-mono text-[0.6rem] font-bold text-accent-mint">
                 ⌘K
               </span>
               <button
@@ -144,7 +144,7 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
             {/* Show Recent Items if query is empty and recentItems exist */}
             {!query && recentItems.length > 0 && (
               <div className="mb-3 px-2 pt-1 space-y-1">
-                <div className="flex items-center gap-1.5 font-mono text-[0.56rem] font-bold text-accent uppercase tracking-widest">
+                <div className="flex items-center gap-1.5 font-mono text-[0.56rem] font-bold text-accent-lavender uppercase tracking-widest">
                   <Clock className="h-3 w-3" />
                   <span>Recently Opened</span>
                 </div>
@@ -195,7 +195,7 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
           <div className="flex items-center justify-between px-4 py-2.5 border-t border-white/10 bg-white/[0.02] font-mono text-[0.6rem] text-white/40">
             <div className="flex items-center gap-3">
               <span className="flex items-center gap-1">
-                <kbd className="px-1 py-0.5 rounded bg-white/10 border border-white/15 text-[0.55rem] font-bold text-white/80">
+                <kbd className="px-1 py-0.5 rounded bg-white/10 border border-white/[0.15] text-[0.55rem] font-bold text-white/80">
                   <ArrowUp className="h-2.5 w-2.5 inline" />
                   <ArrowDown className="h-2.5 w-2.5 inline" />
                 </kbd>
@@ -203,21 +203,21 @@ export function CommandCenter({ isOpen, onClose }: CommandCenterProps) {
               </span>
 
               <span className="flex items-center gap-1">
-                <kbd className="px-1 py-0.5 rounded bg-white/10 border border-white/15 text-[0.55rem] font-bold text-white/80">
+                <kbd className="px-1 py-0.5 rounded bg-white/10 border border-white/[0.15] text-[0.55rem] font-bold text-white/80">
                   <CornerDownLeft className="h-2.5 w-2.5 inline" />
                 </kbd>
                 Open
               </span>
 
               <span className="flex items-center gap-1">
-                <kbd className="px-1 py-0.5 rounded bg-white/10 border border-white/15 text-[0.55rem] font-bold text-white/80">
+                <kbd className="px-1 py-0.5 rounded bg-white/10 border border-white/[0.15] text-[0.55rem] font-bold text-white/80">
                   ESC
                 </kbd>
                 Close
               </span>
             </div>
 
-            <span className="text-accent/80 font-bold hidden sm:inline">ANIKET OS COMMAND</span>
+            <span className="hidden font-bold text-accent-mint/80 sm:inline">ANIKET OS COMMAND</span>
           </div>
         </motion.div>
       </div>
@@ -247,15 +247,15 @@ function CommandItemRow({
       onMouseEnter={onMouseEnter}
       className={`w-full text-left rounded-xl px-3 py-2 flex items-center justify-between gap-3 transition-all ${
         isSelected
-          ? "bg-accent/15 border border-accent/40 text-white shadow-sm"
-          : "border border-transparent hover:bg-white/[0.04] text-white/80"
+          ? "border border-accent-mint/40 bg-accent-mint/[0.12] text-white shadow-sm"
+          : "border border-transparent text-white/80 hover:bg-white/[0.045]"
       }`}
     >
       <div className="flex items-center gap-3 min-w-0">
         <div
           className={`flex h-8 w-8 items-center justify-center rounded-lg border shrink-0 transition-colors ${
             isSelected
-              ? "border-accent/40 bg-accent/20 text-accent"
+              ? "border-accent-mint/40 bg-accent-mint/[0.15] text-accent-mint"
               : "border-white/10 bg-white/5 text-white/60"
           }`}
         >
@@ -266,7 +266,7 @@ function CommandItemRow({
           <h4 className="font-semibold text-xs text-white truncate">
             {item.title}
           </h4>
-          <p className="text-[0.68rem] text-white/55 truncate">
+          <p className="text-[0.68rem] text-white/[0.55] truncate">
             {item.subtitle}
           </p>
         </div>
@@ -277,7 +277,7 @@ function CommandItemRow({
           {item.category}
         </span>
         {isSelected && (
-          <CornerDownLeft className="h-3 w-3 text-accent animate-pulse" />
+          <CornerDownLeft className="h-3 w-3 text-accent-mint os-status-pulse" />
         )}
       </div>
     </button>

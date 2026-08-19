@@ -11,6 +11,7 @@ import {
   Clock,
   ChevronRight,
 } from "lucide-react";
+import { AppHeader, Panel, StatusBadge } from "@/components/ui/os-primitives";
 
 const categoryFilters: { id: ActivityCategory | "ALL"; label: string }[] = [
   { id: "ALL", label: "All Events" },
@@ -19,7 +20,6 @@ const categoryFilters: { id: ActivityCategory | "ALL"; label: string }[] = [
   { id: "ENGINEERING", label: "Lab Work" },
   { id: "SOURCE_CONTROL", label: "Source Control" },
   { id: "NETWORK", label: "Network" },
-  { id: "LAB_NOTES", label: "Lab Notes" },
 ];
 
 export function ActivityApp() {
@@ -46,39 +46,27 @@ export function ActivityApp() {
   };
 
   return (
-    <div className="flex flex-col h-full text-white select-none font-sans overflow-hidden">
-      {/* Pinned Header & Category Nav Bar */}
-      <div className="shrink-0 space-y-3 pb-3 border-b border-white/10">
-        {/* Sub-Header */}
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Activity className="h-4 w-4 text-accent" />
-            <div>
-              <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-white">
-                SYSTEM ACTIVITY
-              </h2>
-              <p className="text-[0.68rem] text-white/60">
-                Real Session Event Log & Workstation State Transitions
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-2 font-mono text-[0.62rem]">
+    <div className="flex h-full flex-col gap-4 overflow-hidden text-white select-none">
+      <div className="shrink-0 space-y-3">
+        <AppHeader
+          icon={Activity}
+          eyebrow="LIVE SYSTEM"
+          title="System Activity"
+          description="Real session events, application launches, and workstation state transitions."
+          variant="data"
+          meta={
             <button
               type="button"
               onClick={() => activityContext?.clearEvents()}
-              className="inline-flex items-center gap-1 border border-white/10 bg-white/5 px-2.5 py-1 rounded text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.045] px-2.5 py-1.5 font-mono text-[0.58rem] font-semibold uppercase tracking-[0.12em] text-white/[0.55] transition-all hover:border-white/20 hover:bg-white/[0.075] hover:text-white"
             >
               <Trash2 className="h-3 w-3" />
               <span>Clear Log</span>
             </button>
-            <span className="text-accent font-bold px-2 py-1 rounded border border-accent/20 bg-accent/10">
-              {events.length} EVENTS
-            </span>
-          </div>
-        </div>
+          }
+          status={<StatusBadge tone="info" pulse>{events.length} Events</StatusBadge>}
+        />
 
-        {/* Category Filter Nav Bar */}
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
           {categoryFilters.map((f) => (
             <button
@@ -88,8 +76,8 @@ export function ActivityApp() {
               className={`rounded-md border px-2.5 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-wider transition-all whitespace-nowrap
                 ${
                   selectedCategory === f.id
-                    ? "border-accent/40 bg-accent/15 text-accent"
-                    : "border-white/8 bg-white/[0.02] text-white/40 hover:text-white/70 hover:border-white/15"
+                    ? "border-semantic-info/40 bg-semantic-info/[0.15] text-semantic-info"
+                    : "border-white/[0.08] bg-white/[0.02] text-white/40 hover:border-white/[0.15] hover:text-white/70"
                 }
               `}
             >
@@ -99,24 +87,25 @@ export function ActivityApp() {
         </div>
       </div>
 
-      {/* Scrollable Events Timeline List */}
       <div className="flex-1 overflow-y-auto pt-3 pr-1 space-y-2 custom-scrollbar">
         {filteredEvents.length === 0 ? (
-          <div className="flex flex-col items-center justify-center min-h-[14rem] rounded-xl border border-dashed border-white/10 p-6 text-center">
+          <Panel variant="quiet" className="flex min-h-[14rem] flex-col items-center justify-center border-dashed p-6 text-center">
             <Clock className="h-6 w-6 text-white/20 mb-2" />
             <p className="font-mono text-xs text-white/40">
               No activity logged for this category in the current session.
             </p>
-          </div>
+          </Panel>
         ) : (
           filteredEvents.map((evt) => (
-            <div
+            <Panel
               key={evt.id}
-              className="rounded-xl border border-white/10 bg-white/[0.02] p-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:border-white/15 transition-all"
+              variant="data"
+              interactive
+              className="flex flex-col gap-3 p-3.5 sm:flex-row sm:items-center sm:justify-between"
             >
               <div className="space-y-1">
                 <div className="flex items-center gap-2 font-mono text-[0.65rem]">
-                  <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                  <span className="h-1.5 w-1.5 rounded-full bg-semantic-info os-status-pulse" />
                   <span className="font-bold text-white text-xs">{evt.title}</span>
                   <span className="px-1.5 py-0.5 rounded border border-white/10 bg-white/5 text-[0.55rem] uppercase text-white/40 font-semibold">
                     {evt.category}
@@ -133,7 +122,7 @@ export function ActivityApp() {
                   <button
                     type="button"
                     onClick={() => handleOpenApp(evt.appId, evt.labId)}
-                    className="inline-flex items-center gap-1 font-semibold text-accent hover:underline uppercase tracking-wider"
+                    className="inline-flex items-center gap-1 font-semibold text-semantic-info hover:underline uppercase tracking-wider"
                   >
                     <span>Inspect App</span>
                     <ChevronRight className="h-3 w-3" />
@@ -142,7 +131,7 @@ export function ActivityApp() {
 
                 <span className="text-white/40 tabular-nums">{evt.timestamp}</span>
               </div>
-            </div>
+            </Panel>
           ))
         )}
       </div>

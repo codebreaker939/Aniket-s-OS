@@ -61,30 +61,30 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
   };
 
   return (
-    <header className="fixed top-0 inset-x-0 z-50 flex h-8 items-center justify-between border-b border-white/10 bg-slate-950/40 px-3 text-white shadow-[0_4px_24px_rgba(0,0,0,0.3)] backdrop-blur-2xl md:px-4">
+    <header className="fixed top-0 inset-x-0 z-50 flex h-8 items-center justify-between border-b border-white/10 bg-surface-1/[0.58] px-3 text-white shadow-[0_6px_28px_rgba(0,0,0,0.30)] backdrop-blur-2xl md:px-4">
       <div ref={navRef} className="relative flex items-center gap-1 sm:gap-2">
         {/* Brand / OS Logo Menu */}
         <div className="relative">
           <button
             type="button"
             aria-expanded={activeMenu === "OS"}
-            className="flex items-center rounded px-2 py-0.5 text-xs font-bold tracking-wider text-accent transition-colors hover:bg-white/10 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+            className="flex items-center rounded px-2 py-0.5 text-xs font-semibold tracking-[0.03em] text-accent-mint transition-colors hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-mint"
             onClick={() => toggleMenu("OS")}
           >
             ANIKET OS
           </button>
           {activeMenu === "OS" && (
-            <div className="absolute left-0 top-7 z-50 w-52 rounded-lg border border-white/12 bg-slate-950/90 py-1.5 shadow-2xl backdrop-blur-2xl text-xs text-white/80">
+            <div className="os-surface-3 absolute left-0 top-7 z-50 w-52 rounded-lg py-1.5 text-xs text-white/80">
               <button
                 type="button"
-                className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
+                className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white"
                 onClick={() => handleMenuAction("about")}
               >
                 About Aniket OS
               </button>
               <button
                 type="button"
-                className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
+                className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white"
                 onClick={() => handleMenuAction("settings")}
               >
                 System Settings...
@@ -92,7 +92,7 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
               <div className="my-1 border-t border-white/10" />
               <button
                 type="button"
-                className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
+                className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white"
                 onClick={() => handleMenuAction("terminal")}
               >
                 Launch Terminal
@@ -108,8 +108,8 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
               <button
                 type="button"
                 aria-expanded={activeMenu === menu}
-                className={`rounded px-2.5 py-0.5 text-xs font-medium transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent ${
-                  activeMenu === menu ? "bg-white/12 text-white" : "text-white/75"
+                className={`rounded px-2.5 py-0.5 text-xs font-medium transition-colors hover:bg-white/[0.08] hover:text-white focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent-mint ${
+                  activeMenu === menu ? "bg-white/10 text-white" : "text-white/[0.68]"
                 }`}
                 onClick={() => toggleMenu(menu)}
               >
@@ -117,36 +117,36 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
               </button>
 
               {activeMenu === menu && (
-                <div className="absolute left-0 top-7 z-50 w-48 rounded-lg border border-white/12 bg-slate-950/90 py-1.5 shadow-2xl backdrop-blur-2xl text-xs text-white/80">
+                <div className="os-surface-3 absolute left-0 top-7 z-50 w-48 rounded-lg py-1.5 text-xs text-white/80">
                   {menu === "File" && (
                     <>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("engineering-lab")}>Open Engineering Lab</button>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("projects")}>Browse Projects</button>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("terminal")}>New Terminal Window</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("engineering-lab")}>Open Engineering Lab</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("projects")}>Browse Projects</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("terminal")}>New Terminal Window</button>
                     </>
                   )}
                   {menu === "Edit" && (
                     <>
-                      <button type="button" className="w-full text-left px-3 py-1.5 opacity-50 cursor-not-allowed" disabled>Undo (N/A)</button>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("toolbox")}>Inspect Stack & Tools</button>
+                      <button type="button" className="w-full cursor-not-allowed px-3 py-1.5 text-left opacity-50" disabled>Undo (N/A)</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("toolbox")}>Inspect Stack & Tools</button>
                     </>
                   )}
                   {menu === "View" && (
                     <>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => setActiveMenu(null)}>Desktop Overview</button>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("journey")}>View Engineering Journey</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => setActiveMenu(null)}>Desktop Overview</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("journey")}>View Engineering Journey</button>
                     </>
                   )}
                   {menu === "Window" && (
                     <>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("engineering-lab")}>Bring Lab to Front</button>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("terminal")}>Bring Terminal to Front</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("engineering-lab")}>Bring Lab to Front</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("terminal")}>Bring Terminal to Front</button>
                     </>
                   )}
                   {menu === "Help" && (
                     <>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("contact")}>Contact / Inquiries</button>
-                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("about")}>Workstation Documentation</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("contact")}>Contact / Inquiries</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("about")}>Workstation Documentation</button>
                     </>
                   )}
                 </div>
@@ -157,7 +157,7 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
       </div>
 
       {/* Center label */}
-      <div className="hidden lg:block font-mono text-[0.66rem] uppercase tracking-widest text-white/35 pointer-events-none">
+      <div className="hidden lg:block font-mono text-[0.66rem] uppercase tracking-widest text-white/[0.35] pointer-events-none">
         Aniket Workstation v1.0
       </div>
 
@@ -168,22 +168,22 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
           type="button"
           aria-label="Open Spotlight Search (⌘K)"
           onClick={onOpenSearch}
-          className="flex items-center gap-1 rounded bg-white/5 border border-white/10 px-2 py-0.5 font-mono text-[0.6rem] font-bold text-white/70 hover:bg-white/10 hover:border-accent/40 hover:text-accent transition-colors"
+        className="flex items-center gap-1 rounded border border-white/10 bg-white/[0.045] px-2 py-0.5 font-mono text-[0.6rem] font-semibold text-white/70 transition-colors hover:border-accent-mint/40 hover:bg-white/10 hover:text-accent-mint"
         >
-          <Search aria-hidden="true" className="h-3 w-3 text-accent" />
+          <Search aria-hidden="true" className="h-3 w-3 text-accent-mint" />
           <span className="hidden sm:inline">⌘K</span>
         </button>
 
         <span className="hidden items-center gap-1.5 sm:inline-flex text-white/70">
-          <Wifi aria-hidden="true" className="h-3.5 w-3.5 text-accent/90" />
+          <Wifi aria-hidden="true" className="h-3.5 w-3.5 text-accent-mint/90" />
           <span>Wi-Fi</span>
         </span>
         <span className="inline-flex items-center gap-1.5 text-white/70">
-          <Battery aria-hidden="true" className="h-3.5 w-3.5 text-emerald-400" />
+          <Battery aria-hidden="true" className="h-3.5 w-3.5 text-accent-mint" />
           <span>87%</span>
         </span>
-        <span className="hidden items-center gap-1.5 md:inline-flex text-accent">
-          <Circle aria-hidden="true" className="h-2 w-2 fill-accent text-accent animate-pulse" />
+        <span className="hidden items-center gap-1.5 md:inline-flex text-accent-lavender">
+          <Circle aria-hidden="true" className="h-2 w-2 fill-accent-lavender text-accent-lavender os-status-pulse" />
           <span className="uppercase tracking-wider text-[0.62rem] font-semibold">BUILDING</span>
         </span>
         <time dateTime={clock.iso || undefined} className="normal-case font-mono text-white/90 text-[0.68rem] tracking-tight tabular-nums">

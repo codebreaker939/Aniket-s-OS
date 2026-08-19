@@ -7,8 +7,7 @@ export type ActivityCategory =
   | "APPLICATION"
   | "ENGINEERING"
   | "SOURCE_CONTROL"
-  | "NETWORK"
-  | "LAB_NOTES";
+  | "NETWORK";
 
 export type SystemActivityEvent = {
   id: string;
