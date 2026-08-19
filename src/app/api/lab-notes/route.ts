@@ -83,7 +83,7 @@ export async function GET(): Promise<NextResponse<PublicLabNotesResponse | { err
       publishedCount === 0
         ? null
         : Math.round(
-            (notes.reduce((sum, n) => sum + n.rating, 0) / publishedCount) * 10
+          notes.reduce((sum: number, n) => sum + n.rating, 0) * 10
           ) / 10;
 
     const publicNotes: PublicLabNote[] = notes.map((note) => ({
