@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { DesktopHero } from "@/components/os/desktop-hero";
 import { DesktopIcon } from "@/components/os/desktop-icon";
 import { desktopIconMap } from "@/components/os/icon-registry";
@@ -10,18 +10,120 @@ import { Dock } from "@/components/os/dock";
 import { MenuBar } from "@/components/os/menu-bar";
 import { SystemWidget } from "@/components/os/system-widget";
 import { WindowManagerProvider, useWindowManager } from "@/components/os/window-manager";
+import { OSLifecycleProvider, useOSLifecycle } from "@/components/os/os-lifecycle";
+import { PowerScreen } from "@/components/os/power-screen";
+import { BootSequence } from "@/components/os/boot-sequence";
 import { appRegistry } from "@/lib/app-registry";
 import { desktopApps } from "@/data/desktop";
 import { AppRenderer } from "@/components/apps/app-renderer";
 import type { DesktopApp, DesktopAppId } from "@/types";
 
+/* ─── Root Shell ─────────────────────────────────────────── */
+
 export function DesktopShell() {
   return (
-    <WindowManagerProvider>
-      <DesktopShellInner />
-    </WindowManagerProvider>
+    <OSLifecycleProvider>
+      <WindowManagerProvider>
+        <OSController />
+      </WindowManagerProvider>
+    </OSLifecycleProvider>
   );
 }
+
+/* ─── OS Lifecycle Controller ────────────────────────────── */
+
+function OSController() {
+  const { osState } = useOSLifecycle();
+
+  const handleBootComplete = () => {
+    // Invoke the stable ref registered by OSLifecycleProvider
+    const fn = (window as Window & { __osBootComplete?: () => void }).__osBootComplete;
+    if (fn) fn();
+  };
+
+  return (
+    <>
+      {/* Wallpaper is always present as the base layer */}
+      <DesktopWallpaper />
+
+      <AnimatePresence mode="wait">
+        {/* POWERED OFF → power screen */}
+        {osState === "POWERED_OFF" && (
+          <motion.div key="power-off" exit={{ opacity: 0 }} transition={{ duration: 0.5 }}>
+            <PowerScreen />
+          </motion.div>
+        )}
+
+        {/* BOOTING → boot sequence */}
+        {osState === "BOOTING" && (
+          <BootSequence key="booting" onComplete={handleBootComplete} />
+        )}
+
+        {/* RUNNING → full desktop */}
+        {(osState === "RUNNING" || osState === "SLEEPING") && (
+          <motion.div
+            key="desktop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0, scale: 0.99 }}
+            transition={{ duration: 0.5 }}
+            className="relative"
+          >
+            <DesktopShellInner />
+            {/* Sleep overlay */}
+            <AnimatePresence>
+              {osState === "SLEEPING" && (
+                <SleepOverlay />
+              )}
+            </AnimatePresence>
+          </motion.div>
+        )}
+
+        {/* SHUTTING_DOWN → fade out */}
+        {osState === "SHUTTING_DOWN" && (
+          <motion.div
+            key="shutting-down"
+            initial={{ opacity: 1 }}
+            animate={{ opacity: 0 }}
+            transition={{ duration: 1.2 }}
+            className="fixed inset-0 z-[300] flex items-center justify-center bg-[#04060c]"
+          >
+            <p className="font-mono text-[0.62rem] uppercase tracking-[0.24em] text-white/30">
+              Shutting Down…
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+/* ─── Sleep Overlay ──────────────────────────────────────── */
+
+function SleepOverlay() {
+  const { wake } = useOSLifecycle();
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6 }}
+      className="sleep-overlay fixed inset-0 z-[150] flex items-center justify-center cursor-pointer"
+      onClick={wake}
+      role="button"
+      aria-label="Click to wake Aniket OS"
+    >
+      <div className="text-center space-y-2">
+        <p className="font-mono text-2xl font-bold text-white/20">ANIKET OS</p>
+        <p className="font-mono text-[0.56rem] uppercase tracking-[0.28em] text-white/15">
+          Click anywhere to wake
+        </p>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ─── Main Desktop ───────────────────────────────────────── */
 
 function DesktopShellInner() {
   const {
@@ -33,7 +135,7 @@ function DesktopShellInner() {
     closeApp,
     minimizeApp,
     maximizeApp,
-    focusApp
+    focusApp,
   } = useWindowManager();
 
   const openWindowsList = (Object.keys(windows) as DesktopAppId[]).filter(
@@ -50,23 +152,20 @@ function DesktopShellInner() {
   };
 
   return (
-    <div className="relative min-h-svh w-full overflow-x-hidden bg-[#080c14] text-white md:overflow-hidden select-none">
-      {/* Background Wallpaper */}
-      <DesktopWallpaper />
-
+    <div className="relative min-h-svh w-full overflow-x-hidden text-white md:overflow-hidden select-none">
       <div className="relative z-10 flex min-h-svh flex-col">
         {/* Top OS Menu Bar */}
         <MenuBar onOpenWindow={handleOpenApp} />
 
         <main className="relative flex-1 pt-12 pb-24">
           <div className="relative mx-auto min-h-[calc(100svh-5rem)] w-full max-w-[1720px] px-4">
-            
-            {/* Desktop Hero Canvas (Center anchor) */}
+
+            {/* Desktop Hero Canvas */}
             <div className="relative z-10 mx-auto flex min-h-[48svh] max-w-4xl flex-col items-center justify-center pb-8 pt-8 md:min-h-[calc(100svh-12rem)] md:px-24">
               <DesktopHero align="center" />
             </div>
 
-            {/* Desktop Icons Array (Top-left natural desktop grid layout) */}
+            {/* Desktop Icons */}
             <div
               aria-label="Desktop icons"
               className="hidden md:grid md:absolute md:left-6 md:top-6 md:z-20 md:grid-flow-col md:grid-rows-5 md:gap-x-2 md:gap-y-3"
@@ -83,7 +182,7 @@ function DesktopShellInner() {
               ))}
             </div>
 
-            {/* Floating Desktop Widgets (Top-right natural desktop layout) */}
+            {/* System Widgets */}
             <div className="hidden lg:block lg:absolute lg:right-6 lg:top-6 lg:z-20">
               <SystemWidget onOpenApp={(id) => handleOpenApp(id)} />
             </div>
@@ -95,19 +194,21 @@ function DesktopShellInner() {
               onOpen={(app) => handleOpenApp(app.id)}
             />
 
-            {/* Mobile Active Application Modal / Sheet */}
+            {/* Mobile Active Window */}
             <div className="relative z-30 md:hidden mt-4">
               <AnimatePresence>
-                {activeWindowId && windows[activeWindowId]?.isOpen && !windows[activeWindowId]?.isMinimized ? (
+                {activeWindowId &&
+                  windows[activeWindowId]?.isOpen &&
+                  !windows[activeWindowId]?.isMinimized ? (
                   <DesktopWindow
                     key={activeWindowId}
                     title={appRegistry[activeWindowId]?.title || activeWindowId}
                     icon={
                       appRegistry[activeWindowId]?.icon
                         ? (() => {
-                            const IconC = desktopIconMap[appRegistry[activeWindowId]!.icon];
-                            return <IconC className="h-4 w-4 text-accent" />;
-                          })()
+                          const IconC = desktopIconMap[appRegistry[activeWindowId]!.icon];
+                          return <IconC className="h-4 w-4 text-accent" />;
+                        })()
                         : null
                     }
                     className="w-full"
@@ -158,7 +259,7 @@ function DesktopShellInner() {
         </main>
       </div>
 
-      {/* Dock (Floating at bottom) */}
+      {/* Dock */}
       <Dock
         activeWindow={activeWindowId}
         openWindows={openWindowsList}
@@ -166,10 +267,11 @@ function DesktopShellInner() {
         onOpenWindow={handleOpenApp}
         onMinimizeWindow={(id) => minimizeApp(id)}
       />
-
     </div>
   );
 }
+
+/* ─── Mobile Launch Pad ──────────────────────────────────── */
 
 type MobileLaunchPadProps = {
   selectedApp: DesktopAppId;
@@ -195,7 +297,6 @@ function MobileLaunchPad({ selectedApp, onSelect, onOpen }: MobileLaunchPadProps
         {desktopApps.map((app) => {
           const Icon = desktopIconMap[app.icon];
           const isSelected = selectedApp === app.id;
-
           return (
             <button
               key={app.id}
@@ -224,5 +325,3 @@ function MobileLaunchPad({ selectedApp, onSelect, onOpen }: MobileLaunchPadProps
     </section>
   );
 }
-
-

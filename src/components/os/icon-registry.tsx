@@ -10,6 +10,7 @@ import {
   Terminal,
   User,
   Wrench,
+  ShieldCheck,
   type LucideIcon
 } from "lucide-react";
 
@@ -23,6 +24,7 @@ export const desktopIconMap: Record<DesktopAppIcon, LucideIcon> = {
   toolbox: Wrench,
   github: Github,
   resume: FileText,
+  certifications: ShieldCheck,
   notes: BookOpen,
   contact: Mail,
   terminal: Terminal,

@@ -76,7 +76,18 @@ export const desktopApps: DesktopApp[] = [
     icon: "resume",
     systemLabel: "CV",
     openMode: "route",
-    status: "building"
+    status: "ready"
+  },
+  {
+    id: "certifications",
+    title: "Credentials",
+    label: "CREDENTIALS",
+    href: "/certifications",
+    description: "Verified certifications, professional credentials, and academic tracks.",
+    icon: "certifications",
+    systemLabel: "VERIFIED",
+    openMode: "route",
+    status: "ready"
   },
   {
     id: "lab-notes",
@@ -110,6 +121,7 @@ export const dockApps: DockApp[] = [
   { id: "toolbox", label: "Toolbox", icon: "toolbox", href: "/skills", openMode: "route" },
   { id: "github", label: "GitHub", icon: "github", href: "/github", openMode: "route" },
   { id: "resume", label: "Resume", icon: "resume", href: "/resume", openMode: "route" },
+  { id: "certifications", label: "Credentials", icon: "certifications", href: "/certifications", openMode: "route" },
   { id: "lab-notes", label: "Lab Notes", icon: "notes", href: "/lab-notes", openMode: "route" },
   { id: "terminal", label: "Terminal", icon: "terminal", openMode: "window" },
   { id: "settings", label: "Settings", icon: "settings", openMode: "window" }

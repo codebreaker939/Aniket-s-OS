@@ -6,6 +6,7 @@ import { JourneyApp } from "./journey-app";
 import { ToolboxApp } from "./toolbox-app";
 import { GithubApp } from "./github-app";
 import { ResumeApp } from "./resume-app";
+import { CertificationsApp } from "./certifications-app";
 import { LabNotesApp } from "./lab-notes-app";
 import { ContactApp } from "./contact-app";
 import { TerminalApp } from "./terminal-app";
@@ -27,6 +28,8 @@ export function AppRenderer({ id }: { id: DesktopAppId }) {
       return <GithubApp />;
     case "resume":
       return <ResumeApp />;
+    case "certifications":
+      return <CertificationsApp />;
     case "lab-notes":
       return <LabNotesApp />;
     case "contact":

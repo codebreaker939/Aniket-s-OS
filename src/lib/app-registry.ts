@@ -90,14 +90,25 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
   },
   resume: {
     id: "resume",
-    title: "SYSTEM PROFILE & RESUME",
+    title: "SYSTEM PROFILE",
     label: "RESUME",
     icon: "resume",
     category: "CV",
-    description: "Verified developer credentials, background, and downloadable resume.",
+    description: "Aniket Rai — Professional Profile & Verified Credentials.",
     href: "/resume",
-    defaultPosition: { top: "6rem", right: "8rem" },
-    defaultSize: { width: "34rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "5.5rem", left: "18rem" },
+    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+  },
+  certifications: {
+    id: "certifications",
+    title: "CREDENTIALS",
+    label: "CREDENTIALS",
+    icon: "certifications",
+    category: "VERIFIED",
+    description: "Certifications / Verified Learning — Technical credential archive.",
+    href: "/certifications",
+    defaultPosition: { top: "6rem", left: "16rem" },
+    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   "lab-notes": {
     id: "lab-notes",

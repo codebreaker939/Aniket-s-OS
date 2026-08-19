@@ -1,10 +1,9 @@
 "use client";
 
-import { Battery, Circle, Wifi } from "lucide-react";
+import { Battery, Circle, Power, Wifi } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
-
 import type { DesktopAppId } from "@/types";
+import { PowerMenu } from "./power-menu";
 
 type MenuBarProps = {
   onOpenWindow?: (id: DesktopAppId) => void;
@@ -18,13 +17,15 @@ function formatMenuTime(date: Date) {
     month: "short",
     day: "numeric",
     hour: "numeric",
-    minute: "2-digit"
+    minute: "2-digit",
+    second: "2-digit",
   }).format(date);
 }
 
 export function MenuBar({ onOpenWindow }: MenuBarProps) {
-  const [clock, setClock] = useState({ label: "Wed Aug 19 12:53 AM", iso: "" });
+  const [clock, setClock] = useState({ label: "", iso: "" });
   const [activeMenu, setActiveMenu] = useState<MenuCategory | "OS" | null>(null);
+  const [powerMenuOpen, setPowerMenuOpen] = useState(false);
   const navRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -32,10 +33,8 @@ export function MenuBar({ onOpenWindow }: MenuBarProps) {
       const now = new Date();
       setClock({ label: formatMenuTime(now), iso: now.toISOString() });
     };
-
     updateTime();
-    const interval = window.setInterval(updateTime, 10_000);
-
+    const interval = window.setInterval(updateTime, 1_000);
     return () => window.clearInterval(interval);
   }, []);
 
@@ -120,99 +119,33 @@ export function MenuBar({ onOpenWindow }: MenuBarProps) {
                 <div className="absolute left-0 top-7 z-50 w-48 rounded-lg border border-white/12 bg-slate-950/90 py-1.5 shadow-2xl backdrop-blur-2xl text-xs text-white/80">
                   {menu === "File" && (
                     <>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("engineering-lab")}
-                      >
-                        Open Engineering Lab
-                      </button>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("projects")}
-                      >
-                        Browse Projects
-                      </button>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("terminal")}
-                      >
-                        New Terminal Window
-                      </button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("engineering-lab")}>Open Engineering Lab</button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("projects")}>Browse Projects</button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("terminal")}>New Terminal Window</button>
                     </>
                   )}
                   {menu === "Edit" && (
                     <>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 opacity-50 cursor-not-allowed"
-                        disabled
-                      >
-                        Undo (N/A)
-                      </button>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("toolbox")}
-                      >
-                        Inspect Stack & Tools
-                      </button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 opacity-50 cursor-not-allowed" disabled>Undo (N/A)</button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("toolbox")}>Inspect Stack & Tools</button>
                     </>
                   )}
                   {menu === "View" && (
                     <>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => setActiveMenu(null)}
-                      >
-                        Desktop Overview
-                      </button>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("journey")}
-                      >
-                        View Engineering Journey
-                      </button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => setActiveMenu(null)}>Desktop Overview</button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("journey")}>View Engineering Journey</button>
                     </>
                   )}
                   {menu === "Window" && (
                     <>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("engineering-lab")}
-                      >
-                        Bring Lab to Front
-                      </button>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("terminal")}
-                      >
-                        Bring Terminal to Front
-                      </button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("engineering-lab")}>Bring Lab to Front</button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("terminal")}>Bring Terminal to Front</button>
                     </>
                   )}
                   {menu === "Help" && (
                     <>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("contact")}
-                      >
-                        Contact / Inquiries
-                      </button>
-                      <button
-                        type="button"
-                        className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors"
-                        onClick={() => handleMenuAction("about")}
-                      >
-                        Workstation Documentation
-                      </button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("contact")}>Contact / Inquiries</button>
+                      <button type="button" className="w-full text-left px-3 py-1.5 hover:bg-white/10 hover:text-white transition-colors" onClick={() => handleMenuAction("about")}>Workstation Documentation</button>
                     </>
                   )}
                 </div>
@@ -222,9 +155,9 @@ export function MenuBar({ onOpenWindow }: MenuBarProps) {
         </nav>
       </div>
 
-      {/* Center Subtitle (Optional workstation title) */}
+      {/* Center label */}
       <div className="hidden lg:block font-mono text-[0.66rem] uppercase tracking-widest text-white/35 pointer-events-none">
-        Aniket Workstation v0.1
+        Aniket Workstation v1.0
       </div>
 
       {/* Right System Indicators */}
@@ -241,11 +174,27 @@ export function MenuBar({ onOpenWindow }: MenuBarProps) {
           <Circle aria-hidden="true" className="h-2 w-2 fill-accent text-accent animate-pulse" />
           <span className="uppercase tracking-wider text-[0.62rem] font-semibold">BUILDING</span>
         </span>
-        <time dateTime={clock.iso || undefined} className="normal-case font-mono text-white/90 text-[0.68rem] tracking-tight">
+        <time dateTime={clock.iso || undefined} className="normal-case font-mono text-white/90 text-[0.68rem] tracking-tight tabular-nums">
           {clock.label}
         </time>
+
+        {/* Power button */}
+        <div className="relative">
+          <button
+            type="button"
+            aria-label="Power controls"
+            aria-expanded={powerMenuOpen}
+            onClick={() => setPowerMenuOpen((prev) => !prev)}
+            className="flex items-center justify-center rounded p-0.5 text-white/40 transition-colors hover:bg-white/10 hover:text-white/80 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-accent"
+          >
+            <Power className="h-3.5 w-3.5" />
+          </button>
+          <PowerMenu
+            isOpen={powerMenuOpen}
+            onClose={() => setPowerMenuOpen(false)}
+          />
+        </div>
       </div>
     </header>
   );
 }
-

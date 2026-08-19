@@ -1,18 +1,15 @@
 import type { Metadata } from "next";
-
-import { SectionPlaceholder } from "@/components/sections/section-placeholder";
+import { CertificationsApp } from "@/components/apps/certifications-app";
 
 export const metadata: Metadata = {
-  title: "Certifications"
+  title: "Credentials & Certifications — Aniket OS",
+  description: "Verified academic tracks, technical credentials, and professional certification records for Aniket Rai.",
 };
 
 export default function CertificationsPage() {
   return (
-    <SectionPlaceholder
-      eyebrow="Certifications"
-      title="Credential Records"
-      description="A prepared route for verified certifications. No placeholder credentials are shown until real data is available."
-      status="Awaiting content"
-    />
+    <main className="min-h-screen bg-[#060810] text-white p-6 max-w-6xl mx-auto">
+      <CertificationsApp />
+    </main>
   );
 }

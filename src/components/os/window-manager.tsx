@@ -149,3 +149,7 @@ export function useWindowManager() {
   }
   return context;
 }
+
+export function useOptionalWindowManager() {
+  return useContext(WindowManagerContext);
+}
