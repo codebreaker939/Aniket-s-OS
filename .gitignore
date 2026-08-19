@@ -21,3 +21,8 @@ yarn-error.log*
 
 # system
 .DS_Store
+
+# prisma
+# Note: prisma/migrations/ is intentionally NOT ignored — migrations must be committed.
+# The generated client is inside node_modules (already ignored).
+prisma.config.js

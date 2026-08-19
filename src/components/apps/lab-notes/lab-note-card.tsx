@@ -1,14 +1,27 @@
 "use client";
 
-import type { LabNote } from "@/lib/lab-notes/types";
 import { Star, User } from "lucide-react";
 
+type PublicLabNote = {
+  id: string;
+  rating: number;
+  name: string;
+  message: string;
+  context: string | null;
+  createdAt: string;
+};
+
 type LabNoteCardProps = {
-  note: LabNote;
+  note: PublicLabNote;
 };
 
 export function LabNoteCard({ note }: LabNoteCardProps) {
-  const displayName = note.name?.trim() || "Anonymous";
+  const displayName = note.name || "Anonymous";
+  const formattedDate = new Date(note.createdAt).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
 
   return (
     <article className="rounded-xl border border-white/10 bg-white/[0.02] p-4 space-y-3 relative overflow-hidden font-sans">
@@ -52,7 +65,7 @@ export function LabNoteCard({ note }: LabNoteCardProps) {
           <User className="h-3 w-3 text-white/30" />
           <span className="text-white/80 font-medium">{displayName}</span>
         </div>
-        <span>{note.createdAt}</span>
+        <span>{formattedDate}</span>
       </div>
     </article>
   );

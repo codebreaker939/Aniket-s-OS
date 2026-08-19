@@ -29,7 +29,7 @@ export function AboutApp() {
   const p = aboutProfileData;
 
   return (
-    <div className="flex flex-col h-full space-y-5 text-white select-none font-sans overflow-y-auto pr-1 no-scrollbar">
+    <div className="flex flex-col space-y-5 text-white select-none font-sans">
       {/* Application Sub-Header */}
       <div className="flex items-center justify-between border-b border-white/10 pb-3 shrink-0">
         <div className="flex items-center gap-2">

@@ -43,9 +43,13 @@ export function DesktopWindow({
   onFocus
 }: DesktopWindowProps) {
   const reduceMotion = useReducedMotion();
+
+  // Dynamically clamp max-height based on window top offset to prevent extending below usable viewport
+  const topOffset = defaultPosition?.top ? String(defaultPosition.top) : "4.5rem";
   const style: CSSProperties = {
     ...defaultPosition,
     ...defaultSize,
+    maxHeight: isMaximized ? undefined : `calc(100dvh - ${topOffset} - 5.5rem)`,
     zIndex
   };
 
@@ -53,19 +57,21 @@ export function DesktopWindow({
     <motion.section
       aria-label={title}
       className={cn(
-        "flex flex-col overflow-hidden rounded-xl border border-white/16 bg-slate-950/80 text-white shadow-[0_24px_80px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl transition-all duration-200",
+        "flex flex-col overflow-hidden rounded-xl border border-white/16 bg-slate-950/85 text-white shadow-[0_24px_80px_rgba(0,0,0,0.55),inset_0_1px_0_rgba(255,255,255,0.12)] backdrop-blur-2xl transition-all duration-200 min-h-[16rem]",
         state === "inactive" && "opacity-85 border-white/10 shadow-lg",
-        isMaximized && "!fixed !inset-x-2 !top-10 !bottom-20 !w-auto !h-auto !max-w-none !max-h-none z-40",
+        isMaximized
+          ? "!fixed !inset-x-3 !top-11 !bottom-20 !w-auto !h-auto !max-w-none !max-h-none z-40"
+          : "max-h-[calc(100dvh-7rem)] max-w-[calc(100vw-2rem)]",
         className
       )}
       style={isMaximized ? { zIndex } : style}
-      initial={reduceMotion ? false : { opacity: 0, scale: 0.95, y: 12 }}
+      initial={reduceMotion ? false : { opacity: 0, scale: 0.96, y: 10 }}
       animate={reduceMotion ? undefined : { opacity: 1, scale: 1, y: 0 }}
       exit={reduceMotion ? undefined : { opacity: 0, scale: 0.97, y: 8 }}
       transition={{ duration: 0.22, ease: [0.16, 1, 0.3, 1] }}
       onClick={onFocus}
     >
-      {/* Title Bar */}
+      {/* Fixed Title Bar */}
       <div className="group flex h-9 shrink-0 items-center justify-between border-b border-white/10 bg-white/[0.05] px-3 select-none">
         {/* Left: Window Controls */}
         <div className="flex items-center gap-2">
@@ -116,12 +122,11 @@ export function DesktopWindow({
         <div className="w-12" aria-hidden="true" />
       </div>
 
-      {/* Optional Toolbar */}
+      {/* Optional Fixed Toolbar */}
       {toolbar ? <div className="shrink-0 border-b border-white/8 bg-slate-950/40 px-3.5 py-1.5">{toolbar}</div> : null}
 
-      {/* Main Content Area */}
-      <div className="min-h-0 flex-1 overflow-y-auto p-4 custom-scrollbar">{children}</div>
+      {/* Primary Scrollable Content Area */}
+      <div className="min-h-0 flex-1 overflow-y-auto p-4 custom-scrollbar flex flex-col">{children}</div>
     </motion.section>
   );
 }
-

@@ -30,8 +30,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "PROFILE",
     description: "Aniket Rai / Developer Profile & Engineering Focus.",
     href: "/about",
-    defaultPosition: { top: "5.5rem", left: "18rem" },
-    defaultSize: { width: "44rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "16rem" },
+    defaultSize: { width: "46rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   projects: {
     id: "projects",
@@ -41,8 +41,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "WORK",
     description: "Selected Builds & Software Project Archive — ClaimFast, LockSync, V-pred, HelixAI, DisasterAlert.",
     href: "/projects",
-    defaultPosition: { top: "5.5rem", left: "16rem" },
-    defaultSize: { width: "54rem", height: "calc(100svh - 9rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "14rem" },
+    defaultSize: { width: "54rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   "engineering-lab": {
     id: "engineering-lab",
@@ -52,8 +52,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "LAB",
     description: "Workbench for experiments, system architecture, and technical notes.",
     href: "/engineering-lab",
-    defaultPosition: { top: "5rem", right: "2rem" },
-    defaultSize: { width: "52rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", right: "2rem" },
+    defaultSize: { width: "54rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   journey: {
     id: "journey",
@@ -63,8 +63,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "PATH",
     description: "Aniket Rai — Engineering Journey & Technical Growth Trajectory.",
     href: "/journey",
-    defaultPosition: { top: "5.5rem", left: "14rem" },
-    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "12rem" },
+    defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   toolbox: {
     id: "toolbox",
@@ -74,8 +74,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "STACK",
     description: "Technical Stack / Working Knowledge — Developer tool inventory.",
     href: "/skills",
-    defaultPosition: { top: "5.5rem", left: "16rem" },
-    defaultSize: { width: "44rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "15rem" },
+    defaultSize: { width: "46rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   github: {
     id: "github",
@@ -85,8 +85,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "SOURCE",
     description: "GitHub / Repositories / Development Activity.",
     href: "/github",
-    defaultPosition: { top: "5.5rem", right: "2rem" },
-    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", right: "2rem" },
+    defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   resume: {
     id: "resume",
@@ -96,8 +96,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "CV",
     description: "Aniket Rai — Professional Profile & Verified Credentials.",
     href: "/resume",
-    defaultPosition: { top: "5.5rem", left: "18rem" },
-    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "16rem" },
+    defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   certifications: {
     id: "certifications",
@@ -107,8 +107,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "VERIFIED",
     description: "Certifications / Verified Learning — Technical credential archive.",
     href: "/certifications",
-    defaultPosition: { top: "6rem", left: "16rem" },
-    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "14rem" },
+    defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   achievements: {
     id: "achievements",
@@ -118,8 +118,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "PROGRESS",
     description: "Achievements / Competitions / Leadership — Engineering milestone log.",
     href: "/achievements",
-    defaultPosition: { top: "5.5rem", left: "14rem" },
-    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "12rem" },
+    defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   "lab-notes": {
     id: "lab-notes",
@@ -129,8 +129,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "NOTES",
     description: "Visitor Notes / Field Observations — Shared laboratory notebook.",
     href: "/lab-notes",
-    defaultPosition: { top: "5.5rem", left: "16rem" },
-    defaultSize: { width: "46rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "15rem" },
+    defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   contact: {
     id: "contact",
@@ -140,8 +140,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "COMMS",
     description: "Open a Connection — Communication console & inquiries.",
     href: "/contact",
-    defaultPosition: { top: "5.5rem", left: "14rem" },
-    defaultSize: { width: "48rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "14rem" },
+    defaultSize: { width: "50rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   terminal: {
     id: "terminal",
@@ -150,8 +150,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     icon: "terminal",
     category: "SYSTEM",
     description: "Command-line interface for system status and environment parameters.",
-    defaultPosition: { top: "7.5rem", right: "10rem" },
-    defaultSize: { width: "34rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "6.5rem", right: "8rem" },
+    defaultSize: { width: "34rem", maxHeight: "calc(100dvh - 12rem)" }
   },
   settings: {
     id: "settings",
@@ -160,8 +160,8 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     icon: "settings",
     category: "CONFIG",
     description: "Aniket OS environment configuration and workstation controls.",
-    defaultPosition: { top: "10.5rem", right: "12rem" },
-    defaultSize: { width: "30rem", maxHeight: "calc(100svh - 12rem)" }
+    defaultPosition: { top: "8.5rem", right: "10rem" },
+    defaultSize: { width: "30rem", maxHeight: "calc(100dvh - 14rem)" }
   },
   activity: {
     id: "activity",
@@ -171,7 +171,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     category: "SYSTEM",
     description: "Real session event log, system audit, and state transitions.",
     href: "/activity",
-    defaultPosition: { top: "6.5rem", left: "16rem" },
-    defaultSize: { width: "40rem", height: "calc(100svh - 10rem)", maxWidth: "calc(100vw - 4rem)" }
+    defaultPosition: { top: "4.5rem", left: "16rem" },
+    defaultSize: { width: "42rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   }
 };

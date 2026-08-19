@@ -42,14 +42,13 @@ function OSController() {
   const { osState } = useOSLifecycle();
 
   const handleBootComplete = () => {
-    // Invoke the stable ref registered by OSLifecycleProvider
     const fn = (window as Window & { __osBootComplete?: () => void }).__osBootComplete;
     if (fn) fn();
   };
 
   return (
     <>
-      {/* Wallpaper is always present as the base layer */}
+      {/* Base Wallpaper Layer */}
       <DesktopWallpaper />
 
       <AnimatePresence mode="wait">
@@ -129,7 +128,7 @@ function SleepOverlay() {
   );
 }
 
-/* ─── Main Desktop ───────────────────────────────────────── */
+/* ─── Main Desktop Workstation Layout ─────────────────────── */
 
 function DesktopShellInner() {
   const {
@@ -179,117 +178,114 @@ function DesktopShellInner() {
         onClose={() => setIsCommandCenterOpen(false)}
       />
 
-      <div className="relative z-10 flex h-full w-full flex-col overflow-hidden">
-        {/* Top OS Menu Bar */}
-        <MenuBar
-          onOpenWindow={handleOpenApp}
-          onOpenSearch={() => setIsCommandCenterOpen(true)}
-        />
+      {/* Top OS Menu Bar (Fixed Top) */}
+      <MenuBar
+        onOpenWindow={handleOpenApp}
+        onOpenSearch={() => setIsCommandCenterOpen(true)}
+      />
 
-        <main className="relative flex-1 pt-9 pb-20 overflow-hidden">
-          <div className="relative mx-auto h-full w-full max-w-[1720px] px-4 overflow-hidden">
-
-            {/* Desktop Hero Canvas */}
-            <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col items-center justify-center pb-8 pt-4 md:px-24">
-              <DesktopHero align="center" />
-            </div>
-
-            {/* Desktop Icons */}
-            <div
-              aria-label="Desktop icons"
-              className="hidden md:grid md:absolute md:left-6 md:top-6 md:z-20 md:grid-flow-col md:grid-rows-5 md:gap-x-2 md:gap-y-3"
-            >
-              {desktopApps.map((app) => (
-                <DesktopIcon
-                  key={app.id}
-                  app={app}
-                  selected={selectedAppId === app.id}
-                  isOpen={windows[app.id]?.isOpen && !windows[app.id]?.isMinimized}
-                  onSelect={(id) => setSelectedAppId(id)}
-                  onOpen={() => handleOpenApp(app.id)}
-                />
-              ))}
-            </div>
-
-            {/* System Widgets */}
-            <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-3 lg:absolute lg:right-6 lg:top-6 lg:z-10">
-              <SystemWidget onOpenApp={(id) => handleOpenApp(id)} />
-              <SystemActivityWidget />
-            </div>
-
-            {/* Mobile App Launcher */}
-            <MobileLaunchPad
-              selectedApp={selectedAppId}
-              onSelect={(id) => setSelectedAppId(id)}
-              onOpen={(app) => handleOpenApp(app.id)}
-            />
-
-            {/* Mobile Active Window */}
-            <div className="relative z-30 md:hidden mt-4">
-              <AnimatePresence>
-                {activeWindowId &&
-                  windows[activeWindowId]?.isOpen &&
-                  !windows[activeWindowId]?.isMinimized ? (
-                  <DesktopWindow
-                    key={activeWindowId}
-                    title={appRegistry[activeWindowId]?.title || activeWindowId}
-                    icon={
-                      appRegistry[activeWindowId]?.icon
-                        ? (() => {
-                          const IconC = desktopIconMap[appRegistry[activeWindowId]!.icon];
-                          return <IconC className="h-4 w-4 text-accent" />;
-                        })()
-                        : null
-                    }
-                    className="w-full"
-                    onClose={() => closeApp(activeWindowId)}
-                    onMinimize={() => minimizeApp(activeWindowId)}
-                    onMaximize={() => maximizeApp(activeWindowId)}
-                  >
-                    <AppRenderer id={activeWindowId} />
-                  </DesktopWindow>
-                ) : null}
-              </AnimatePresence>
-            </div>
-
-            {/* Desktop Multi-Window Surface */}
-            <div className="pointer-events-none absolute inset-0 z-30 hidden md:block">
-              <AnimatePresence>
-                {openWindowsList.map((winId) => {
-                  const appDef = appRegistry[winId];
-                  if (!appDef) return null;
-                  const IconComp = desktopIconMap[appDef.icon];
-                  const winState = windows[winId];
-                  const isFocused = activeWindowId === winId;
-
-                  return (
-                    <DesktopWindow
-                      key={winId}
-                      title={appDef.title}
-                      icon={<IconComp aria-hidden="true" className="h-4 w-4 text-accent" />}
-                      className="pointer-events-auto absolute"
-                      zIndex={winState.zIndex}
-                      state={isFocused ? "active" : "inactive"}
-                      isMaximized={winState.isMaximized}
-                      defaultPosition={appDef.defaultPosition}
-                      defaultSize={appDef.defaultSize}
-                      onFocus={() => focusApp(winId)}
-                      onClose={() => closeApp(winId)}
-                      onMinimize={() => minimizeApp(winId)}
-                      onMaximize={() => maximizeApp(winId)}
-                    >
-                      <AppRenderer id={winId} />
-                    </DesktopWindow>
-                  );
-                })}
-              </AnimatePresence>
-            </div>
-
+      {/* Background Desktop Canvas (Hero, Icons, Widgets) */}
+      <div className="absolute inset-0 pt-9 pb-20 overflow-hidden z-10">
+        <div className="relative mx-auto h-full w-full max-w-[1720px] px-4 overflow-hidden">
+          {/* Desktop Hero Canvas */}
+          <div className="relative z-10 mx-auto flex h-full max-w-4xl flex-col items-center justify-center pb-8 pt-4 md:px-24">
+            <DesktopHero align="center" />
           </div>
-        </main>
+
+          {/* Desktop Icons */}
+          <div
+            aria-label="Desktop icons"
+            className="hidden md:grid md:absolute md:left-6 md:top-6 md:z-20 md:grid-flow-col md:grid-rows-5 md:gap-x-2 md:gap-y-3"
+          >
+            {desktopApps.map((app) => (
+              <DesktopIcon
+                key={app.id}
+                app={app}
+                selected={selectedAppId === app.id}
+                isOpen={windows[app.id]?.isOpen && !windows[app.id]?.isMinimized}
+                onSelect={(id) => setSelectedAppId(id)}
+                onOpen={() => handleOpenApp(app.id)}
+              />
+            ))}
+          </div>
+
+          {/* System Widgets */}
+          <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-3 lg:absolute lg:right-6 lg:top-6 lg:z-10">
+            <SystemWidget onOpenApp={(id) => handleOpenApp(id)} />
+            <SystemActivityWidget />
+          </div>
+
+          {/* Mobile App Launcher */}
+          <MobileLaunchPad
+            selectedApp={selectedAppId}
+            onSelect={(id) => setSelectedAppId(id)}
+            onOpen={(app) => handleOpenApp(app.id)}
+          />
+        </div>
       </div>
 
-      {/* Dock */}
+      {/* Desktop Multi-Window Surface (Floating Window Layer) */}
+      <div className="pointer-events-none absolute inset-x-0 top-9 bottom-16 z-30 hidden md:block overflow-hidden">
+        <AnimatePresence>
+          {openWindowsList.map((winId) => {
+            const appDef = appRegistry[winId];
+            if (!appDef) return null;
+            const IconComp = desktopIconMap[appDef.icon];
+            const winState = windows[winId];
+            const isFocused = activeWindowId === winId;
+
+            return (
+              <DesktopWindow
+                key={winId}
+                title={appDef.title}
+                icon={<IconComp aria-hidden="true" className="h-4 w-4 text-accent" />}
+                className="pointer-events-auto absolute"
+                zIndex={winState.zIndex}
+                state={isFocused ? "active" : "inactive"}
+                isMaximized={winState.isMaximized}
+                defaultPosition={appDef.defaultPosition}
+                defaultSize={appDef.defaultSize}
+                onFocus={() => focusApp(winId)}
+                onClose={() => closeApp(winId)}
+                onMinimize={() => minimizeApp(winId)}
+                onMaximize={() => maximizeApp(winId)}
+              >
+                <AppRenderer id={winId} />
+              </DesktopWindow>
+            );
+          })}
+        </AnimatePresence>
+      </div>
+
+      {/* Mobile Active Window Overlay (Mobile Viewport Window Layer) */}
+      <div className="md:hidden fixed inset-x-2 top-11 bottom-16 z-40 flex flex-col pointer-events-none">
+        <AnimatePresence>
+          {activeWindowId &&
+            windows[activeWindowId]?.isOpen &&
+            !windows[activeWindowId]?.isMinimized ? (
+            <DesktopWindow
+              key={activeWindowId}
+              title={appRegistry[activeWindowId]?.title || activeWindowId}
+              icon={
+                appRegistry[activeWindowId]?.icon
+                  ? (() => {
+                      const IconC = desktopIconMap[appRegistry[activeWindowId]!.icon];
+                      return <IconC className="h-4 w-4 text-accent" />;
+                    })()
+                  : null
+              }
+              className="pointer-events-auto h-full w-full"
+              onClose={() => closeApp(activeWindowId)}
+              onMinimize={() => minimizeApp(activeWindowId)}
+              onMaximize={() => maximizeApp(activeWindowId)}
+            >
+              <AppRenderer id={activeWindowId} />
+            </DesktopWindow>
+          ) : null}
+        </AnimatePresence>
+      </div>
+
+      {/* Dock (Fixed Bottom) */}
       <Dock
         activeWindow={activeWindowId}
         openWindows={openWindowsList}
@@ -311,47 +307,18 @@ type MobileLaunchPadProps = {
 
 function MobileLaunchPad({ selectedApp, onSelect, onOpen }: MobileLaunchPadProps) {
   return (
-    <section
-      aria-label="Desktop applications"
-      className="relative z-20 rounded-xl border border-white/14 bg-slate-950/50 p-3 shadow-2xl backdrop-blur-2xl md:hidden mt-6"
-    >
-      <div className="mb-3 flex items-center justify-between gap-3">
-        <h2 className="font-mono text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-white/70">
-          Applications Grid
-        </h2>
-        <span className="font-mono text-[0.62rem] uppercase tracking-[0.16em] text-accent">
-          {desktopApps.length} online
-        </span>
+    <div className="md:hidden mt-4 pb-20 space-y-4">
+      <div className="grid grid-cols-4 gap-3">
+        {desktopApps.map((app) => (
+          <DesktopIcon
+            key={app.id}
+            app={app}
+            selected={selectedApp === app.id}
+            onSelect={(id) => onSelect(id)}
+            onOpen={() => onOpen(app)}
+          />
+        ))}
       </div>
-      <div className="grid grid-cols-3 gap-2">
-        {desktopApps.map((app) => {
-          const Icon = desktopIconMap[app.icon];
-          const isSelected = selectedApp === app.id;
-          return (
-            <button
-              key={app.id}
-              type="button"
-              aria-label={`Open ${app.title}`}
-              className={`group flex flex-col items-center justify-center rounded-lg border p-2.5 text-center transition-all ${
-                isSelected
-                  ? "border-accent/60 bg-accent/15 text-accent shadow-md"
-                  : "border-white/10 bg-white/[0.05] text-white/80 hover:bg-white/10"
-              }`}
-              onClick={() => {
-                onSelect(app.id);
-                onOpen(app);
-              }}
-            >
-              <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-slate-950/40 text-white/90 group-hover:text-accent">
-                <Icon aria-hidden="true" className="h-5 w-5" />
-              </span>
-              <span className="mt-1.5 truncate font-mono text-[0.65rem] font-medium tracking-tight">
-                {app.label}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    </section>
+    </div>
   );
 }
