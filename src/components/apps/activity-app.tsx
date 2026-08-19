@@ -46,58 +46,61 @@ export function ActivityApp() {
   };
 
   return (
-    <div className="flex flex-col h-full space-y-4 text-white select-none font-sans overflow-y-auto pr-1 no-scrollbar">
-      {/* Sub-Header */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-3 shrink-0">
-        <div className="flex items-center gap-2">
-          <Activity className="h-4 w-4 text-accent" />
-          <div>
-            <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-white">
-              SYSTEM ACTIVITY
-            </h2>
-            <p className="text-[0.68rem] text-white/60">
-              Real Session Event Log & Workstation State Transitions
-            </p>
+    <div className="flex flex-col h-full text-white select-none font-sans overflow-hidden">
+      {/* Pinned Header & Category Nav Bar */}
+      <div className="shrink-0 space-y-3 pb-3 border-b border-white/10">
+        {/* Sub-Header */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Activity className="h-4 w-4 text-accent" />
+            <div>
+              <h2 className="font-mono text-sm font-bold uppercase tracking-wider text-white">
+                SYSTEM ACTIVITY
+              </h2>
+              <p className="text-[0.68rem] text-white/60">
+                Real Session Event Log & Workstation State Transitions
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2 font-mono text-[0.62rem]">
+            <button
+              type="button"
+              onClick={() => activityContext?.clearEvents()}
+              className="inline-flex items-center gap-1 border border-white/10 bg-white/5 px-2.5 py-1 rounded text-white/50 hover:text-white hover:bg-white/10 transition-colors"
+            >
+              <Trash2 className="h-3 w-3" />
+              <span>Clear Log</span>
+            </button>
+            <span className="text-accent font-bold px-2 py-1 rounded border border-accent/20 bg-accent/10">
+              {events.length} EVENTS
+            </span>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 font-mono text-[0.62rem]">
-          <button
-            type="button"
-            onClick={() => activityContext?.clearEvents()}
-            className="inline-flex items-center gap-1 border border-white/10 bg-white/5 px-2.5 py-1 rounded text-white/50 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <Trash2 className="h-3 w-3" />
-            <span>Clear Log</span>
-          </button>
-          <span className="text-accent font-bold px-2 py-1 rounded border border-accent/20 bg-accent/10">
-            {events.length} EVENTS
-          </span>
+        {/* Category Filter Nav Bar */}
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-1">
+          {categoryFilters.map((f) => (
+            <button
+              key={f.id}
+              type="button"
+              onClick={() => setSelectedCategory(f.id)}
+              className={`rounded-md border px-2.5 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-wider transition-all whitespace-nowrap
+                ${
+                  selectedCategory === f.id
+                    ? "border-accent/40 bg-accent/15 text-accent"
+                    : "border-white/8 bg-white/[0.02] text-white/40 hover:text-white/70 hover:border-white/15"
+                }
+              `}
+            >
+              {f.label}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* Filter Tabs */}
-      <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar border-b border-white/8 pb-2.5">
-        {categoryFilters.map((f) => (
-          <button
-            key={f.id}
-            type="button"
-            onClick={() => setSelectedCategory(f.id)}
-            className={`rounded-md border px-2.5 py-1 font-mono text-[0.58rem] font-semibold uppercase tracking-wider transition-all whitespace-nowrap
-              ${
-                selectedCategory === f.id
-                  ? "border-accent/40 bg-accent/15 text-accent"
-                  : "border-white/8 bg-white/[0.02] text-white/40 hover:text-white/70 hover:border-white/15"
-              }
-            `}
-          >
-            {f.label}
-          </button>
-        ))}
-      </div>
-
-      {/* Events Timeline List */}
-      <div className="flex-1 space-y-2">
+      {/* Scrollable Events Timeline List */}
+      <div className="flex-1 overflow-y-auto pt-3 pr-1 space-y-2 custom-scrollbar">
         {filteredEvents.length === 0 ? (
           <div className="flex flex-col items-center justify-center min-h-[14rem] rounded-xl border border-dashed border-white/10 p-6 text-center">
             <Clock className="h-6 w-6 text-white/20 mb-2" />
