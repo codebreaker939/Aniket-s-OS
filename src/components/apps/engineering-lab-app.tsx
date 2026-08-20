@@ -31,6 +31,9 @@ export function EngineeringLabApp() {
   const handleSelectExperiment = (id: string) => {
     setSelectedId(id);
     setShowMobileDetail(true);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new CustomEvent("os:select-lab-experiment", { detail: { labId: id } }));
+    }
   };
 
   return (

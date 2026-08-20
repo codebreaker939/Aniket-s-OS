@@ -1,8 +1,27 @@
 "use client";
 
+import { AnimatePresence, motion } from "motion/react";
+import { Activity, ChevronRight } from "lucide-react";
+
 import { useOptionalSystemActivity } from "@/components/os/system-activity-context";
 import { useOptionalWindowManager } from "@/components/os/window-manager";
-import { Activity, ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import type { SystemActivityEvent } from "@/lib/activity-types";
+
+function eventTone(event: SystemActivityEvent) {
+  switch (event.category) {
+    case "SOURCE_CONTROL":
+      return "bg-semantic-info shadow-[0_0_10px_rgba(151,172,255,0.55)]";
+    case "ENGINEERING":
+      return "bg-accent-lavender shadow-[0_0_10px_rgba(178,164,255,0.55)]";
+    case "NETWORK":
+      return "bg-accent-mint shadow-[0_0_10px_rgba(96,224,202,0.55)]";
+    case "APPLICATION":
+      return "bg-accent-copper shadow-[0_0_10px_rgba(213,145,94,0.45)]";
+    default:
+      return "bg-white/45";
+  }
+}
 
 export function SystemActivityWidget() {
   const activityContext = useOptionalSystemActivity();
@@ -12,57 +31,65 @@ export function SystemActivityWidget() {
   const latestEvents = events.slice(0, 3);
 
   const handleViewAll = () => {
-    if (windowManager) {
-      windowManager.openApp("activity");
-    }
+    windowManager?.openApp("activity");
   };
 
   return (
-    <div className="os-surface-1 w-full max-w-sm select-none space-y-2.5 rounded-2xl p-4 font-sans text-white">
-      {/* Widget Header */}
-      <div className="flex items-center justify-between border-b border-white/10 pb-2">
-        <div className="flex items-center gap-2 font-mono text-[0.62rem] font-bold text-semantic-info uppercase tracking-widest">
-          <Activity className="h-3.5 w-3.5" />
-          <span>SYSTEM ACTIVITY</span>
+    <aside className="desktop-activity-feed select-none font-sans text-white" aria-label="System activity">
+      <div className="flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2">
+          <Activity className="h-3.5 w-3.5 text-semantic-info" aria-hidden="true" />
+          <h2 className="font-mono text-[0.62rem] font-semibold uppercase tracking-[0.18em] text-white/58">
+            SYSTEM ACTIVITY
+          </h2>
         </div>
 
         <button
           type="button"
           onClick={handleViewAll}
-          className="flex items-center gap-0.5 font-mono text-[0.58rem] font-bold uppercase tracking-wider text-semantic-info transition-colors hover:text-white"
+          className="flex items-center gap-0.5 font-mono text-[0.54rem] font-semibold uppercase tracking-[0.12em] text-semantic-info/72 transition-colors hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-semantic-info"
         >
-          <span>VIEW ALL</span>
-          <ChevronRight className="h-3 w-3" />
+          VIEW
+          <ChevronRight className="h-3 w-3" aria-hidden="true" />
         </button>
       </div>
 
-      {/* Events List */}
-      <div className="space-y-2 font-mono text-xs">
-        {latestEvents.length === 0 ? (
-          <div className="p-3 text-center text-[0.68rem] text-white/[0.35]">
-            No recent activity logged.
-          </div>
-        ) : (
-          latestEvents.map((evt) => (
-            <div
-              key={evt.id}
-              className="rounded-lg border border-white/8 bg-white/[0.026] p-2.5 space-y-1 transition-colors hover:border-semantic-info/20"
+      <div className="mt-2.5 space-y-2">
+        <AnimatePresence initial={false}>
+          {latestEvents.length === 0 ? (
+            <motion.p
+              key="empty"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="py-4 text-[0.72rem] text-white/36"
             >
-              <div className="flex items-center justify-between text-[0.62rem]">
-                <div className="flex items-center gap-1.5 font-bold">
-                  <span className="h-1.5 w-1.5 rounded-full bg-semantic-info os-status-pulse" />
-                  <span className="text-white">{evt.title}</span>
+              No recent activity logged.
+            </motion.p>
+          ) : (
+            latestEvents.map((event) => (
+              <motion.div
+                key={event.id}
+                layout
+                initial={{ opacity: 0, y: -6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 6 }}
+                transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                className="grid grid-cols-[2.6rem_0.5rem_minmax(0,1fr)] items-start gap-2"
+              >
+                <time className="font-mono text-[0.58rem] tabular-nums text-white/36">
+                  {event.timestamp.slice(0, 5)}
+                </time>
+                <span className={cn("mt-1.5 h-1.5 w-1.5 rounded-full", eventTone(event))} />
+                <div className="min-w-0">
+                  <p className="truncate text-[0.74rem] font-medium leading-tight text-white/82">
+                    {event.title}
+                  </p>
                 </div>
-                <span className="text-white/40 tabular-nums">{evt.timestamp}</span>
-              </div>
-
-              <p className="text-[0.65rem] text-white/[0.55] leading-tight font-sans line-clamp-1">
-                {evt.description}
-              </p>
-            </div>
-          ))
-        )}
+              </motion.div>
+            ))
+          )}
+        </AnimatePresence>
       </div>
-    </div>
+    </aside>
   );
 }

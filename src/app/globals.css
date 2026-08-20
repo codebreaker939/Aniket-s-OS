@@ -73,33 +73,54 @@ body {
 
 /* ── Desktop Wallpaper ─────────────────────────────────── */
 
-.desktop-wallpaper-canvas {
+.desktop-wallpaper-base {
   background:
-    radial-gradient(960px circle at 18% 26%, rgb(88 99 193 / 0.18), transparent 58%),
-    radial-gradient(700px circle at 72% 28%, rgb(60 190 178 / 0.10), transparent 54%),
-    radial-gradient(880px circle at 74% 88%, rgb(178 164 255 / 0.12), transparent 58%),
-    radial-gradient(620px circle at 36% 94%, rgb(213 145 94 / 0.055), transparent 48%),
-    linear-gradient(145deg, #04060c 0%, #070a15 28%, #10142a 58%, #070914 100%);
-  background-size: 118% 118%;
-  animation: wallpaper-drift 24s var(--ease-os) infinite alternate;
+    radial-gradient(ellipse at 50% 112%, rgb(19 31 47 / 0.74), transparent 54%),
+    radial-gradient(ellipse at 20% 28%, rgb(27 37 76 / 0.50), transparent 48%),
+    radial-gradient(ellipse at 78% 20%, rgb(15 39 51 / 0.42), transparent 46%),
+    linear-gradient(145deg, #03050a 0%, #07101c 32%, #10152b 58%, #070811 100%);
 }
 
-.desktop-wallpaper-grid {
-  background-image:
-    linear-gradient(to right, rgb(255 255 255 / 0.018) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(255 255 255 / 0.014) 1px, transparent 1px),
-    linear-gradient(135deg, transparent 0 48%, rgb(255 255 255 / 0.018) 49% 51%, transparent 52% 100%);
-  background-size: 88px 88px, 88px 88px, 176px 176px;
-  mask-image: radial-gradient(ellipse at 50% 42%, rgb(0 0 0 / 0.78) 0%, rgb(0 0 0 / 0.14) 74%, transparent 100%);
+.desktop-aurora-field {
+  inset: -18%;
+  filter: blur(54px);
+  mix-blend-mode: screen;
+  transform: translate3d(0, 0, 0);
+  will-change: transform, opacity;
 }
 
-.desktop-wallpaper-architecture {
+.desktop-aurora-field-primary {
+  opacity: 0.48;
   background:
-    linear-gradient(90deg, transparent 0 14%, rgb(96 224 202 / 0.04) 14.1% 14.35%, transparent 14.45% 100%),
-    linear-gradient(0deg, transparent 0 28%, rgb(178 164 255 / 0.035) 28.1% 28.3%, transparent 28.4% 100%);
-  background-size: 540px 360px;
-  opacity: 0.65;
-  mask-image: linear-gradient(90deg, transparent, black 12%, black 86%, transparent);
+    radial-gradient(ellipse at 16% 58%, rgb(96 224 202 / 0.20), transparent 42%),
+    radial-gradient(ellipse at 48% 34%, rgb(178 164 255 / 0.13), transparent 40%),
+    linear-gradient(115deg, transparent 0%, rgb(60 190 178 / 0.13) 42%, transparent 68%);
+  animation: aurora-field-primary 38s ease-in-out infinite alternate;
+}
+
+.desktop-aurora-field-secondary {
+  opacity: 0.34;
+  background:
+    radial-gradient(ellipse at 84% 62%, rgb(151 172 255 / 0.18), transparent 44%),
+    radial-gradient(ellipse at 58% 82%, rgb(213 145 94 / 0.10), transparent 42%),
+    linear-gradient(42deg, transparent 12%, rgb(126 101 231 / 0.12) 44%, transparent 72%);
+  animation: aurora-field-secondary 46s ease-in-out infinite alternate;
+}
+
+.desktop-warm-horizon {
+  background:
+    radial-gradient(ellipse at 58% 92%, rgb(213 145 94 / 0.09), transparent 52%),
+    linear-gradient(to bottom, transparent 0%, transparent 68%, rgb(213 145 94 / 0.035) 100%);
+  opacity: 0.72;
+}
+
+.desktop-material-depth {
+  background:
+    linear-gradient(120deg, transparent 0 24%, rgb(255 255 255 / 0.018) 24.1% 24.24%, transparent 24.36% 100%),
+    linear-gradient(36deg, transparent 0 64%, rgb(96 224 202 / 0.018) 64.1% 64.24%, transparent 64.36% 100%),
+    radial-gradient(ellipse at 50% 42%, transparent 0%, rgb(255 255 255 / 0.026) 42%, transparent 44%);
+  opacity: 0.58;
+  mask-image: radial-gradient(ellipse at 50% 50%, black 0%, black 58%, transparent 92%);
 }
 
 .desktop-vignette {
@@ -112,7 +133,173 @@ body {
   background-image:
     repeating-linear-gradient(0deg, rgb(255 255 255 / 0.018) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(90deg, rgb(0 0 0 / 0.022) 0 1px, transparent 1px 4px);
-  opacity: 0.36;
+  opacity: 0.30;
+}
+
+.desktop-identity-glow {
+  background: radial-gradient(ellipse at center, rgb(96 224 202 / 0.12), transparent 64%);
+  filter: blur(42px);
+}
+
+.desktop-menu-bar {
+  background:
+    linear-gradient(180deg, rgb(7 10 18 / 0.76), rgb(7 10 18 / 0.46)),
+    linear-gradient(90deg, rgb(96 224 202 / 0.055), transparent 28%, transparent 72%, rgb(178 164 255 / 0.052));
+  border-bottom: 1px solid rgb(255 255 255 / 0.105);
+  box-shadow: 0 8px 26px rgb(0 0 0 / 0.28), inset 0 -1px 0 rgb(255 255 255 / 0.045);
+  backdrop-filter: blur(20px);
+}
+
+.desktop-widget,
+.desktop-system-readout,
+.desktop-activity-feed,
+.desktop-build-monitor {
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.064), rgb(255 255 255 / 0.022)),
+    rgb(8 12 22 / 0.38);
+  border: 1px solid rgb(255 255 255 / 0.105);
+  border-radius: 0.5rem;
+  box-shadow: 0 18px 52px rgb(0 0 0 / 0.30), inset 0 1px 0 rgb(255 255 255 / 0.07);
+  backdrop-filter: blur(18px);
+}
+
+.desktop-widget,
+.desktop-system-readout,
+.desktop-activity-feed {
+  padding: 0.65rem;
+}
+
+.desktop-widget-source {
+  background:
+    radial-gradient(340px ellipse at 100% 0%, rgb(151 172 255 / 0.10), transparent 58%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.060), rgb(255 255 255 / 0.020)),
+    rgb(8 12 22 / 0.38);
+}
+
+.desktop-widget-experiment {
+  background:
+    radial-gradient(340px ellipse at 100% 0%, rgb(178 164 255 / 0.10), transparent 58%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.058), rgb(255 255 255 / 0.020)),
+    rgb(8 12 22 / 0.36);
+}
+
+.desktop-system-readout {
+  background:
+    radial-gradient(300px ellipse at 0% 0%, rgb(96 224 202 / 0.08), transparent 58%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.052), rgb(255 255 255 / 0.018)),
+    rgb(8 12 22 / 0.32);
+}
+
+.desktop-activity-feed {
+  background:
+    linear-gradient(180deg, rgb(8 12 22 / 0.56), rgb(8 12 22 / 0.28));
+}
+
+.desktop-build-monitor {
+  padding: 0.875rem;
+  background:
+    radial-gradient(420px ellipse at 18% 0%, rgb(96 224 202 / 0.07), transparent 58%),
+    radial-gradient(420px ellipse at 82% 0%, rgb(178 164 255 / 0.07), transparent 58%),
+    linear-gradient(180deg, rgb(255 255 255 / 0.050), rgb(255 255 255 / 0.018)),
+    rgb(8 12 22 / 0.30);
+}
+
+.desktop-build-line {
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  top: 0.56rem;
+  height: 1px;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgb(96 224 202 / 0.10), rgb(151 172 255 / 0.22), rgb(178 164 255 / 0.10));
+}
+
+.desktop-build-signal {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 36%;
+  height: 5px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgb(96 224 202 / 0.80), rgb(178 164 255 / 0.72), transparent);
+  filter: blur(1px);
+  animation: build-signal-travel 5.8s linear infinite;
+}
+
+.desktop-build-node {
+  position: relative;
+  z-index: 1;
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.22);
+  border: 1px solid rgb(255 255 255 / 0.34);
+  box-shadow: 0 0 0 4px rgb(8 12 22 / 0.78);
+}
+
+.desktop-build-node-mint {
+  color: rgb(var(--accent-mint));
+  background: rgb(var(--accent-mint));
+  border-color: rgb(var(--accent-mint) / 0.82);
+}
+
+.desktop-build-node-blue {
+  color: rgb(var(--semantic-info));
+  background: rgb(var(--semantic-info));
+  border-color: rgb(var(--semantic-info) / 0.82);
+}
+
+.desktop-build-node-lavender {
+  color: rgb(var(--accent-lavender));
+  background: rgb(var(--accent-lavender));
+  border-color: rgb(var(--accent-lavender) / 0.82);
+}
+
+.desktop-build-node-amber {
+  color: rgb(var(--semantic-attention));
+  background: rgb(var(--semantic-attention));
+  border-color: rgb(var(--semantic-attention) / 0.82);
+}
+
+.desktop-build-node-coral {
+  color: rgb(var(--semantic-error));
+  background: rgb(var(--semantic-error));
+  border-color: rgb(var(--semantic-error) / 0.82);
+}
+
+.desktop-build-node-active::after {
+  content: "";
+  position: absolute;
+  inset: -0.45rem;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  opacity: 0.42;
+  animation: build-node-pulse 2.2s ease-in-out infinite;
+}
+
+.desktop-sync-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  min-height: 1.15rem;
+}
+
+.desktop-dock-shell {
+  border-radius: 1.05rem;
+  border: 1px solid rgb(255 255 255 / 0.14);
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.105), rgb(255 255 255 / 0.040)),
+    rgb(6 9 16 / 0.66);
+  box-shadow:
+    0 22px 60px rgb(0 0 0 / 0.46),
+    0 0 36px rgb(96 224 202 / 0.055),
+    inset 0 1px 0 rgb(255 255 255 / 0.12);
+  backdrop-filter: blur(22px);
+}
+
+.desktop-dock-active-light {
+  box-shadow: 0 0 14px rgb(96 224 202 / 0.86);
+  animation: dock-active-light 2.4s ease-in-out infinite;
 }
 
 /* ── Power / Boot Screen ────────────────────────────────── */
@@ -244,12 +431,64 @@ body {
   outline-offset: 2px;
 }
 
-@keyframes wallpaper-drift {
+@keyframes aurora-field-primary {
   0% {
-    background-position: 0% 0%;
+    transform: translate3d(-1.8%, -0.8%, 0) scale(1);
+    opacity: 0.42;
   }
   100% {
-    background-position: 10% 8%;
+    transform: translate3d(2.2%, 1.2%, 0) scale(1.04);
+    opacity: 0.55;
+  }
+}
+
+@keyframes aurora-field-secondary {
+  0% {
+    transform: translate3d(2.4%, 1.4%, 0) scale(1.02);
+    opacity: 0.30;
+  }
+  100% {
+    transform: translate3d(-2.0%, -1.1%, 0) scale(1);
+    opacity: 0.40;
+  }
+}
+
+@keyframes build-signal-travel {
+  0% {
+    transform: translateX(-110%);
+    opacity: 0;
+  }
+  14%,
+  86% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(310%);
+    opacity: 0;
+  }
+}
+
+@keyframes build-node-pulse {
+  0%,
+  100% {
+    transform: scale(0.88);
+    opacity: 0.20;
+  }
+  50% {
+    transform: scale(1.12);
+    opacity: 0.52;
+  }
+}
+
+@keyframes dock-active-light {
+  0%,
+  100% {
+    opacity: 0.72;
+    transform: translateX(-50%) scaleX(0.86);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scaleX(1.08);
   }
 }
 
@@ -340,7 +579,11 @@ select {
     transition-duration: 0.01ms !important;
   }
 
-  .desktop-wallpaper-canvas,
+  .desktop-aurora-field-primary,
+  .desktop-aurora-field-secondary,
+  .desktop-build-signal,
+  .desktop-build-node-active::after,
+  .desktop-dock-active-light,
   .os-status-pulse {
     animation: none !important;
   }

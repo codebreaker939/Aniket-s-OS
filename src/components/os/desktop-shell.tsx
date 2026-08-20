@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AnimatePresence, motion } from "motion/react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { DesktopHero } from "@/components/os/desktop-hero";
 import { DesktopIcon } from "@/components/os/desktop-icon";
 import { desktopIconMap } from "@/components/os/icon-registry";
@@ -20,6 +20,8 @@ import { desktopApps } from "@/data/desktop";
 import { SystemActivityProvider } from "@/components/os/system-activity-context";
 import { SystemActivityWidget } from "@/components/os/system-activity-widget";
 import { AppRenderer } from "@/components/apps/app-renderer";
+import { DesktopTelemetryProvider } from "@/components/os/desktop-telemetry";
+import { CurrentExperimentWidget, SourceControlWidget } from "@/components/os/desktop-widgets";
 import type { DesktopApp, DesktopAppId } from "@/types";
 
 /* ─── Root Shell ─────────────────────────────────────────── */
@@ -29,7 +31,9 @@ export function DesktopShell() {
     <OSLifecycleProvider>
       <WindowManagerProvider>
         <SystemActivityProvider>
-          <OSController />
+          <DesktopTelemetryProvider>
+            <OSController />
+          </DesktopTelemetryProvider>
         </SystemActivityProvider>
       </WindowManagerProvider>
     </OSLifecycleProvider>
@@ -40,6 +44,7 @@ export function DesktopShell() {
 
 function OSController() {
   const { osState } = useOSLifecycle();
+  const reduceMotion = useReducedMotion();
 
   const handleBootComplete = () => {
     const fn = (window as Window & { __osBootComplete?: () => void }).__osBootComplete;
@@ -68,10 +73,10 @@ function OSController() {
         {(osState === "RUNNING" || osState === "SLEEPING") && (
           <motion.div
             key="desktop"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 0.99 }}
-            transition={{ duration: 0.5 }}
+            initial={reduceMotion ? false : { opacity: 0, scale: 0.985 }}
+            animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
+            exit={reduceMotion ? undefined : { opacity: 0, scale: 0.99 }}
+            transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
             className="relative"
           >
             <DesktopShellInner />
@@ -185,37 +190,44 @@ function DesktopShellInner() {
       />
 
       {/* Background Desktop Canvas (Hero, Icons, Widgets) */}
-      <div className="absolute inset-0 z-10 overflow-hidden pt-9 pb-24">
-        <div className="relative mx-auto grid h-full w-full max-w-[1720px] grid-cols-1 overflow-y-auto px-4 py-5 no-scrollbar md:grid-cols-[8rem_minmax(0,1fr)_18rem] md:overflow-hidden md:px-6 lg:grid-cols-[9rem_minmax(0,1fr)_18rem]">
-          {/* Desktop Hero Canvas */}
-          <div className="relative z-10 col-start-1 flex min-h-[28rem] flex-col items-center justify-center pb-10 pt-12 md:col-start-2 md:min-h-0 md:px-10 md:pt-2">
-            <DesktopHero align="center" />
-          </div>
-
-          {/* Desktop Icons */}
-          <div
-            aria-label="Desktop icons"
-            className="hidden md:grid md:absolute md:left-6 md:top-8 md:z-20 md:grid-cols-1 md:gap-y-3"
+      <div className="absolute inset-0 z-10 overflow-hidden pt-11 pb-24">
+        <div className="relative mx-auto grid h-full w-full max-w-[1800px] grid-cols-1 gap-5 overflow-y-auto px-4 py-5 no-scrollbar md:grid-cols-[12rem_minmax(0,1fr)] md:overflow-hidden md:px-6 lg:grid-cols-[12rem_minmax(0,1fr)_20rem] xl:grid-cols-[13rem_minmax(0,1fr)_21rem]">
+          <section
+            aria-label="Desktop applications"
+            className="relative z-20 hidden min-h-0 flex-col gap-3 md:flex"
           >
-            {desktopApps.map((app) => (
-              <DesktopIcon
-                key={app.id}
-                app={app}
-                selected={selectedAppId === app.id}
-                isOpen={windows[app.id]?.isOpen && !windows[app.id]?.isMinimized}
-                onSelect={(id) => setSelectedAppId(id)}
-                onOpen={() => handleOpenApp(app.id)}
-              />
-            ))}
-          </div>
+            <div className="flex items-center justify-between font-mono text-[0.58rem] font-semibold uppercase tracking-[0.16em] text-white/38">
+              <span>WORKSPACE</span>
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-mint shadow-[0_0_10px_rgba(96,224,202,0.70)]" />
+            </div>
+            <div className="grid min-h-0 grid-cols-2 content-start gap-x-2 gap-y-2 overflow-y-auto pr-1 no-scrollbar">
+              {desktopApps.map((app) => (
+                <DesktopIcon
+                  key={app.id}
+                  app={app}
+                  selected={selectedAppId === app.id}
+                  isOpen={windows[app.id]?.isOpen && !windows[app.id]?.isMinimized}
+                  onSelect={(id) => setSelectedAppId(id)}
+                  onOpen={() => handleOpenApp(app.id)}
+                />
+              ))}
+            </div>
+          </section>
 
-          {/* System Widgets */}
-          <div className="hidden lg:flex lg:flex-col lg:items-end lg:gap-3 lg:absolute lg:right-6 lg:top-8 lg:z-10">
-            <SystemWidget onOpenApp={(id) => handleOpenApp(id)} />
+          <main className="relative z-10 flex min-h-[34rem] min-w-0 flex-col items-center justify-center pb-4 pt-7 md:min-h-0 md:px-5 md:pt-0 lg:px-8">
+            <DesktopHero align="center" />
+          </main>
+
+          <aside
+            aria-label="Desktop telemetry"
+            className="relative z-10 hidden min-h-0 flex-col gap-2 overflow-y-auto pb-2 pr-1 no-scrollbar lg:flex"
+          >
+            <SourceControlWidget onOpenApp={handleOpenApp} />
+            <CurrentExperimentWidget onOpenApp={handleOpenApp} />
+            <SystemWidget />
             <SystemActivityWidget />
-          </div>
+          </aside>
 
-          {/* Mobile App Launcher */}
           <MobileLaunchPad
             selectedApp={selectedAppId}
             onSelect={(id) => setSelectedAppId(id)}
@@ -307,7 +319,7 @@ type MobileLaunchPadProps = {
 
 function MobileLaunchPad({ selectedApp, onSelect, onOpen }: MobileLaunchPadProps) {
   return (
-    <div className="relative z-20 -mt-5 pb-28 md:hidden">
+    <div className="relative z-20 pb-28 md:hidden">
       <div className="mb-3 flex items-center justify-between">
         <p className="os-meta">Applications</p>
         <span className="rounded-full border border-white/10 bg-white/[0.035] px-2 py-1 font-mono text-[0.56rem] uppercase tracking-[0.12em] text-white/[0.42]">

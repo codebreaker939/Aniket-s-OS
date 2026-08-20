@@ -29,7 +29,7 @@ const WindowManagerContext = createContext<WindowManagerContextType | null>(null
 
 export function WindowManagerProvider({ children }: { children: ReactNode }) {
   const [selectedAppId, setSelectedAppId] = useState<DesktopAppId>("engineering-lab");
-  const [activeWindowId, setActiveWindowId] = useState<DesktopAppId | null>("engineering-lab");
+  const [activeWindowId, setActiveWindowId] = useState<DesktopAppId | null>(null);
   const [highestZIndex, setHighestZIndex] = useState(30);
 
   const [windows, setWindows] = useState<Record<DesktopAppId, WindowState>>(() => {
@@ -37,10 +37,10 @@ export function WindowManagerProvider({ children }: { children: ReactNode }) {
     (Object.keys(appRegistry) as DesktopAppId[]).forEach((id) => {
       initial[id] = {
         id,
-        isOpen: id === "engineering-lab",
+        isOpen: false,
         isMinimized: false,
         isMaximized: false,
-        zIndex: id === "engineering-lab" ? 30 : 20
+        zIndex: 20
       };
     });
     return initial as Record<DesktopAppId, WindowState>;
