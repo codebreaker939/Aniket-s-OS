@@ -31,8 +31,8 @@ export function ToolboxApp() {
       <AppHeader
         icon={Wrench}
         title="Toolbox"
-        eyebrow="System Utility"
-        description="Technical stack, working knowledge, and tools grouped for inspection."
+        eyebrow="Tools"
+        description="Languages, frameworks, and tools Aniket has used or is learning."
         variant="technical"
         status={<StatusBadge tone="neutral">{toolsData.length} Tools</StatusBadge>}
         meta={

@@ -35,7 +35,7 @@ export function AboutApp() {
         icon={User}
         title="About Aniket"
         eyebrow={p.systemId}
-        description="Human profile, engineering focus, and current direction."
+        description="A short profile, current focus, and what Aniket is looking for."
         variant="editorial"
         status={<StatusBadge tone="ready" pulse>{p.availability}</StatusBadge>}
       />
@@ -114,7 +114,7 @@ export function AboutApp() {
         {/* Section 01: WHO I AM */}
         <section aria-labelledby="about-sec-01" className="os-panel os-panel-editorial rounded-xl p-4 space-y-3 flex flex-col justify-between">
           <div className="space-y-2">
-            <SectionHeading id="about-sec-01" label="Who I Am" kicker="01 · Human Context" icon={GraduationCap} />
+            <SectionHeading id="about-sec-01" label="Who I Am" kicker="01 · Profile" icon={GraduationCap} />
             <p className="text-xs text-white/75 leading-relaxed">
               {p.whoIAm}
             </p>
@@ -124,7 +124,7 @@ export function AboutApp() {
         {/* Section 02: WHAT I BUILD */}
         <section aria-labelledby="about-sec-02" className="os-panel rounded-xl p-4 space-y-3 flex flex-col justify-between">
           <div className="space-y-2">
-            <SectionHeading id="about-sec-02" label="What I Build" kicker="02 · Builder Mode" icon={Code2} />
+            <SectionHeading id="about-sec-02" label="What I Build" kicker="02 · Projects" icon={Code2} />
             <p className="text-xs text-white/75 leading-relaxed">
               {p.whatIBuild}
             </p>
@@ -135,7 +135,7 @@ export function AboutApp() {
             onClick={() => openApp("engineering-lab")}
             className="self-start inline-flex items-center gap-1 pt-2 font-mono text-[0.6rem] font-semibold uppercase tracking-wider text-accent-mint transition-colors hover:text-white"
           >
-            <span>Explore Engineering Lab</span>
+            <span>Open Engineering Lab</span>
             <ChevronRight className="h-3 w-3" />
           </button>
         </section>
@@ -214,7 +214,7 @@ export function AboutApp() {
       {/* Navigation Quick Actions Footer */}
       <div className="pt-2 border-t border-white/10 space-y-2">
         <span className="font-mono text-[0.56rem] uppercase tracking-[0.18em] text-white/[0.35] block">
-          Workstation Navigation
+          Open Related Sections
         </span>
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 font-mono text-xs">

@@ -1,5 +1,7 @@
 /* ─── Resume Data Model ─────────────────────────────────── */
 
+import { personalProfile } from "@/lib/profile-content";
+
 export type EducationItem = {
   degree: string;
   institution: string;
@@ -49,23 +51,23 @@ export type ResumeAssetConfig = {
 /* ─── Resume Config ─────────────────────────────────────── */
 
 export const resumeConfig: ResumeAssetConfig = {
-  pdfUrl: null, // Set to path string (e.g., "/resume.pdf") when file is uploaded
+  pdfUrl: "/assets/Aniket_cv.pdf",
   filename: "Aniket_Rai_Resume.pdf",
   lastUpdated: "AUG 2026",
-  isAvailable: false,
+  isAvailable: true,
 };
 
 /* ─── Profile Content ───────────────────────────────────── */
 
 export const profileData = {
   systemId: "PROFILE / ANIKET-001",
-  name: "Aniket Rai",
-  title: "B.Tech CSE Student",
-  headline: "Full-Stack Developer · Exploring AI/ML",
-  location: "Navi Mumbai, India",
-  status: "Open to Internships & Software Engineering Opportunities",
+  name: personalProfile.name,
+  title: `${personalProfile.education} Student`,
+  headline: `${personalProfile.role} · ${personalProfile.focus}`,
+  location: personalProfile.location,
+  status: "Open to Internships & Software Roles",
   summary:
-    "B.Tech Computer Science & Engineering student with a solid full-stack development foundation. Experienced in building structured web applications, RESTful services, and distributed primitives. Currently expanding technical depth into machine learning algorithms, model evaluation, and software system design.",
+    "B.Tech CSE student at ITM Skills University with a full-stack development foundation. Builds web applications, REST APIs, and backend services. Currently learning machine learning fundamentals, model evaluation, and software system design.",
 };
 
 export const educationData: EducationItem[] = [
@@ -84,13 +86,13 @@ export const leadershipData: LeadershipItem[] = [
     role: "Core Sports Head",
     organization: "Student Council / Campus Activities",
     description:
-      "Coordinated campus athletic events, managed event logistics, and fostered team dynamics across inter-departmental sports initiatives.",
+      "Coordinated campus sports events and managed event logistics across departments.",
   },
   {
     role: "Student Ambassador",
     organization: "ITM Skills University",
     description:
-      "Represented the student body during institutional events, assisted in organizing technical workshops, and supported peer onboarding.",
+      "Represented students during university events, helped with technical workshops, and supported peer onboarding.",
   },
 ];
 
@@ -120,14 +122,14 @@ export const projectRefsData: ProjectRef[] = [
     name: "HelixAI",
     labId: "LAB-004",
     summary:
-      "Cloud-native precision medicine architecture featuring microservice isolation, Kubernetes deployment, and Prometheus monitoring.",
+      "Containerized backend prototype with FastAPI, PostgreSQL, Kubernetes, and Prometheus monitoring.",
     tech: ["FastAPI", "PostgreSQL", "Docker", "Kubernetes"],
   },
   {
     name: "DisasterAlert",
     labId: "LAB-005",
     summary:
-      "Emergency response cloud platform with automated alert distribution, Nginx reverse proxy, and Grafana telemetry dashboards.",
+      "Emergency alert backend with automated notifications, Nginx reverse proxying, and Grafana dashboards.",
     tech: ["FastAPI", "MySQL", "Nginx", "Grafana"],
   },
 ];
@@ -148,17 +150,17 @@ export const certificationsData: CertificationItem[] = [
     status: "active",
   },
   {
-    title: "Applied Machine Learning & AI Engineering Track",
-    issuer: "Current Learning Pathway",
+    title: "Machine Learning Fundamentals Track",
+    issuer: "Current Learning Path",
     status: "in_progress",
   },
 ];
 
 export const achievementsData: AchievementItem[] = [
   {
-    title: "Aniket OS Workstation & Engineering Lab",
+    title: "Aniket OS and Engineering Lab",
     description:
-      "Designed and engineered an OS-metaphor workstation portfolio integrating technical case studies, live state monitoring, and window management.",
+      "Built an OS-style portfolio that connects projects, technical case studies, live session state, and window management.",
   },
   {
     title: "University Technical & Sports Leadership",

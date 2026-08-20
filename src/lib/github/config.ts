@@ -25,7 +25,7 @@ export const REPOSITORY_LAB_MAPPINGS: Record<string, string> = {
 export const KNOWN_PROJECT_NAMES: Record<string, string> = {
   "locksync_sd": "LockSync (Distributed Mutex)",
   "v-pred": "Vehicle Maintenance Predictor",
-  "helixai": "HelixAI (Genomic Platform)",
+  "helixai": "HelixAI (Genomic Backend)",
   "disastermanagement_automated": "DisasterAlert Cloud",
   "aniket-s-os": "Aniket OS",
 };

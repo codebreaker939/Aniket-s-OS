@@ -203,7 +203,7 @@ export function JourneyDetail({ stage }: JourneyDetailProps) {
                 <span className="text-accent font-semibold">Software / AI Engineering</span>
               </div>
               <p className="mt-2.5 text-[0.72rem] text-white/50 leading-relaxed">
-                Currently exploring AI/ML with the goal of moving toward AI/ML engineering. Seeking professional experience to apply skills in real-world production systems.
+                Currently learning AI/ML fundamentals while looking for software engineering internship experience.
               </p>
             </div>
           </section>

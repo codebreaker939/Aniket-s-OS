@@ -1,6 +1,9 @@
-import { siteConfig } from "@/lib/constants";
+"use client";
+
 import { cn } from "@/lib/utils";
 import { LiveBuildMonitor } from "@/components/os/desktop-widgets";
+import { useDesktopTelemetry } from "@/components/os/desktop-telemetry";
+import { personalProfile } from "@/lib/profile-content";
 
 type DesktopHeroProps = {
   compact?: boolean;
@@ -10,6 +13,7 @@ type DesktopHeroProps = {
 
 export function DesktopHero({ compact = false, align = "left", className }: DesktopHeroProps) {
   const isCentered = align === "center";
+  const { focusedAppLabel } = useDesktopTelemetry();
 
   return (
     <section
@@ -30,9 +34,7 @@ export function DesktopHero({ compact = false, align = "left", className }: Desk
 
       <div className={cn("relative inline-flex items-center gap-2 font-mono text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-accent-mint/90", isCentered && "justify-center")}>
         <span className="h-1.5 w-1.5 rounded-full bg-accent-mint shadow-[0_0_12px_rgba(96,224,202,0.8)] os-status-pulse" />
-        <span>{siteConfig.name}</span>
-        <span className="text-white/24">/</span>
-        <span className="text-white/54">AURORA WORKSTATION</span>
+        <span>{personalProfile.osName}</span>
       </div>
 
       <h1
@@ -42,7 +44,7 @@ export function DesktopHero({ compact = false, align = "left", className }: Desk
           compact ? "text-4xl sm:text-5xl" : "text-5xl sm:text-6xl lg:text-7xl xl:text-[5.65rem]"
         )}
       >
-        ANIKET RAI
+        {personalProfile.name.toUpperCase()}
       </h1>
 
       <div
@@ -51,15 +53,17 @@ export function DesktopHero({ compact = false, align = "left", className }: Desk
           isCentered && "justify-center"
         )}
       >
-        <span className="text-white/62">B.Tech CSE Student</span>
+        <span className="text-white/78">{personalProfile.education}</span>
         <span aria-hidden="true" className="text-accent-mint/58 font-bold">•</span>
-        <span>Full-Stack Developer</span>
-        <span aria-hidden="true" className="text-accent-lavender/70 font-bold">•</span>
-        <span className="text-accent-lavender/90">Exploring AI/ML</span>
+        <span>{personalProfile.role}</span>
       </div>
 
+      <p className="mt-3 text-base font-medium text-accent-lavender/90">
+        {personalProfile.focus}
+      </p>
+
       <p className={cn("relative mx-auto mt-5 max-w-2xl text-white/66 font-normal leading-relaxed", compact ? "text-base" : "text-base md:text-lg")}>
-        Building practical software, understanding systems, and moving toward AI/ML engineering.
+        {personalProfile.desktopIntro}
       </p>
 
       <dl
@@ -70,21 +74,21 @@ export function DesktopHero({ compact = false, align = "left", className }: Desk
       >
         <div>
           <dt className="font-mono text-[0.54rem] uppercase tracking-[0.16em] text-accent-lavender/68">
-            FOCUS
+            CURRENTLY
           </dt>
           <dd className="mt-1 text-sm font-semibold text-white/92">AI / ML</dd>
         </div>
         <div>
           <dt className="font-mono text-[0.54rem] uppercase tracking-[0.16em] text-accent-mint/68">
-            BUILDING
+            LOOKING FOR
           </dt>
-          <dd className="mt-1 text-sm font-semibold text-white/92">Software Systems</dd>
+          <dd className="mt-1 text-sm font-semibold text-white/92">Software Internships</dd>
         </div>
         <div>
           <dt className="font-mono text-[0.54rem] uppercase tracking-[0.16em] text-accent-copper/72">
-            OPEN TO
+            CURRENT APP
           </dt>
-          <dd className="mt-1 text-sm font-semibold text-white/92">Internships</dd>
+          <dd className="mt-1 truncate text-sm font-semibold uppercase text-white/92">{focusedAppLabel}</dd>
         </div>
       </dl>
 

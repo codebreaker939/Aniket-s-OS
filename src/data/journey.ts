@@ -12,14 +12,14 @@ export const journeyEntries: JourneyEntry[] = [
     id: "full-stack-foundation",
     title: "Full-Stack Development",
     timeframe: "Completed",
-    description: "Built a full-stack development foundation before moving deeper into applied engineering.",
+    description: "Built a foundation in frontend, backend, APIs, and databases.",
     status: "completed"
   },
   {
     id: "ai-ml-exploration",
     title: "AI / ML Exploration",
     timeframe: "Current",
-    description: "Exploring AI/ML with the goal of moving toward software and AI engineering roles.",
+    description: "Learning machine learning basics with Python and data tools.",
     status: "current"
   }
 ];

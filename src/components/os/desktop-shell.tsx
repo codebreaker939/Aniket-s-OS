@@ -133,7 +133,7 @@ function SleepOverlay() {
   );
 }
 
-/* ─── Main Desktop Workstation Layout ─────────────────────── */
+/* ─── Main Desktop Layout ─────────────────────────────────── */
 
 function DesktopShellInner() {
   const {

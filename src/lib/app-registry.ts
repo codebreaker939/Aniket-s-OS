@@ -28,7 +28,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "ABOUT",
     icon: "about",
     category: "PROFILE",
-    description: "Aniket Rai / Developer Profile & Engineering Focus.",
+    description: "Who Aniket is and what he is working on.",
     href: "/about",
     defaultPosition: { top: "4.5rem", left: "16rem" },
     defaultSize: { width: "46rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -39,7 +39,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "PROJECTS",
     icon: "projects",
     category: "WORK",
-    description: "Selected Builds & Software Project Archive — ClaimFast, LockSync, V-pred, HelixAI, DisasterAlert.",
+    description: "Projects, stacks, and source links.",
     href: "/projects",
     defaultPosition: { top: "4.5rem", left: "14rem" },
     defaultSize: { width: "54rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -50,18 +50,18 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "ENGINEERING LAB",
     icon: "lab",
     category: "LAB",
-    description: "Workbench for experiments, system architecture, and technical notes.",
+    description: "Technical experiments, architecture notes, and decisions.",
     href: "/engineering-lab",
     defaultPosition: { top: "4.5rem", right: "2rem" },
     defaultSize: { width: "54rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
   },
   journey: {
     id: "journey",
-    title: "SYSTEM EVOLUTION",
+    title: "JOURNEY",
     label: "JOURNEY",
     icon: "journey",
     category: "PATH",
-    description: "Aniket Rai — Engineering Journey & Technical Growth Trajectory.",
+    description: "Education, learning milestones, and next steps.",
     href: "/journey",
     defaultPosition: { top: "4.5rem", left: "12rem" },
     defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -72,7 +72,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "TOOLBOX",
     icon: "toolbox",
     category: "STACK",
-    description: "Technical Stack / Working Knowledge — Developer tool inventory.",
+    description: "Languages, frameworks, and tools Aniket has used or is learning.",
     href: "/skills",
     defaultPosition: { top: "4.5rem", left: "15rem" },
     defaultSize: { width: "46rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -83,7 +83,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "GITHUB",
     icon: "github",
     category: "SOURCE",
-    description: "GitHub / Repositories / Development Activity.",
+    description: "Repositories, update times, and public activity from GitHub.",
     href: "/github",
     defaultPosition: { top: "4.5rem", right: "2rem" },
     defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -94,7 +94,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "RESUME",
     icon: "resume",
     category: "CV",
-    description: "Aniket Rai — Professional Profile & Verified Credentials.",
+    description: "Formal profile and resume details.",
     href: "/resume",
     defaultPosition: { top: "4.5rem", left: "16rem" },
     defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -105,7 +105,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "CREDENTIALS",
     icon: "certifications",
     category: "VERIFIED",
-    description: "Certifications / Verified Learning — Technical credential archive.",
+    description: "Academic and technical records.",
     href: "/certifications",
     defaultPosition: { top: "4.5rem", left: "14rem" },
     defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -116,7 +116,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "MILESTONES",
     icon: "achievements",
     category: "PROGRESS",
-    description: "Achievements / Competitions / Leadership — Engineering milestone log.",
+    description: "Achievements, activities, and leadership.",
     href: "/achievements",
     defaultPosition: { top: "4.5rem", left: "12rem" },
     defaultSize: { width: "48rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -127,7 +127,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "CONTACT",
     icon: "contact",
     category: "COMMS",
-    description: "Open a Connection — Communication console & inquiries.",
+    description: "Email and professional links.",
     href: "/contact",
     defaultPosition: { top: "4.5rem", left: "14rem" },
     defaultSize: { width: "50rem", height: "calc(100dvh - 10.5rem)", maxWidth: "calc(100vw - 4rem)" }
@@ -148,7 +148,7 @@ export const appRegistry: Record<DesktopAppId, AppDefinition> = {
     label: "SETTINGS",
     icon: "settings",
     category: "CONFIG",
-    description: "Aniket OS environment configuration and workstation controls.",
+    description: "Aniket OS settings and controls.",
     defaultPosition: { top: "8.5rem", right: "10rem" },
     defaultSize: { width: "30rem", maxHeight: "calc(100dvh - 14rem)" }
   },

@@ -114,7 +114,7 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
                   {menu === "View" && (
                     <>
                       <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => setActiveMenu(null)}>Desktop Overview</button>
-                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("journey")}>View Engineering Journey</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("journey")}>Open Learning Timeline</button>
                     </>
                   )}
                   {menu === "Window" && (
@@ -126,7 +126,7 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
                   {menu === "Help" && (
                     <>
                       <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("contact")}>Contact / Inquiries</button>
-                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("about")}>Workstation Documentation</button>
+                      <button type="button" className="w-full px-3 py-1.5 text-left transition-colors hover:bg-white/[0.08] hover:text-white" onClick={() => handleMenuAction("about")}>About Aniket</button>
                     </>
                   )}
                 </div>
@@ -138,7 +138,7 @@ export function MenuBar({ onOpenWindow, onOpenSearch }: MenuBarProps) {
 
       <div className="pointer-events-none hidden lg:flex items-center gap-2 font-mono text-[0.62rem] uppercase tracking-[0.16em] text-white/[0.34]">
         <span className="h-px w-8 bg-gradient-to-r from-transparent to-accent-mint/30" />
-        <span>Aurora Workstation</span>
+        <span>ANIKET OS</span>
         <span className="h-px w-8 bg-gradient-to-l from-transparent to-accent-lavender/30" />
       </div>
 

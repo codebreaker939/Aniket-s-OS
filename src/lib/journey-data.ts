@@ -21,9 +21,9 @@ export const journeyStages: JourneyStage[] = [
     version: "v0.1",
     period: "B.Tech CSE — Early Semesters",
     label: "FOUNDATION",
-    title: "Learning to Think in Systems",
+    title: "Computer Science Foundation",
     narrative:
-      "Started with the fundamentals of computer science — understanding how programs execute, how data is structured, and how machines communicate. This stage was about building the mental models that everything else depends on.",
+      "Started with computer science basics: how programs run, how data is organized, and how machines communicate.",
     whatLearned: [
       "Data Structures & Algorithms",
       "Object-Oriented Programming",
@@ -34,7 +34,7 @@ export const journeyStages: JourneyStage[] = [
     ],
     whatBuilt: [],
     whatChanged:
-      "Gained the foundational vocabulary to read and reason about software systems. Ready to move from theory to building real applications.",
+      "Built enough foundation to move from small exercises into full applications.",
     technologies: ["C", "C++", "Python", "SQL", "Git"],
     status: "completed",
   },
@@ -45,7 +45,7 @@ export const journeyStages: JourneyStage[] = [
     label: "FULL STACK",
     title: "Building Complete Applications",
     narrative:
-      "Moved from academic exercises into building end-to-end web applications. Learned how frontends communicate with backends, how databases persist state, and how APIs connect everything together.",
+      "Moved from academic exercises into end-to-end web applications. Learned how frontends, APIs, and databases fit together.",
     whatLearned: [
       "Frontend development with React",
       "Backend API design with Node.js & Express",
@@ -61,7 +61,7 @@ export const journeyStages: JourneyStage[] = [
       },
     ],
     whatChanged:
-      "Understood how full products are assembled from frontend, backend, and data layers. Started asking deeper questions about how systems scale and stay reliable.",
+      "Started thinking beyond screens and forms: data flow, API boundaries, auth, and reliability became more important.",
     technologies: [
       "React",
       "Node.js",
@@ -78,9 +78,9 @@ export const journeyStages: JourneyStage[] = [
     version: "v0.8",
     period: "Project-Based Exploration",
     label: "ENGINEERING",
-    title: "Beyond Applications — Into Systems",
+    title: "Systems and Infrastructure",
     narrative:
-      "Moved beyond building individual applications toward understanding how systems behave under real operational constraints. Started working with containers, monitoring, distributed coordination, and infrastructure automation.",
+      "Started working with containers, monitoring, distributed coordination, and deployment details around backend services.",
     whatLearned: [
       "Docker & container orchestration",
       "Distributed systems coordination",
@@ -96,16 +96,16 @@ export const journeyStages: JourneyStage[] = [
         labId: "LAB-002",
       },
       {
-        name: "HelixAI — Precision Medicine Platform",
+        name: "HelixAI — Genomic Backend Prototype",
         labId: "LAB-004",
       },
       {
-        name: "DisasterAlert — Emergency Response Cloud",
+        name: "DisasterAlert — Emergency Alert Backend",
         labId: "LAB-005",
       },
     ],
     whatChanged:
-      "Shifted perspective from 'how do I make it work' to 'how do I make it reliable, observable, and maintainable.' Infrastructure became a first-class concern.",
+      "Reliability, observability, and deployment became part of how I evaluate a project.",
     technologies: [
       "Python",
       "FastAPI",
@@ -126,15 +126,15 @@ export const journeyStages: JourneyStage[] = [
     version: "v1.0",
     period: "Current Direction",
     label: "AI / ML",
-    title: "Exploring Intelligent Systems",
+    title: "AI / ML Fundamentals",
     narrative:
-      "Currently exploring machine learning and AI systems — understanding how models learn from data, how to build data pipelines, and how to evaluate predictions. This is the active area of learning and experimentation.",
+      "Currently learning how machine learning models use data, how to prepare datasets, and how to evaluate predictions.",
     whatLearned: [
       "Machine learning fundamentals",
       "Classification & regression workflows",
       "Data preprocessing & feature engineering",
       "Model evaluation and metrics",
-      "Python data science ecosystem",
+      "Python data tools",
     ],
     whatBuilt: [
       {
@@ -143,7 +143,7 @@ export const journeyStages: JourneyStage[] = [
       },
     ],
     whatChanged:
-      "Beginning to understand how data-driven systems complement traditional software engineering. Exploring how ML can be integrated into backend architectures.",
+      "Learning where ML fits with regular software systems, especially APIs and backend workflows.",
     technologies: [
       "Python",
       "Scikit-Learn",
@@ -158,9 +158,9 @@ export const journeyStages: JourneyStage[] = [
     version: "NEXT",
     period: "Career Objective",
     label: "SOFTWARE ENGINEERING",
-    title: "Real-World Engineering Experience",
+    title: "Internship Experience",
     narrative:
-      "Looking to apply accumulated skills in professional environments. Seeking software engineering internships and opportunities where I can contribute to production systems, learn from experienced engineers, and continue growing.",
+      "Seeking software engineering internships where I can contribute, learn from experienced engineers, and improve through real project work.",
     whatLearned: [],
     whatBuilt: [],
     whatChanged: "",

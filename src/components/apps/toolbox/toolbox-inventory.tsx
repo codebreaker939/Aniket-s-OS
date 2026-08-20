@@ -103,8 +103,8 @@ export function ToolboxInventory({
                 Current Exploration
               </p>
               <p className="text-[0.7rem] text-white/55 leading-relaxed">
-                Building stronger foundations in AI/ML with the goal of moving
-                toward AI/ML engineering.
+                Current focus: machine learning basics with Python,
+                Scikit-Learn, Pandas, and NumPy.
               </p>
             </div>
           </div>

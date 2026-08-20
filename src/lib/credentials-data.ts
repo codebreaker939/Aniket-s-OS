@@ -43,31 +43,31 @@ export const credentialsData: CredentialItem[] = [
     category: "academic",
     skills: ["Data Structures", "Algorithms", "Operating Systems", "Computer Networks", "DBMS", "Software Engineering"],
     description:
-      "Formal academic degree pathway covering core computer science theory, algorithms, system architecture, database design, and applied engineering methodologies.",
+      "Degree track covering data structures, algorithms, operating systems, networks, databases, and software engineering.",
   },
   {
     id: "cred-002",
-    name: "Full-Stack Web Architecture & Engineering",
-    issuer: "Aniket OS / Verified Project Portfolio",
+    name: "Full-Stack Web Development",
+    issuer: "Project Portfolio",
     issuedAt: "AUG 2026",
     credentialId: "VER-FS-2026-01",
     status: "verified",
     category: "technical",
     skills: ["React", "Next.js", "TypeScript", "Node.js", "Express.js", "FastAPI", "MongoDB", "Tailwind CSS"],
     description:
-      "Verified technical proficiency across client-side state orchestration, server-side rendering, RESTful API architecture, asynchronous backend workflows, and modern CSS design systems.",
+      "Documented through projects using React, Next.js, REST APIs, backend services, databases, and modern CSS.",
   },
   {
     id: "cred-003",
-    name: "Applied Machine Learning & AI Engineering Fundamentals",
-    issuer: "Self-Directed Learning & Laboratory Research",
+    name: "Machine Learning Fundamentals",
+    issuer: "Self-Directed Learning",
     issuedAt: "AUG 2026",
     credentialId: "TRK-AIML-2026-02",
     status: "documented",
     category: "technical",
     skills: ["Python", "Scikit-Learn", "Pandas", "NumPy", "Jupyter Notebook", "Supervised Learning"],
     description:
-      "Documented learning trajectory focused on classification algorithms, feature engineering from operational data, model validation, and AI system design patterns.",
+      "Current learning track covering classification, feature engineering, model validation, and Python data tools.",
   },
   {
     id: "cred-004",
@@ -79,6 +79,6 @@ export const credentialsData: CredentialItem[] = [
     category: "professional",
     skills: ["Team Leadership", "Event Operations", "Communication", "Cross-Department Logistics"],
     description:
-      "Verified leadership appointment as Core Sports Head and Student Ambassador, organizing inter-college sports events, representing the student body, and coordinating peer workshops.",
+      "Core Sports Head and Student Ambassador work, including event coordination, student representation, and peer support.",
   },
 ];

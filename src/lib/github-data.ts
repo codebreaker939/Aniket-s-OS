@@ -46,7 +46,7 @@ export const GITHUB_PROFILE_URL = `https://github.com/${GITHUB_USERNAME}`;
 export const profileData: GitHubProfile = {
   name: "Aniket Rai",
   username: GITHUB_USERNAME,
-  bio: "B.Tech CSE student building full-stack applications, distributed systems, and exploring AI/ML.",
+  bio: "B.Tech CSE student building web apps, backend services, and learning AI/ML fundamentals.",
   title: "Full-Stack Developer",
   focus: "AI / ML Exploration",
   profileUrl: GITHUB_PROFILE_URL,
@@ -59,7 +59,7 @@ export const repositoriesData: RepositoryItem[] = [
     id: "claimfast",
     name: "ClaimFast",
     description:
-      "Insurance claim management and processing engine. Full-stack MERN application with structured claim forms, real-time status tracking, and role-based workflows.",
+      "Full-stack MERN app with claim forms, status tracking, and role-based workflows.",
     language: "JavaScript",
     technologies: ["React", "Node.js", "Express.js", "MongoDB", "Tailwind CSS"],
     githubUrl: `${GITHUB_PROFILE_URL}/claimfast`,
@@ -83,7 +83,7 @@ export const repositoriesData: RepositoryItem[] = [
     id: "vehicle-maintenance-predictor",
     name: "Vehicle Maintenance Predictor",
     description:
-      "Machine learning classification pipeline for predicting equipment breakdown risks from sensor telemetry data.",
+      "Machine learning pipeline for maintenance-risk prediction from telemetry data.",
     language: "Python",
     technologies: ["Scikit-Learn", "Pandas", "NumPy", "Jupyter Notebook"],
     githubUrl: `${GITHUB_PROFILE_URL}/vehicle-maintenance-predictor`,
@@ -95,7 +95,7 @@ export const repositoriesData: RepositoryItem[] = [
     id: "helixai",
     name: "HelixAI",
     description:
-      "Cloud-native precision medicine platform with containerized microservices, Kubernetes orchestration, and continuous observability.",
+      "Containerized backend prototype with FastAPI, PostgreSQL, Kubernetes, and observability tooling.",
     language: "Python",
     technologies: [
       "FastAPI",
@@ -135,7 +135,7 @@ export const repositoriesData: RepositoryItem[] = [
     id: "aniket-os",
     name: "Aniket OS",
     description:
-      "Personal developer workstation portfolio built as a desktop operating system interface.",
+      "Personal portfolio built as a desktop-style operating system interface.",
     language: "TypeScript",
     technologies: ["Next.js", "React", "Tailwind CSS", "Motion"],
     githubUrl: `${GITHUB_PROFILE_URL}/aniket-os`,

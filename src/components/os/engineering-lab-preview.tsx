@@ -10,7 +10,7 @@ export function EngineeringLabPreview() {
         </div>
         <h2 className="mt-1 text-lg font-bold tracking-tight text-white">Engineering Lab</h2>
         <p className="mt-1 text-xs leading-5 text-white/70">
-          A dedicated workstation environment for technical experiments, systems architecture, benchmark measurements, and engineering notes.
+          Technical experiments, architecture notes, implementation details, and results.
         </p>
       </div>
 
@@ -44,9 +44,8 @@ export function EngineeringLabPreview() {
       </div>
 
       <p className="font-mono text-[0.62rem] text-white/40 text-center tracking-tight">
-        Lab modules are active prototypes. Case studies and benchmark results will update with ongoing research.
+        Lab records update as projects and notes are refined.
       </p>
     </div>
   );
 }
-

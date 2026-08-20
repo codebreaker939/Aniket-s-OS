@@ -100,13 +100,13 @@ export function ProfileView({ profile }: ProfileViewProps) {
       {/* Direction summary */}
       <div className="rounded-xl border border-white/10 bg-white/[0.02] p-4 space-y-2">
         <span className="font-mono text-[0.58rem] uppercase tracking-[0.16em] text-white/40 block">
-          ENGINEERING FOCUS
+          CURRENT FOCUS
         </span>
         <div className="space-y-1.5 font-mono text-xs text-white/80">
           {[
-            "Full-Stack Web Applications & REST Services",
-            "Distributed Systems & Cloud Infrastructure",
-            "Artificial Intelligence & Machine Learning Exploration",
+            "Full-stack web applications and REST services",
+            "Backend systems and cloud infrastructure",
+            "AI / ML fundamentals",
           ].map((item) => (
             <div key={item} className="flex items-center gap-2">
               <span className="h-1.5 w-1.5 rounded-full bg-accent shrink-0" />

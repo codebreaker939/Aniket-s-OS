@@ -41,8 +41,8 @@ export function EngineeringLabApp() {
       <AppHeader
         icon={FlaskConical}
         title="Engineering Lab Workbench"
-        eyebrow="Technical Investigation"
-        description="Case studies, system architecture diagrams, and build records."
+        eyebrow="Technical Notes"
+        description="Objectives, architecture, decisions, challenges, and results."
         variant="technical"
         status={<StatusBadge tone="ready" pulse>{experimentsData.length} Lab Records</StatusBadge>}
         meta={

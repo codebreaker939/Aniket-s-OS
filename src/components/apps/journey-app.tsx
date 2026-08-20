@@ -24,9 +24,9 @@ export function JourneyApp() {
     <div className="flex flex-col h-full space-y-4 text-white">
       <AppHeader
         icon={GitBranch}
-        title="System Evolution"
-        eyebrow="Progression Map"
-        description="A timeline of education, engineering growth, and current AI/ML direction."
+        title="Journey"
+        eyebrow="Learning Timeline"
+        description="Education, skills, projects, and what came next."
         variant="quiet"
         status={<StatusBadge tone="learning">{journeyStages.length} Stages</StatusBadge>}
         meta={
@@ -81,11 +81,10 @@ export function JourneyApp() {
                   <GitBranch className="h-6 w-6" />
                 </div>
                 <h3 className="text-sm font-bold text-white uppercase tracking-wider">
-                  SYSTEM EVOLUTION
+                  JOURNEY
                 </h3>
                 <p className="mt-1 text-xs text-white/50 max-w-sm">
-                  Select a stage from the timeline to explore the engineering
-                  journey.
+                  Select a stage from the timeline.
                 </p>
               </div>
             )}

@@ -3,7 +3,7 @@ import { AboutApp } from "@/components/apps/about-app";
 
 export const metadata: Metadata = {
   title: "About Aniket Rai — Aniket OS",
-  description: "Developer profile, engineering background, and technical direction for Aniket Rai.",
+  description: "Who Aniket is, what he builds, and what he is learning.",
 };
 
 export default function AboutPage() {

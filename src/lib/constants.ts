@@ -1,11 +1,12 @@
 import type { NavigationItem, SystemStatusItem } from "@/types";
+import { personalProfile } from "@/lib/profile-content";
 
 export const siteConfig = {
-  name: "Aniket OS",
-  owner: "Aniket Rai",
-  role: "B.Tech CSE Student",
+  name: personalProfile.osName,
+  owner: personalProfile.name,
+  role: personalProfile.education,
   description:
-    "A personal developer workstation and engineering lab for a full-stack developer exploring AI/ML.",
+    "Aniket Rai's personal developer workspace for projects, notes, and learning.",
   version: "foundation-0.1"
 } as const;
 
@@ -20,7 +21,7 @@ export const primaryNavigation: NavigationItem[] = [
   {
     title: "About",
     href: "/about",
-    description: "Profile context and current engineering direction."
+    description: "Who Aniket is and what he is working on."
   },
   {
     title: "Projects",
@@ -30,17 +31,17 @@ export const primaryNavigation: NavigationItem[] = [
   {
     title: "Engineering Lab",
     href: "/engineering-lab",
-    description: "Experiments, build notes, and systems thinking."
+    description: "Technical experiments, build notes, and decisions."
   },
   {
     title: "Journey",
     href: "/journey",
-    description: "Education, learning milestones, and direction."
+    description: "Education, learning milestones, and next steps."
   },
   {
     title: "Toolbox",
     href: "/skills",
-    description: "Full-stack foundation and AI/ML exploration areas."
+    description: "Tools, languages, and current skill areas."
   },
   {
     title: "Resume",

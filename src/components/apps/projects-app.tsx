@@ -99,8 +99,8 @@ export function ProjectsApp() {
       <AppHeader
         icon={FolderGit2}
         title="Projects"
-        eyebrow="Curated Build Archive"
-        description="Selected projects organized for quick inspection, source context, and Engineering Lab connections."
+        eyebrow="Project List"
+        description="Projects Aniket has built or documented, with stack and source links."
         variant="editorial"
         status={<StatusBadge tone="neutral">{projectsData.length} Builds</StatusBadge>}
       />
@@ -265,7 +265,7 @@ export function ProjectsApp() {
               {/* Summary */}
               <div className="space-y-1.5">
                 <h4 className="font-mono text-[0.62rem] font-bold text-white/50 uppercase tracking-widest">
-                  SUMMARY & PURPOSE
+                  SUMMARY
                 </h4>
                 <p className="text-xs text-white/80 leading-relaxed font-sans">
                   {activeProject.summary}
@@ -304,7 +304,7 @@ export function ProjectsApp() {
               {/* Integration & Connections */}
               <div className="pt-3 border-t border-white/10 space-y-3">
                 <h4 className="font-mono text-[0.62rem] font-bold text-white/50 uppercase tracking-widest">
-                  SYSTEM CONNECTIONS & LINKS
+                  LINKS
                 </h4>
 
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 font-mono text-xs">

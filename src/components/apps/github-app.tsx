@@ -139,8 +139,8 @@ export function GithubApp() {
       <AppHeader
         icon={GitBranch}
         title="Source Control"
-        eyebrow="Developer Activity"
-        description="GitHub repositories, public activity, and live source metadata."
+        eyebrow="GitHub"
+        description="Repositories, update times, and public activity from GitHub."
         variant="data"
         status={
           <StatusBadge
@@ -176,7 +176,7 @@ export function GithubApp() {
         <div className="flex items-center justify-between rounded-lg border border-semantic-info/20 bg-semantic-info/[0.045] p-3 font-mono text-xs text-semantic-info">
           <div className="flex items-center gap-2">
             <Loader2 className="h-3.5 w-3.5 animate-spin" />
-            <span>Synchronizing public repository data from GitHub API...</span>
+            <span>Fetching GitHub repositories...</span>
           </div>
         </div>
       )}

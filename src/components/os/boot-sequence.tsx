@@ -7,12 +7,10 @@ import { Check, Cpu } from "lucide-react";
 /* ─── Boot steps (honest, browser-meaningful) ───────────── */
 
 const BOOT_STEPS = [
-  "Interface core initialized",
-  "Application registry loaded",
-  "Workspace configured",
-  "Engineering Lab ready",
-  "Source Control ready",
-  "Session initialized",
+  "Interface",
+  "Workspace",
+  "Applications",
+  "Session",
 ] as const;
 
 const TOTAL_DURATION_MS = 2200; // target ~2.2s total, then transition
@@ -101,7 +99,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
       >
         <div className="flex items-center justify-between gap-4">
           <div>
-            <p className="os-meta text-accent-mint/70">Activation</p>
+            <p className="os-meta text-accent-mint/70">POWERING ON</p>
             <h2 className="mt-1 text-xl font-semibold text-white">ANIKET OS</h2>
           </div>
           <motion.div
@@ -146,7 +144,7 @@ export function BootSequence({ onComplete }: BootSequenceProps) {
               className="mt-1 rounded-lg border border-accent-mint/20 bg-accent-mint/[0.08] px-3 py-2"
             >
               <p className="font-mono text-[0.66rem] font-semibold uppercase tracking-[0.16em] text-accent-mint">
-                Desktop emergence ready
+                READY
               </p>
             </motion.div>
           )}

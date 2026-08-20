@@ -1,5 +1,7 @@
 /* ─── About Profile Data Model ───────────────────────────── */
 
+import { personalProfile } from "@/lib/profile-content";
+
 export type ProfileImageConfig = {
   url: string | null;
   alt: string;
@@ -29,35 +31,35 @@ export type AboutProfile = {
 
 export const aboutProfileData: AboutProfile = {
   systemId: "PROFILE / ANIKET-001",
-  name: "Aniket Rai",
-  title: "B.Tech CSE Student",
-  role: "Full-Stack Developer · Exploring AI/ML",
-  location: "Navi Mumbai, India",
+  name: personalProfile.name,
+  title: `${personalProfile.education} · ${personalProfile.university}`,
+  role: `${personalProfile.role} · ${personalProfile.focus}`,
+  location: personalProfile.location,
   availability: "Open for Internships & Engineering Roles",
   profileImage: {
-    url: null, // Centralized asset URL. Set to e.g. "/assets/aniket.jpg" when real file is provided.
-    alt: "Aniket Rai Developer Profile",
+    url: "/assets/aniket.jpeg",
+    alt: "Aniket Rai profile",
     fallbackInitials: "AR",
   },
   intro:
-    "I'm a Computer Science & Engineering student who started by learning how to build complete web applications and gradually became more interested in what happens underneath them — APIs, systems, data flows, and now AI/ML algorithms.",
+    personalProfile.profileSummary,
   whoIAm:
-    "Currently pursuing my B.Tech in Computer Science and Engineering (2024–2028). I approach software engineering with disciplined curiosity, focusing on understanding core principles, software architecture, and system reliability.",
+    "I'm currently pursuing Computer Science and Engineering. I like breaking a feature down into the parts that make it work: data, API design, state, and deployment.",
   whatIBuild:
-    "I build full-stack web applications, REST APIs, and backend architectures designed to handle real data flows. Rather than focusing only on visual widgets, I enjoy designing schema contracts, state management pipelines, and distributed service primitives.",
+    "I build full-stack web applications, REST APIs, and backend services. Projects like LockSync helped me spend more time with concurrency, validation, and service behavior.",
   whatIExplore:
-    "Currently expanding my technical depth into machine learning fundamentals — working with Python, Scikit-Learn, Pandas, and NumPy. My goal is to build a rigorous foundation to transition from full-stack software development toward AI/ML engineering.",
+    "I'm learning machine learning fundamentals with Python, Scikit-Learn, Pandas, and NumPy. Right now the goal is a solid foundation, not exaggerated claims.",
   whatILookFor: [
     "Software Engineering Internships",
     "Full-Stack Web Developer Roles",
     "AI / Machine Learning Trainee Positions",
-    "Applied Systems & Open-Source Collaborations",
+    "Technical Collaborations",
   ],
   workStyle:
     "I like understanding why something works, not only making it work once.",
   nowStatus: {
     learning: "Machine Learning & AI Foundations",
-    building: "Aniket OS Workstation & Engineering Lab",
+    building: "Aniket OS and project documentation",
     lookingFor: "Software Engineering & AI Internships",
   },
 };

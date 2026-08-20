@@ -62,7 +62,7 @@ export function SystemActivityProvider({ children }: { children: ReactNode }) {
     logEvent({
       category: "SYSTEM",
       title: "System Initialized",
-      description: "Aniket OS developer workstation operational.",
+      description: "Aniket OS is ready.",
     });
 
     // 2. Initial Network Check

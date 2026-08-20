@@ -49,7 +49,7 @@ export function ContactApp() {
     }
   };
 
-  // Form Submission (Option B: Prepare Mailto & Local Demo Confirmation)
+  // Prepare a mailto link and local confirmation state.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -106,8 +106,8 @@ export function ContactApp() {
       <AppHeader
         icon={Mail}
         title="Contact"
-        eyebrow="Communication Console"
-        description="Direct channels for internships, collaborations, and engineering conversations."
+        eyebrow="Contact"
+        description="Open to internship opportunities, software roles, and technical collaborations."
         variant="default"
         status={<StatusBadge tone="ready" pulse>{c.status}</StatusBadge>}
       />
@@ -119,7 +119,7 @@ export function ContactApp() {
           {/* Identity Card */}
           <Panel variant="default" className="space-y-2 p-5">
             <span className="font-mono text-[0.58rem] font-bold text-accent-mint uppercase tracking-[0.2em] block">
-              OPEN A CONNECTION
+              CONTACT
             </span>
 
             <h3 className="text-xl font-bold text-white tracking-tight">
@@ -140,7 +140,7 @@ export function ContactApp() {
             </div>
 
             <p className="text-xs text-white/75 leading-relaxed pt-1">
-              Open to conversations around software engineering internships, full-stack development, applied machine learning projects, and technical collaborations.
+              Open to internship opportunities, software roles, and technical collaborations.
             </p>
           </Panel>
 
@@ -298,19 +298,19 @@ export function ContactApp() {
 
                   <div>
                     <span className="font-mono text-[0.62rem] font-bold text-accent-mint uppercase tracking-[0.2em] px-2.5 py-0.5 rounded border border-accent-mint/30 bg-accent-mint/10">
-                      DISPATCH READY
+                      READY TO SEND
                     </span>
                     <h3 className="text-base font-bold text-white tracking-tight mt-2">
-                      MESSAGE PREPARED
+                      MESSAGE READY
                     </h3>
                     <p className="text-xs text-white/80 leading-relaxed max-w-sm mx-auto mt-1">
-                      Your message has been formatted. Click below to launch your email client with your pre-filled inquiry.
+                      Open your email client with the message filled in, or copy the text.
                     </p>
                   </div>
 
                   <div className="rounded-lg border border-white/10 bg-slate-950/40 p-3 text-left space-y-1.5 font-mono text-[0.65rem] text-white/60">
                     <div className="flex items-center justify-between text-accent-mint border-b border-white/5 pb-1">
-                      <span className="font-semibold uppercase">PRE-FILLED INQUIRY SUMMARY</span>
+                      <span className="font-semibold uppercase">MESSAGE SUMMARY</span>
                       <span>{preparedMailto.subject}</span>
                     </div>
                     <p className="whitespace-pre-wrap leading-relaxed italic text-white/70 line-clamp-4 pt-1">

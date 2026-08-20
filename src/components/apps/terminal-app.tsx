@@ -6,7 +6,7 @@ export function TerminalApp() {
   const rows = [
     ["status --focus", "AI/ML exploration active"],
     ["stack --primary", "Next.js 15, TypeScript, Tailwind CSS, Python"],
-    ["workspace --mode", "Aniket OS Workstation Environment"],
+    ["workspace --mode", "Aniket OS"],
     ["opportunities --looking-for", "Internships / Software Engineering"]
   ];
 
@@ -16,7 +16,7 @@ export function TerminalApp() {
         icon={TerminalIcon}
         eyebrow="SYSTEM UTILITY"
         title="Terminal Console"
-        description="A compact workstation readout for active focus, stack, environment, and availability."
+        description="A compact readout for focus, stack, environment, and availability."
         variant="technical"
         status={<StatusBadge tone="ready" pulse>Shell Ready</StatusBadge>}
       />

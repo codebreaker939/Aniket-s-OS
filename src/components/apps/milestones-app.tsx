@@ -260,7 +260,7 @@ export function MilestonesApp() {
                 {selectedMilestone.outcome && (
                   <div className="pt-2 border-t border-white/5">
                     <h4 className="font-mono text-[0.6rem] font-bold uppercase tracking-[0.16em] text-white/40 mb-1">
-                      OUTCOME & IMPACT
+                      OUTCOME
                     </h4>
                     <p className="text-xs text-white/75 leading-relaxed">
                       {selectedMilestone.outcome}

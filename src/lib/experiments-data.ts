@@ -32,14 +32,14 @@ export const experimentsData: EngineeringExperiment[] = [
     id: "LAB-001",
     name: "CLAIMFAST",
     slug: "claimfast",
-    subtitle: "Insurance Claim Management & Processing Engine",
+    subtitle: "Insurance Claim Management App",
     domain: "FULL STACK",
     status: "COMPLETED",
     year: "2024",
-    summary: "Full-stack web application designed to streamline insurance claim submissions, document verification, and workflow management.",
-    objective: "Build a responsive web application to reduce claim processing delays and standardize claim document submissions.",
-    problem: "Traditional claim intake workflows suffer from disjointed data submission, lack of real-time status updates, and manual document verification bottlenecks.",
-    approach: "Designed a centralized MERN-stack application featuring structured claim forms, real-time status tracking, role-based admin workflows, and secure document storage.",
+    summary: "Full-stack app for claim submission, document checks, and admin review workflows.",
+    objective: "Build a responsive web application for structured claim submissions and status tracking.",
+    problem: "Claim intake can become hard to track when forms, documents, and review status live in separate places.",
+    approach: "Built a MERN-stack application with claim forms, status tracking, role-based admin workflows, and document storage.",
     technologies: ["React", "Node.js", "Express.js", "MongoDB", "JavaScript", "Tailwind CSS"],
     architecture: {
       diagramType: "claimfast",
@@ -59,21 +59,21 @@ export const experimentsData: EngineeringExperiment[] = [
       "Handling asynchronous file uploads while maintaining responsive form UI states.",
       "Validating complex multi-step claim payloads across client and server validation layers."
     ],
-    outcome: "Delivered a operational MERN-stack claim management portal enabling structured claim filing and real-time status tracking.",
+    outcome: "Delivered an operational MERN-stack claim management portal with structured claim filing and status tracking.",
     githubUrl: "https://github.com/codebreaker939"
   },
   {
     id: "LAB-002",
     name: "LOCKSYNC",
     slug: "locksync",
-    subtitle: "High-Concurrency Distributed Locking Service",
+    subtitle: "Distributed Locking Service",
     domain: "DISTRIBUTED SYSTEMS",
     status: "COMPLETED",
     year: "2024",
-    summary: "Fault-tolerant distributed locking service built with Python 3.12, FastAPI, and MongoDB supporting TTL expiration, lock renewal, and safe release semantics.",
-    objective: "Provide a reliable distributed mutex primitive preventing race conditions across concurrent microservice workloads without deadlocks.",
+    summary: "Distributed lock service built with Python 3.12, FastAPI, and MongoDB, with TTL expiry, renewal, and safe release handling.",
+    objective: "Provide a distributed mutex primitive for concurrent worker processes.",
     problem: "When multiple distributed worker nodes contend for shared critical resources, network partitions or process crashes can cause resource corruption or lock starvation if locks lack auto-expiration and heartbeat renewals.",
-    approach: "Engineered a distributed lock manager using FastAPI and MongoDB atomically handling lock acquire, heartbeat renewal (TTL extension), lock release, and automatic expiration handling for crashed nodes.",
+    approach: "Built a FastAPI lock manager that uses MongoDB atomic updates for acquire, heartbeat renewal, release, and automatic expiry.",
     technologies: ["Python 3.12", "FastAPI", "Uvicorn", "MongoDB", "PyMongo", "UUID", "Threading"],
     architecture: {
       diagramType: "locksync",
@@ -94,19 +94,19 @@ export const experimentsData: EngineeringExperiment[] = [
       "Preventing split-brain lock release scenarios when network latency causes lock renewal heartbeat delays.",
       "Managing thread safety during concurrent lock heartbeat updates and process shutdown signals."
     ],
-    outcome: "Built a verified distributed locking implementation with automated TTL expiry handling process failures gracefully.",
+    outcome: "Built a distributed locking implementation with automated TTL expiry for failed or stopped processes.",
     githubUrl: "https://github.com/codebreaker939"
   },
   {
     id: "LAB-003",
     name: "VEHICLE MAINTENANCE PREDICTOR",
     slug: "vehicle-maintenance-predictor",
-    subtitle: "Predictive Analytics & Maintenance Classification",
+    subtitle: "Maintenance Risk Classifier",
     domain: "MACHINE LEARNING",
     status: "PROJECT",
     year: "2024",
-    summary: "Machine learning model exploring sensor telemetry data to predict component failure windows and schedule preventive vehicle servicing.",
-    objective: "Develop a machine learning classification workflow for predicting equipment breakdown risks prior to catastrophic mechanical failure.",
+    summary: "Machine learning prototype for predicting maintenance risk from vehicle telemetry data.",
+    objective: "Build a classification workflow for vehicle maintenance risk.",
     problem: "Unscheduled vehicle breakdowns cause expensive operational downtime and unsafe operating conditions when routine maintenance schedules fail to account for usage intensity.",
     approach: "Constructed data preprocessing pipelines and evaluated decision-tree and ensemble classification algorithms on vehicle sensor metrics.",
     technologies: ["Python", "Scikit-Learn", "Pandas", "NumPy", "Jupyter Notebook"],
@@ -133,14 +133,14 @@ export const experimentsData: EngineeringExperiment[] = [
     id: "LAB-004",
     name: "HELIXAI",
     slug: "helixai",
-    subtitle: "Precision Medicine & Genomic Data Platform",
+    subtitle: "Genomic Data Backend Prototype",
     domain: "AI / PRECISION MEDICINE",
     status: "PROJECT",
     year: "2024",
-    summary: "Cloud-native precision medicine platform utilizing FastAPI, PostgreSQL, Kubernetes, and continuous observability pipelines.",
-    objective: "Architect a scalable backend containerized infrastructure for analyzing precision genomic datasets with continuous integration and real-time observability.",
-    problem: "Genomic workflows handle high-dimensional dataset operations demanding robust service isolation, secrets security, and continuous cluster metrics monitoring.",
-    approach: "Designed a microservice stack containerized with Docker Compose, deployed to Kubernetes, integrated with Jenkins CI/CD pipelines, and monitored via Prometheus and Grafana.",
+    summary: "Containerized backend prototype using FastAPI, PostgreSQL, Kubernetes, and observability tooling.",
+    objective: "Build a backend infrastructure prototype for genomic-data workflows.",
+    problem: "Genomic workflows need clear service boundaries, secure configuration, database storage, and visible runtime metrics.",
+    approach: "Built a containerized service stack with Docker Compose, Kubernetes deployment files, Jenkins pipeline definitions, and Prometheus/Grafana monitoring.",
     technologies: ["FastAPI", "Python", "PostgreSQL", "Docker Compose", "Kubernetes", "Jenkins", "Prometheus", "Grafana", "Vault"],
     architecture: {
       diagramType: "helixai",
@@ -161,20 +161,20 @@ export const experimentsData: EngineeringExperiment[] = [
       "Managing database migration scripts across automated Jenkins deployment stages.",
       "Configuring cluster ingress routing rules and resource requests for compute pods."
     ],
-    outcome: "Built an infrastructure-ready containerized precision medicine backend platform."
+    outcome: "Built a containerized backend prototype with deployment and monitoring configuration."
   },
   {
     id: "LAB-005",
     name: "DISASTERALERT",
     slug: "disasteralert",
-    subtitle: "Emergency Response Cloud Infrastructure",
+    subtitle: "Emergency Alert Infrastructure",
     domain: "EMERGENCY RESPONSE CLOUD",
     status: "PROJECT",
     year: "2024",
-    summary: "Containerized emergency alert notification system utilizing FastAPI, MySQL, Nginx reverse proxy, and Prometheus/Grafana infrastructure monitoring.",
-    objective: "Construct a high-availability cloud architecture for broadcasting critical emergency notifications and managing responder dispatch records.",
+    summary: "Containerized emergency alert system using FastAPI, MySQL, Nginx, Prometheus, and Grafana.",
+    objective: "Build a service layout for broadcasting emergency notifications and storing responder records.",
     problem: "Emergency alert systems experience sudden spikes in traffic during crisis events, requiring proxy caching, database indexing, and strict infrastructure telemetry.",
-    approach: "Engineered a containerized multi-container service orchestrated via Docker Compose with Nginx reverse proxy load distribution, MySQL database storage, phpMyAdmin management, and Prometheus metrics monitoring.",
+    approach: "Built a Docker Compose service layout with Nginx reverse proxying, MySQL storage, phpMyAdmin management, and Prometheus metrics.",
     technologies: ["FastAPI", "Python", "MySQL", "Docker Compose", "Nginx", "Prometheus", "Grafana", "phpMyAdmin"],
     architecture: {
       diagramType: "disasteralert",
@@ -196,6 +196,6 @@ export const experimentsData: EngineeringExperiment[] = [
       "Configuring cross-container network aliases and health-check dependencies in Docker Compose.",
       "Optimizing MySQL connection pool limits during surge load simulations."
     ],
-    outcome: "Deployed a containerized emergency response cloud system architecture."
+    outcome: "Built a containerized emergency response service layout with monitoring."
   }
 ];

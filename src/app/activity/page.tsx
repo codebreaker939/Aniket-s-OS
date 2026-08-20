@@ -3,7 +3,7 @@ import { ActivityApp } from "@/components/apps/activity-app";
 
 export const metadata: Metadata = {
   title: "System Activity & Event Log — Aniket OS",
-  description: "Real session event log, system audit, and state transitions across ANIKET OS workstation.",
+  description: "Session event log for app, network, lab, and GitHub activity in Aniket OS.",
 };
 
 export default function ActivityPage() {

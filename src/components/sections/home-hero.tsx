@@ -22,7 +22,7 @@ export function HomeHero() {
     >
       <div className="border border-border bg-surface/70 p-5 shadow-shell sm:p-8 lg:p-10">
         <div className="mb-8 flex flex-wrap items-center gap-2">
-          <StatusPill tone="accent">Developer Workstation</StatusPill>
+          <StatusPill tone="accent">Aniket OS</StatusPill>
           <StatusPill>Engineering Lab</StatusPill>
         </div>
 
@@ -40,7 +40,7 @@ export function HomeHero() {
         </div>
 
         <p className="mt-8 max-w-2xl text-balance text-xl leading-8 text-muted-foreground">
-          Building software. Learning systems. Moving toward AI/ML engineering.
+          I build web applications and backend systems, and I&apos;m currently building my foundation in AI/ML.
         </p>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">

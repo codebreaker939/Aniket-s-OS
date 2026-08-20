@@ -74,15 +74,15 @@ export const milestonesData: MilestoneItem[] = [
   },
   {
     id: "M-003",
-    title: "Aniket OS Developer Workstation Architecture",
+    title: "Aniket OS Interface",
     category: "projects",
     period: "AUG 2026",
     role: "Lead Systems Developer",
     organization: "Independent Engineering",
     summary:
-      "Architected and implemented a personal developer workstation operating system interface featuring interactive window management, desktop icons, dock, and live system monitoring.",
+      "Built a desktop-style portfolio interface with window management, app icons, a dock, and live session state.",
     context:
-      "Designed as a developer workstation metaphor to showcase full-stack projects, architecture diagrams, and system state.",
+      "Used the OS interface to organize projects, technical notes, and source-control activity in one place.",
     outcome:
       "Deployed responsive Next.js 15 application with multi-window Z-index ordering, custom wallpaper system, and live session uptime timers.",
     skills: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Motion"],

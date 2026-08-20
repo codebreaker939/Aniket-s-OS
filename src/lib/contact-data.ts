@@ -1,5 +1,7 @@
 /* ─── Contact Configuration & Domain Model ───────────────── */
 
+import { personalProfile } from "@/lib/profile-content";
+
 export type ContactConfig = {
   name: string;
   title: string;
@@ -13,19 +15,19 @@ export type ContactConfig = {
 };
 
 export const contactConfig: ContactConfig = {
-  name: "Aniket Rai",
-  title: "B.Tech CSE Student",
-  role: "Full-Stack Developer · Exploring AI/ML",
-  location: "Navi Mumbai, India",
-  email: "aniketrai.dev@gmail.com",
-  linkedin: "https://linkedin.com/in/aniketrai",
-  github: "https://github.com/codebreaker939",
+  name: personalProfile.name,
+  title: `${personalProfile.education} Student`,
+  role: `${personalProfile.role} · ${personalProfile.focus}`,
+  location: personalProfile.location,
+  email: personalProfile.email,
+  linkedin: personalProfile.linkedin,
+  github: personalProfile.github,
   status: "OPEN TO OPPORTUNITIES",
   opportunities: [
     "Software Engineering Internships",
     "Full-Stack Web Development Roles",
     "AI / Machine Learning Trainee Positions",
-    "Applied Systems & Open-Source Collaborations",
+    "Technical Collaborations",
   ],
 };
 

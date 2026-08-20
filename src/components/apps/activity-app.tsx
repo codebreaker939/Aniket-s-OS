@@ -52,7 +52,7 @@ export function ActivityApp() {
           icon={Activity}
           eyebrow="LIVE SYSTEM"
           title="System Activity"
-          description="Real session events, application launches, and workstation state transitions."
+          description="Recent app, network, lab, and GitHub events from this session."
           variant="data"
           meta={
             <button
